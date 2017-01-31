@@ -669,7 +669,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
      * @warning Changing the string is as expensive as creating a new cc.LabelTTF. To obtain better performance use cc.LabelAtlas
      * @param {String} text Text content for the label
      */
-    setString: function (text) {
+    setString: function (text, p_updateTex) {
         text = String(text);
         if (this._originalText !== text) {
             this._originalText = text + "";
@@ -679,6 +679,12 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             // Force update
             this._setUpdateTextureDirty();
             this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.transformDirty);
+
+            /////////////////////////////////////////////
+            var updateTexture = p_updateTex || false;
+            if (updateTexture)
+                this._renderCmd._updateTexture();
+            /////////////////////////////////////////////
         }
     },
     _updateString: function () {
