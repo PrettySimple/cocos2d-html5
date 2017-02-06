@@ -39,6 +39,7 @@ cc.LabelTTF._firsrEnglish = /^[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]/;
         this._shadowColorStr = "rgba(128, 128, 128, 0.5)";
         this._strokeColorStr = "";
         this._fillColorStr = "rgba(255,255,255,1)";
+        this._fillColorArray = [];
 
         this._labelCanvas = null;
         this._labelContext = null;
@@ -91,6 +92,27 @@ cc.LabelTTF._firsrEnglish = /^[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]/;
         this._strokeColorStr = "rgba(" + (0 | (dr * locStrokeColor.r)) + "," + (0 | (dg * locStrokeColor.g)) + ","
             + (0 | (db * locStrokeColor.b)) + ", 1)";
     };
+
+    proto._setColorsArray = function()
+    {
+        var locDisplayColor = this._displayedColor, node = this._node;
+        var dr = locDisplayColor.r / 255, dg = locDisplayColor.g / 255, db = locDisplayColor.b / 255;
+        // var nbColors = node._textArrayColors.length;
+
+        this._fillColorArray = [];
+        // for (var i=0; i < nbColors; i++)
+        for (colorIdx in node._textArrayColors)
+        {
+            var colorDef = node._textArrayColors[colorIdx];
+            var color = {};
+            color.col   = "rgba(" + (0 | (dr * colorDef.col.r)) + "," + (0 | (dg * colorDef.col.g)) + ","
+                                  + (0 | (db * colorDef.col.b)) + ", 1)";
+            color.start = colorDef.start;
+            color.end   = colorDef.end;
+
+            this._fillColorArray.push(color);
+        }
+    }
 
     var localBB = new cc.Rect();
     proto.getLocalBB = function () {
@@ -372,14 +394,88 @@ cc.LabelTTF._firsrEnglish = /^[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]/;
         context.textBaseline = cc.LabelTTF._textBaseline[locVAlignment];
         context.textAlign = cc.LabelTTF._textAlign[locHAlignment];
 
-        var locStrLen = this._strings.length;
-        for (var i = 0; i < locStrLen; i++) {
-            var line = this._strings[i];
-            if (locStrokeEnabled)
-                context.strokeText(line, xOffset, yOffsetArray[i]);
-            context.fillText(line, xOffset, yOffsetArray[i]);
+        //////////////////////////////////////////////////////
+        var nbColors = this._fillColorArray.length;
+        if (nbColors > 0)
+        {
+            var curColorIdx = 0;
+            var curColor = this._fillColorStr;
+            var curIdx = 0;
+            var curColorDesc = this._fillColorArray[curColorIdx];
+            
+            var locStrLen = this._strings.length;
+            // cc.log("DISPLAYING " + locStrLen + " lines:")
+            for (var i = 0; i < locStrLen; i++) 
+            {
+                var line = this._strings[i];
+                if (locStrokeEnabled)
+                    context.strokeText(line, xOffset, yOffsetArray[i]);
+
+                cc.log(" > " + line);
+
+                var strDisplay = "";
+                var xDisplay   = xOffset;
+                var startIdx   = curIdx;
+                while((curIdx-startIdx) < line.length)
+                {
+                    // 
+                    if (curColorIdx < nbColors)
+                    {
+                        if (curIdx >= curColorDesc.end)
+                        {
+                            // We need to look at the next color!
+                            // cc.log("NEXT COLOR!");
+                            curColorIdx++;
+                            curColorDesc = this._fillColorArray[curColorIdx];
+                            continue;
+                        }
+                        else if (curIdx >= curColorDesc.start)
+                        {
+                            // We need to apply this color!
+                            // cc.log("Apply COLOR!");
+                            curColor = curColorDesc.col;
+                            strDisplay = line.substring(curIdx - startIdx, curColorDesc.end + 1 - startIdx);
+                        }
+                        else
+                        {
+                            // We are not YET in a zone to highlight
+                            // cc.log("Before COLOR!");
+                            curColor = this._fillColorStr;
+                            strDisplay = line.substring(curIdx - startIdx, curColorDesc.start - startIdx);
+                        }
+                    }
+                    else
+                    {
+                        // We don't have anymore zones to hightlight
+                        // cc.log("No more COLOR!");
+                        curColor = this._fillColorStr;
+                        strDisplay = line.substring(curIdx - startIdx, line.length+1);
+                    }
+
+                    // Display our text
+                    context.fillStyle = curColor;
+                    context.fillText(strDisplay, xDisplay, yOffsetArray[i]);
+                    // cc.log("Display: " + curIdx + "/" + line.length +" > " + strDisplay);
+
+                    // Advance our state
+                    curIdx   += strDisplay.length;
+                    xDisplay += context.measureText(strDisplay).width;
+                }
+            }
+            cc.g_NumberOfDraws++;
         }
-        cc.g_NumberOfDraws++;
+        else
+        {
+        //////////////////////////////////////////////////////
+            var locStrLen = this._strings.length;
+            for (var i = 0; i < locStrLen; i++) {
+                var line = this._strings[i];
+                if (locStrokeEnabled)
+                    context.strokeText(line, xOffset, yOffsetArray[i]);
+                context.fillText(line, xOffset, yOffsetArray[i]);
+            }
+            cc.g_NumberOfDraws++;
+        }
     };
 })();
 

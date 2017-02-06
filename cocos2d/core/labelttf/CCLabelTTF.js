@@ -87,6 +87,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
     // font tint
     _textFillColor: null,
+    _textArrayColors: {},
 
     _strokeShadowOffsetX: 0,
     _strokeShadowOffsetY: 0,
@@ -496,6 +497,26 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         return this._textFillColor;
     },
 
+    /** 
+     *  PRETTY FUNCTION: set a color to be used between the p_startIdx and the p_endIdx!
+     */
+    setColorRange : function (p_color, p_startIdx, p_endIdx)
+    {
+        var colorRange = {};
+        colorRange.col   = p_color;
+        colorRange.start = p_startIdx;
+        colorRange.end   = p_endIdx;
+
+        this._textArrayColors[p_startIdx] = colorRange;
+        this._renderCmd._setColorsArray();
+    },
+
+    clearColorRange : function ()
+    {
+        this._textArrayColors = {};
+        this._renderCmd._setColorsArray();
+    },
+
     //set the text definition for this label
     _updateWithTextDefinition: function (textDefinition, mustUpdateTexture) {
         if (textDefinition.fontDimensions) {
@@ -684,6 +705,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             var updateTexture = p_updateTex || false;
             if (updateTexture)
                 this._renderCmd._updateTexture();
+
+            // Since our string changed, we reset our array of colors!
+            this._textArrayColors = {};
             /////////////////////////////////////////////
         }
     },
