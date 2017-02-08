@@ -26,11 +26,12 @@ cc.LabelTTF.wrapInspection = true;
 
 //Support: English French German
 //Other as Oriental Language
-cc.LabelTTF._wordRex = /([a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]+|\S)/;
+cc.LabelTTF._wordRex = unicode_hack(/(([0-9\u00A0]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+|\S)/);
 cc.LabelTTF._symbolRex = /^[!,.:;}\]%\?>、‘“》？。，！]/;
-cc.LabelTTF._lastWordRex = /([a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]+|\S)$/;
-cc.LabelTTF._lastEnglish = /[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]+$/;
-cc.LabelTTF._firsrEnglish = /^[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]/;
+cc.LabelTTF._lastWordRex = unicode_hack(/(([0-9\u00A0]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+|\S)$/);
+cc.LabelTTF._lastEnglish = unicode_hack(/([0-9\u00A0]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+$/);
+cc.LabelTTF._firsrEnglish = unicode_hack(/^([0-9\u00A0]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})/);
+cc.LabelTTF._firstSpaces = /^\s*/;
 
 (function () {
     cc.LabelTTF.RenderCmd = function () {
@@ -338,6 +339,20 @@ cc.LabelTTF._firsrEnglish = /^[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]/;
                 }
             }
 
+            /////////////////////////////////////////////////////////
+            //Remove empty spaces at the beginning of a word!
+            if (cc.LabelTTF._firstSpaces.test(sLine))
+            {
+                result = cc.LabelTTF._firstSpaces.exec(sLine);
+                if (result && result.length > 0) 
+                {
+                    fuzzyLen += result[0].length;
+                    sLine = text.substr(fuzzyLen);
+                    sText = text.substr(0, fuzzyLen);
+                }
+            }
+            /////////////////////////////////////////////////////////
+
             strArr[i] = sLine || tmpText;
             strArr.splice(i, 0, sText);
         }
@@ -411,7 +426,7 @@ cc.LabelTTF._firsrEnglish = /^[a-zA-Z0-9ÄÖÜäöüßéèçàùêâîôû]/;
                 if (locStrokeEnabled)
                     context.strokeText(line, xOffset, yOffsetArray[i]);
 
-                cc.log(" > " + line);
+                // cc.log(" > " + line);
 
                 var strDisplay = "";
                 var xDisplay   = xOffset;
