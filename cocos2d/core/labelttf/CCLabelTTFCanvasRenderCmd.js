@@ -392,7 +392,8 @@ cc.LabelTTF._firstSpaces = /^\s*/;
 
         var locHAlignment = node._hAlignment,
             locVAlignment = node._vAlignment,
-            locStrokeSize = node._strokeSize;
+            locStrokeSize = node._strokeSize,
+            locMiterLimit = node._miterLimit;
 
         //this is fillText for canvas
         if (context.font !== this._fontStyleStr)
@@ -404,6 +405,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         if (locStrokeEnabled) {
             context.lineWidth = locStrokeSize * 2;
             context.strokeStyle = this._strokeColorStr;
+            context.miterLimit = locMiterLimit;
         }
 
         context.textBaseline = cc.LabelTTF._textBaseline[locVAlignment];
@@ -501,6 +503,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         locCanvas.width = 1;
         locCanvas.height = 1;
         this._labelContext = locCanvas.getContext("2d");
+        this._labelContext.imageSmoothingEnabled = true;
     };
 
     cc.LabelTTF.CacheRenderCmd.prototype = Object.create(cc.LabelTTF.RenderCmd.prototype);

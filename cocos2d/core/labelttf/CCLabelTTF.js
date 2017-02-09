@@ -62,6 +62,7 @@
  * @property {Number}       shadowOffsetY   - The y axis offset of shadow
  * @property {Number}       shadowOpacity   - The opacity of shadow
  * @property {Number}       shadowBlur      - The blur size of shadow
+ * @property {Number}       miterLimit      - The miter value for line drawing
  */
 cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _dimensions: null,
@@ -84,6 +85,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _strokeEnabled: false,
     _strokeColor: null,
     _strokeSize: 0,
+
+    // miterLimit
+    _miterLimit: 0,
 
     // font tint
     _textFillColor: null,
@@ -112,7 +116,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
      * @param {Number} [vAlignment=]
      * @return {Boolean} return false on error
      */
-    initWithString: function (label, fontName, fontSize, dimensions, hAlignment, vAlignment) {
+    initWithString: function (label, fontName, fontSize, dimensions, hAlignment, vAlignment, miterLimit) {
         var strInfo;
         if (label)
             strInfo = label + "";
@@ -129,6 +133,8 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._fontName = fontName || "Arial";
         this._hAlignment = hAlignment;
         this._vAlignment = vAlignment;
+
+        this._miterLimit = miterLimit;
 
         this._fontSize = fontSize;
         this._renderCmd._setFontStyle(this._fontName, fontSize, this._fontStyle, this._fontWeight);
@@ -149,7 +155,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.textDirty);
     },
 
-    ctor: function (text, fontName, fontSize, dimensions, hAlignment, vAlignment) {
+    ctor: function (text, fontName, fontSize, dimensions, hAlignment, vAlignment, miterLimit) {
         cc.Sprite.prototype.ctor.call(this);
 
         this._dimensions = cc.size(0, 0);
@@ -167,6 +173,8 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._strokeColor = cc.color(255, 255, 255, 255);
         this._strokeSize = 0;
 
+        this._miterLimit = 0;
+
         this._textFillColor = cc.color(255, 255, 255, 255);
         this._strokeShadowOffsetX = 0;
         this._strokeShadowOffsetY = 0;
@@ -179,7 +187,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         if (fontName && fontName instanceof cc.FontDefinition) {
             this.initWithStringAndTextDefinition(text, fontName);
         } else {
-            cc.LabelTTF.prototype.initWithString.call(this, text, fontName, fontSize, dimensions, hAlignment, vAlignment);
+            cc.LabelTTF.prototype.initWithString.call(this, text, fontName, fontSize, dimensions, hAlignment, vAlignment, miterLimit);
         }
     },
 
@@ -223,6 +231,14 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
      */
     getVerticalAlignment: function () {
         return this._vAlignment;
+    },
+
+    /**
+     * Return the miter limit for line drawing
+     * @return {Number}
+     */
+    getMiterLimit: function () {
+        return this._miterLimit;
     },
 
     /**
@@ -538,6 +554,8 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         else
             this._lineHeight = this._fontSize;
 
+        this._miterLimit = textDefinition.miterLimit;
+
         this._renderCmd._setFontStyle(textDefinition);
 
 
@@ -577,6 +595,8 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         texDef.fontName = this._fontName;
         texDef.textAlign = this._hAlignment;
         texDef.verticalAlign = this._vAlignment;
+
+        texDef.miterLimit = this._miterLimit;
 
         // stroke
         if (this._strokeEnabled) {
@@ -740,6 +760,18 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             // Force update
             this._setUpdateTextureDirty();
         }
+    },
+
+    /**
+     * Sets the miter limit for line drawing (aplicable to stroke text)
+     * @param {Number} miterLimit
+     */
+    setMiterLimit: function (miterLimit) {
+        if(miterLimit !== this._miterLimit)
+            this._miterLimit = miterLimit;
+
+        //Force update
+        this._setUpdateTextureDirty();
     },
 
     /**

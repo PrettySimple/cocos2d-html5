@@ -969,6 +969,10 @@ cc.FontDefinition = function (properties) {
     _t.fontStyle = "normal";
     _t.fontWeight = "normal";
 
+    //A number specifying the miter limit ratio in space units. Zero, negative, Infinity and NaN values are ignored.
+    //From: https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/miterLimit
+    _t.miterLimit = 0; 
+
     _t.shadowEnabled = false;
     _t.shadowOffsetX = 0;
     _t.shadowOffsetY = 0;
