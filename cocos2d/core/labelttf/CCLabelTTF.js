@@ -872,6 +872,14 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         return cc.size( this._contentSize.width / ratio, this._contentSize.height / ratio );
     },
 
+    /**
+     * Returns the real height of our current text
+     */
+    getTextHeight : function()
+    {
+        return(this._renderCmd.getTextHeight());
+    },
+
     _getWidth: function () {
         if (this._needUpdateTexture)
             this._renderCmd._updateTTF();

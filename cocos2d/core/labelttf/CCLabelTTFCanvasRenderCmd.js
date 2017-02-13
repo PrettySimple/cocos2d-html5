@@ -494,6 +494,14 @@ cc.LabelTTF._firstSpaces = /^\s*/;
             cc.g_NumberOfDraws++;
         }
     };
+
+    proto.getTextHeight = function()
+    {
+        var scale = cc.view.getDevicePixelRatio();
+        var node  = this._node;
+        return(node.getLineHeight() * scale * this._strings.length);
+    };
+
 })();
 
 (function () {
@@ -562,7 +570,6 @@ cc.LabelTTF._firstSpaces = /^\s*/;
             return 0;
         }
     };
-
 })();
 
 (function () {
