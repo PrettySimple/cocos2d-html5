@@ -403,7 +403,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         //stroke style setup
         var locStrokeEnabled = node._strokeEnabled;
         if (locStrokeEnabled) {
-            context.lineWidth = locStrokeSize * 2;
+            context.lineWidth = locStrokeSize;
             context.strokeStyle = this._strokeColorStr;
             context.miterLimit = locMiterLimit;
         }
