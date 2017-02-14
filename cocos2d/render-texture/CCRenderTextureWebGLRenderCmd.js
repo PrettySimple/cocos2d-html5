@@ -207,11 +207,11 @@
         if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE)
             cc.log("Could not attach texture to the framebuffer");
 
-        locTexture.setAliasTexParameters();
+        // locTexture.setAliasTexParameters();
 
         var locSprite = node.sprite = new cc.Sprite(locTexture);
         locSprite.scaleY = -1;
-        locSprite.setBlendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        // locSprite.setBlendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);      // WTF AGAIN COCOS?!
 
         gl.bindRenderbuffer(gl.RENDERBUFFER, oldRBO);
         gl.bindFramebuffer(gl.FRAMEBUFFER, this._oldFBO);
@@ -234,29 +234,34 @@
 
         var gl = cc._renderContext;
 
-        var director = cc.director;
-        director.setProjection(director.getProjection());
+        /////////////////////////////////////////////////////
+        // WTF IS THIS SHIT COCOS ?!
 
-        var texSize = node._texture.getContentSizeInPixels();
+        // var director = cc.director;
+        // director.setProjection(director.getProjection());
+
+        // var texSize = node._texture.getContentSizeInPixels();
 
         // Calculate the adjustment ratios based on the old and new projections
-        var size = cc.director.getWinSizeInPixels();
-        var widthRatio = size.width / texSize.width;
-        var heightRatio = size.height / texSize.height;
+        // var size = cc.director.getWinSizeInPixels();
+        // var widthRatio = size.width / texSize.width;
+        // var heightRatio = size.height / texSize.height;
 
-        var orthoMatrix = cc.math.Matrix4.createOrthographicProjection(-1.0 / widthRatio, 1.0 / widthRatio,
-            -1.0 / heightRatio, 1.0 / heightRatio, -1, 1);
-        cc.kmGLMultMatrix(orthoMatrix);
+        // var orthoMatrix = cc.math.Matrix4.createOrthographicProjection(-1.0 / widthRatio, 1.0 / widthRatio,
+        //     -1.0 / heightRatio, 1.0 / heightRatio, -1, 1);
+        // cc.kmGLMultMatrix(orthoMatrix);
 
-        //calculate viewport
-        var viewport = new cc.Rect(0, 0, 0, 0);
-        viewport.width = this._fullViewport.width;
-        viewport.height = this._fullViewport.height;
-        var viewPortRectWidthRatio = viewport.width / this._fullRect.width;
-        var viewPortRectHeightRatio = viewport.height / this._fullRect.height;
-        viewport.x = (this._fullRect.x - this._rtTextureRect.x) * viewPortRectWidthRatio;
-        viewport.y = (this._fullRect.y - this._rtTextureRect.y) * viewPortRectHeightRatio;
-        gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height);
+        // //calculate viewport
+        // var viewport = new cc.Rect(0, 0, 0, 0);
+        // viewport.width = this._fullViewport.width;
+        // viewport.height = this._fullViewport.height;
+        // var viewPortRectWidthRatio = viewport.width / this._fullRect.width;
+        // var viewPortRectHeightRatio = viewport.height / this._fullRect.height;
+        // viewport.x = (this._fullRect.x - this._rtTextureRect.x) * viewPortRectWidthRatio;
+        // viewport.y = (this._fullRect.y - this._rtTextureRect.y) * viewPortRectHeightRatio;
+        // gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height);
+
+        /////////////////////////////////////////////////////
 
         this._oldFBO = gl.getParameter(gl.FRAMEBUFFER_BINDING);
         gl.bindFramebuffer(gl.FRAMEBUFFER, this._fBO);//Will direct drawing to the frame buffer created above
