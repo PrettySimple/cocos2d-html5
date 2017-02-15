@@ -98,6 +98,16 @@ cc.DrawNode = cc.Node.extend(/** @lends cc.DrawNode# */{
      */
     getDrawColor: function () {
         return cc.color(this._drawColor.r, this._drawColor.g, this._drawColor.b, this._drawColor.a);
+    },
+
+    /**
+     * Private utils method that converts degrees to radians
+     * @param  {Number} p_angle value in degrees
+     * @return {Number}         value in radians
+     */
+    _degreesToRadians: function(p_angle)
+    {
+        return p_angle * Math.PI / 180;
     }
 });
 
@@ -240,6 +250,39 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 element.lineColor = color;
                 element.isClosePolygon = true;
                 element.isStroke = true;
+                this._buffer.push(element);
+            },
+
+            /**
+             * draws a filled circular polygon given a start and finish angle
+             * @param  {cc.Point}   p_center      
+             * @param  {Number}     p_radius      
+             * @param  {Number}     p_start_angle 
+             * @param  {Number}     p_end_angle   
+             * @param  {cc.Color}   p_color       
+             * @param  {Number}     p_segments    
+             */
+            drawArch: function (p_center, p_radius, p_start_angle, p_end_angle, p_color, p_segments) {
+                var fillColor = p_color || this.getDrawColor();
+                var segments = p_segments || 32;
+                var angleStep = (p_end_angle - p_start_angle) / segments;
+                var angleCurrent = p_start_angle;
+
+                var vertices = [];
+                vertices.push(p_center);
+                for (i = 0; i <= segments; i++) {
+                    var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius;
+                    var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius;
+                    vertices.push(cc.p(p_x, p_y));
+
+                    angleCurrent = Math.min(angleCurrent + angleStep, p_end_angle);
+                }
+                
+                var element = new cc._DrawNodeElement(cc.DrawNode.TYPE_POLY);
+                element.verts = vertices;
+                element.fillColor = fillColor;
+                element.isClosePolygon = true;
+                element.isFill = true;
                 this._buffer.push(element);
             },
 
@@ -622,6 +665,36 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                     _to.y = _vertices[i + 3];
                     this.drawSegment(_from, _to, lineWidth, color);
                 }
+                _vertices.length = 0;
+            },
+
+            /**
+             * draws a circle given the center, radius and number of segments.
+             * @override
+             * @param {cc.Point} center center of circle
+             * @param {Number} radius
+             * @param {Number} angle angle in radians
+             * @param {Number} segments
+             * @param {Boolean} drawLineToCenter
+             * @param {Number} lineWidth
+             * @param {cc.Color} color
+             */
+            drawArch: function (p_center, p_radius, p_start_angle, p_end_angle, p_color, p_segments) {
+                var fillColor = p_color || this._drawColor;
+                var segments = p_segments || 32;
+                var angleStep = (p_end_angle - p_start_angle) / segments;
+                var angleCurrent = p_start_angle;
+
+                _vertices.length = 0;
+                _vertices.push(p_center.x, p_center.y);
+                for (i = 0; i <= segments; i++) {
+                    var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius;
+                    var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius;
+                    _vertices.push(p_x, p_y);
+
+                    angleCurrent = Math.min(angleCurrent + angleStep, p_end_angle);
+                }
+                this.drawPoly(_vertices, fillColor, 0, fillColor);
                 _vertices.length = 0;
             },
 
