@@ -269,7 +269,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 var angleCurrent = p_start_angle;
 
                 var vertices = [];
-                vertices.push(p_center);
+                if(p_end_angle - p_start_angle < 360)
+                    vertices.push(p_center, p_center);
+
                 for (i = 0; i <= segments; i++) {
                     var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius;
                     var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius;
@@ -684,9 +686,11 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 var segments = p_segments || 32;
                 var angleStep = (p_end_angle - p_start_angle) / segments;
                 var angleCurrent = p_start_angle;
-
+                
                 _vertices.length = 0;
-                _vertices.push(p_center.x, p_center.y);
+                if(p_end_angle - p_start_angle < 360)
+                    _vertices.push(p_center.x, p_center.y);
+
                 for (i = 0; i <= segments; i++) {
                     var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius;
                     var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius;
