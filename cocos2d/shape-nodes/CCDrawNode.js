@@ -573,12 +573,16 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             },
 
             onEnter: function () {
+                cc.Node.prototype.onEnter.call(this);
+
                 if (this._occupiedSize < this._bufferCapacity) {
                     this._ensureCapacity(this._bufferCapacity);
                 }
             },
 
             onExit: function () {
+                cc.Node.prototype.onExit.call(this);
+
                 if (!this.manualRelease) {
                     this.release();
                 }
