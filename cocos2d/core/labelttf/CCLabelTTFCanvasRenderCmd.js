@@ -130,7 +130,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
 
         this._fillColorArray = [];
         // for (var i=0; i < nbColors; i++)
-        for (colorIdx in node._textArrayColors)
+        for (var colorIdx in node._textArrayColors)
         {
             var colorDef = node._textArrayColors[colorIdx];
             var color = {};
@@ -141,7 +141,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
 
             this._fillColorArray.push(color);
         }
-    }
+    };
 
     var localBB = new cc.Rect();
     proto.getLocalBB = function () {
@@ -476,8 +476,6 @@ cc.LabelTTF._firstSpaces = /^\s*/;
             for (var i = 0; i < locStrLen; i++) 
             {
                 var line = this._strings[i];
-                if (locStrokeEnabled)
-                    context.strokeText(line, xOffset, yOffsetArray[i]);
 
                 // cc.log(" > " + line);
 
@@ -537,6 +535,9 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                     if (strDisplay)
                     {
                         context.fillStyle = curColor;
+
+                        if (locStrokeEnabled)
+                            context.strokeText(strDisplay, xDisplay, yOffsetArray[i]);
                         context.fillText(strDisplay, xDisplay, yOffsetArray[i]);
                         // cc.log("Display: " + curIdx + "/" + line.length +" > " + strDisplay);
                     }
