@@ -43,6 +43,9 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         this._fillColorArray = [];
         this._nbCharDisplay = -1;
 
+        this._fillGradientStops = null;
+        this._fillGradientBox = null;
+
         this._labelCanvas = null;
         this._labelContext = null;
         this._lineWidths = [];
@@ -93,6 +96,30 @@ cc.LabelTTF._firstSpaces = /^\s*/;
             + (0 | (db * locFontFillColor.b)) + ", 1)";
         this._strokeColorStr = "rgba(" + (0 | (dr * locStrokeColor.r)) + "," + (0 | (dg * locStrokeColor.g)) + ","
             + (0 | (db * locStrokeColor.b)) + ", 1)";
+
+        if(node._textGradientFillColorData !== null)
+            this._setColorGradientData();
+    };
+
+    proto._setColorGradientData = function()
+    {
+        var locDisplayColor = this._displayedColor, node = this._node;
+        var dr = locDisplayColor.r / 255, dg = locDisplayColor.g / 255, db = locDisplayColor.b / 255;
+        var locGradientData = node._textGradientFillColorData;
+        var index = 0;
+        var locGradientStops = locGradientData.gradientStops;
+        var stopCount = locGradientStops.length;
+        this._fillGradientStops = [];
+        this._fillGradientBox = locGradientData.gradientBox;
+        for(index; index < stopCount; index++)
+        {
+            var stopData = {};
+            stopData.colorStr = "rgba(" + (0 | (dr * locGradientStops[index].color.r)) + "," 
+                                        + (0 | (dg * locGradientStops[index].color.g)) + "," 
+                                        + (0 | (db * locGradientStops[index].color.b)) + ", 1)";
+            stopData.ratio = locGradientStops[index].ratio.toString();
+            this._fillGradientStops.push(stopData);
+        }
     };
 
     proto._setColorsArray = function()
@@ -399,7 +426,28 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         //this is fillText for canvas
         if (context.font !== this._fontStyleStr)
             context.font = this._fontStyleStr;
-        context.fillStyle = this._fillColorStr;
+
+        if(this._fillGradientStops !== null && this._fillGradientStops.length > 0)
+        {
+            //Canvas coordinates for cocos are y-flipped so we must adjust our box accordingly.
+            //Also the createLinearGradient() takes in (x0, y0), (x1, y1) as parameters so in order
+            //for our box to render as expected the cc.rect must match (cc.Rect.x, cc.Rect.width), (cc.Rect.y, cc.Rect.height)
+            //which should create the correct tracing line for our gradient
+            var gradient = context.createLinearGradient(this._fillGradientBox.x, -this._fillGradientBox.height, this._fillGradientBox.width, -this._fillGradientBox.y);
+            var index = 0;
+            var stopCount = this._fillGradientStops.length;
+            var stopData;
+            for(index = 0; index < stopCount; index++)
+            {
+                stopData = this._fillGradientStops[index];
+                gradient.addColorStop(stopData.ratio, stopData.colorStr);
+            }
+            context.fillStyle = gradient;
+        }
+        else
+        {
+            context.fillStyle = this._fillColorStr;
+        }
 
         //stroke style setup
         var locStrokeEnabled = node._strokeEnabled;
@@ -416,8 +464,10 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         var nbColors = this._fillColorArray.length;
         if (nbColors > 0)
         {
+            //Backup the currently set fill style
+            var fillStyle = context.fillStyle;
             var curColorIdx = 0;
-            var curColor = this._fillColorStr;
+            var curColor = null;
             var curIdx = 0;
             var curColorDesc = this._fillColorArray[curColorIdx];
             
@@ -458,7 +508,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                         {
                             // We are not YET in a zone to highlight
                             // cc.log("Before COLOR!");
-                            curColor = this._fillColorStr;
+                            curColor = fillStyle;
                             strDisplay = line.substring(curIdx - startIdx, curColorDesc.start - startIdx);
                         }
                     }
@@ -466,7 +516,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                     {
                         // We don't have anymore zones to hightlight
                         // cc.log("No more COLOR!");
-                        curColor = this._fillColorStr;
+                        curColor = fillStyle;
                         strDisplay = line.substring(curIdx - startIdx, line.length+1);
                     }
 

@@ -93,6 +93,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _textFillColor: null,
     _textArrayColors: {},
 
+    // font gradient
+    _textGradientFillColorData: null,
+
     _strokeShadowOffsetX: 0,
     _strokeShadowOffsetY: 0,
     _needUpdateTexture: false,
@@ -179,6 +182,8 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._strokeShadowOffsetX = 0;
         this._strokeShadowOffsetY = 0;
         this._needUpdateTexture = false;
+
+        this._textGradientFillColorData = null;
 
         this._lineWidths = [];
         this._renderCmd._setColorsString();
@@ -506,6 +511,42 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             locTextFillColor.b = fillColor.b;
             this._renderCmd._setColorsString();
             this._needUpdateTexture = true;
+        }
+    },
+
+    /**
+     * Sets the gradient gradient color fill for text.
+     * @param {Array}   p_gradient_colors Array of cc.Color to use in our gradient
+     * @param {Array}   p_gradient_ratios Array of float ratios to use as gradient stops.
+     * @param {cc.Rect} p_gradient_box    Gradient box for the gradient. (optional)
+     *                                    Defaults to vertical cc.Rect(0, -TEXT_HEIGHT, 0, 0) which is a regular vertical gradient fill
+     */
+    setFontGradientColor: function (p_gradient_colors, p_gradient_ratios, p_gradient_box) {
+        var index = 0;
+        var colorsCount = p_gradient_colors.length;
+        var ratiosCount = p_gradient_ratios.length;
+        var gradientBox = p_gradient_box || cc.rect(0, -this.getTextHeight(), 0, 0);
+
+        if(colorsCount == ratiosCount)
+        {
+            this._textGradientFillColorData = {};
+            this._textGradientFillColorData.gradientStops = [];
+            this._textGradientFillColorData.gradientBox = gradientBox;
+
+            for(index; index < colorsCount; index++)
+            {
+                var stopData = {};
+                stopData.color = p_gradient_colors[index];
+                stopData.ratio = p_gradient_ratios[index];
+                this._textGradientFillColorData.gradientStops.push(stopData);
+            }
+
+            this._renderCmd._setColorsString();
+            this._needUpdateTexture = true;
+        }
+        else
+        {
+            cc.error('CCLabelTTF.setFontGradientColor() :: different length between ratios count');
         }
     },
 
