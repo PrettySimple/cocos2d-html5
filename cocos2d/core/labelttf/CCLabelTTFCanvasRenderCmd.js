@@ -60,13 +60,13 @@ cc.LabelTTF._firstSpaces = /^\s*/;
     proto.constructor = cc.LabelTTF.RenderCmd;
     proto._labelCmdCtor = cc.LabelTTF.RenderCmd;
 
-    proto._setFontStyle = function (fontNameOrFontDef, fontSize, fontStyle, fontWeight) {
+    proto._setFontStyle = function (fontNameOrFontDef, fontSize, fontStyle, fontWeight, fontVariant) {
         if (fontNameOrFontDef instanceof cc.FontDefinition) {
             this._fontStyleStr = fontNameOrFontDef._getCanvasFontStr();
             this._fontClientHeight = cc.LabelTTF.__getFontHeightByDiv(fontNameOrFontDef);
         } else {
             var deviceFontSize = fontSize * cc.view.getDevicePixelRatio();
-            this._fontStyleStr = fontStyle + " " + fontWeight + " " + deviceFontSize + "px '" + fontNameOrFontDef + "'";
+            this._fontStyleStr = fontStyle + " " + fontVariant + " " + fontWeight + " " + deviceFontSize + "px '" + fontNameOrFontDef + "'";
             this._fontClientHeight = cc.LabelTTF.__getFontHeightByDiv(fontNameOrFontDef, fontSize);
         }
     };

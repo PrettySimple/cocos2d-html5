@@ -107,6 +107,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _fontStyle: "normal",
     _fontWeight: "normal",
     _lineHeight: "normal",
+    _fontVariant: "normal",
 
     /**
      * Initializes the cc.LabelTTF with a font name, alignment, dimension and font size, do not call it by yourself,
@@ -140,7 +141,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._miterLimit = miterLimit;
 
         this._fontSize = fontSize;
-        this._renderCmd._setFontStyle(this._fontName, fontSize, this._fontStyle, this._fontWeight);
+        this._renderCmd._setFontStyle(this._fontName, fontSize, this._fontStyle, this._fontWeight, this._fontVariant);
         this.string = strInfo;
         this._renderCmd._setColorsString();
         this._renderCmd._updateTexture();
@@ -496,6 +497,12 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             this._strokeEnabled = false;
             this._setUpdateTextureDirty();
         }
+    },
+
+    enableSmallCaps: function(p_value)
+    {
+        var variant = (p_value) ? "small-caps" : "normal";
+        this._setFontVariant(variant);
     },
 
     /**
@@ -882,7 +889,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     setFontSize: function (fontSize) {
         if (this._fontSize !== fontSize) {
             this._fontSize = fontSize;
-            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight);
+            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight, this._fontVariant);
             // Force update
             this._setUpdateTextureDirty();
         }
@@ -895,7 +902,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     setFontName: function (fontName) {
         if (this._fontName && this._fontName !== fontName) {
             this._fontName = fontName;
-            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight);
+            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight, this._fontVariant);
             // Force update
             this._setUpdateTextureDirty();
         }
@@ -909,7 +916,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         if (res) {
             this._fontSize = parseInt(res[1]);
             this._fontName = res[2];
-            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight);
+            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight, this._fontVariant);
 
             // Force update
             this._setUpdateTextureDirty();
@@ -985,7 +992,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _setFontStyle: function (fontStyle) {
         if (this._fontStyle !== fontStyle) {
             this._fontStyle = fontStyle;
-            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight);
+            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight, this._fontVariant);
             this._setUpdateTextureDirty();
         }
     },
@@ -997,13 +1004,27 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     _setFontWeight: function (fontWeight) {
         if (this._fontWeight !== fontWeight) {
             this._fontWeight = fontWeight;
-            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight);
+            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight, this._fontVariant);
             this._setUpdateTextureDirty();
         }
     },
 
     _getFontWeight: function () {
         return this._fontWeight;
+    },
+
+    _setFontVariant: function(p_variant) {
+        if(this._fontVariant !== p_variant)
+        {
+            this._fontVariant = p_variant;
+            this._renderCmd._setFontStyle(this._fontName, this._fontSize, this._fontStyle, this._fontWeight, this._fontVariant);
+            this._setUpdateTextureDirty();
+        }
+    },
+
+    _getFontVariant: function()
+    {
+        return this._fontVariant;
     }
 });
 
