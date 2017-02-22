@@ -41,6 +41,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         this._strokeColorStr = "";
         this._fillColorStr = "rgba(255,255,255,1)";
         this._fillColorArray = [];
+        this._nbCharDisplay = -1;
 
         this._labelCanvas = null;
         this._labelContext = null;
@@ -469,13 +470,29 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                         strDisplay = line.substring(curIdx - startIdx, line.length+1);
                     }
 
+                    // Only display the first _nbCharDisplay characters, if we actived this
+                    var strLength = strDisplay.length;
+                    if (this._nbCharDisplay >= 0)
+                    {
+                        if (curIdx + strDisplay.length > this._nbCharDisplay)
+                        {
+                            if (curIdx <= this._nbCharDisplay)
+                                strDisplay = strDisplay.substring(0, this._nbCharDisplay - curIdx);
+                            else
+                                strDisplay = "";
+                        }
+                    }
+
                     // Display our text
-                    context.fillStyle = curColor;
-                    context.fillText(strDisplay, xDisplay, yOffsetArray[i]);
-                    // cc.log("Display: " + curIdx + "/" + line.length +" > " + strDisplay);
+                    if (strDisplay)
+                    {
+                        context.fillStyle = curColor;
+                        context.fillText(strDisplay, xDisplay, yOffsetArray[i]);
+                        // cc.log("Display: " + curIdx + "/" + line.length +" > " + strDisplay);
+                    }
 
                     // Advance our state
-                    curIdx   += strDisplay.length;
+                    curIdx   += strLength;
                     xDisplay += context.measureText(strDisplay).width;
                 }
             }
@@ -483,16 +500,35 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         }
         else
         {
-        //////////////////////////////////////////////////////
+            var curIdx = 0;
             var locStrLen = this._strings.length;
-            for (var i = 0; i < locStrLen; i++) {
+            for (var i = 0; i < locStrLen; i++) 
+            {
                 var line = this._strings[i];
+                var lineLength = line.length;
+
+                // Only display the first _nbCharDisplay characters, if we actived this
+                if (this._nbCharDisplay >= 0)
+                {
+                    if (curIdx + line.length > this._nbCharDisplay)
+                    {
+                        if (curIdx <= this._nbCharDisplay)
+                            line = line.substring(0, this._nbCharDisplay - curIdx);
+                        else
+                            line = "";
+                    }
+                }
+
+                //
                 if (locStrokeEnabled)
                     context.strokeText(line, xOffset, yOffsetArray[i]);
                 context.fillText(line, xOffset, yOffsetArray[i]);
+
+                curIdx += lineLength;
             }
             cc.g_NumberOfDraws++;
         }
+        //////////////////////////////////////////////////////
     };
 
     proto.getTextHeight = function()
