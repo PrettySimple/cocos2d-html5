@@ -588,6 +588,18 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         //////////////////////////////////////////////////////
     };
 
+    proto.getTextWidth = function()
+    {
+        var maxWidth = 0;
+        var nbLines  = this._strings.length;
+        for (var i=0; i < nbLines; i++)
+        {
+            var measuredWidth = this._measure(this._strings[i]);
+            maxWidth = Math.max(maxWidth, measuredWidth);
+        }
+        return(maxWidth);
+    };
+
     proto.getTextHeight = function()
     {
         var scale = cc.view.getDevicePixelRatio();
