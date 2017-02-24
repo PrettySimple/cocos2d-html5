@@ -88,6 +88,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
     // miterLimit
     _miterLimit: 0,
+    _strokeOffset: null,
 
     // font tint
     _textFillColor: null,
@@ -176,6 +177,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
         this._strokeEnabled = false;
         this._strokeColor = cc.color(255, 255, 255, 255);
         this._strokeSize = 0;
+        this._strokeOffset = cc.p(0,0);
 
         this._miterLimit = 0;
 
@@ -442,8 +444,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
      * Enable label stroke with stroke parameters
      * @param {cc.Color} strokeColor The color of stroke
      * @param {Number} strokeSize The size of stroke
+     * @param {cc.Point} strokeOffset the offset for the stroke
      */
-    enableStroke: function (strokeColor, strokeSize) {
+    enableStroke: function (strokeColor, strokeSize, strokeOffet) {
         if (this._strokeEnabled === false)
             this._strokeEnabled = true;
 
@@ -455,9 +458,16 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             this._renderCmd._setColorsString();
         }
 
+        if(strokeOffet)
+            this._strokeOffset = strokeOffet || cc.p(0, 0);
+
         if (this._strokeSize !== strokeSize)
             this._strokeSize = strokeSize || 0;
         this._setUpdateTextureDirty();
+    },
+
+    _getStrokeOffset: function() {
+        return this._strokeOffset;
     },
 
     _getStrokeStyle: function () {

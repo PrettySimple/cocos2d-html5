@@ -537,7 +537,10 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                         context.fillStyle = curColor;
 
                         if (locStrokeEnabled)
-                            context.strokeText(strDisplay, xDisplay, yOffsetArray[i]);
+                        {
+                            var locStrokeOffset = node._strokeOffset;
+                            context.strokeText(strDisplay, xDisplay + locStrokeOffset.x, yOffsetArray[i] + locStrokeOffset.y);
+                        }
                         context.fillText(strDisplay, xDisplay, yOffsetArray[i]);
                         // cc.log("Display: " + curIdx + "/" + line.length +" > " + strDisplay);
                     }
@@ -572,7 +575,10 @@ cc.LabelTTF._firstSpaces = /^\s*/;
 
                 //
                 if (locStrokeEnabled)
-                    context.strokeText(line, xOffset, yOffsetArray[i]);
+                {
+                    var locStrokeOffset = node._strokeOffset;
+                    context.strokeText(line, xOffset + locStrokeOffset.x, yOffsetArray[i] + locStrokeOffset.y);
+                }
                 context.fillText(line, xOffset, yOffsetArray[i]);
 
                 curIdx += lineLength;
