@@ -527,7 +527,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             locTextFillColor.g = fillColor.g;
             locTextFillColor.b = fillColor.b;
             this._renderCmd._setColorsString();
-            this._needUpdateTexture = true;
+            this._setUpdateTextureDirty();
         }
     },
 
@@ -559,7 +559,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             }
 
             this._renderCmd._setColorsString();
-            this._needUpdateTexture = true;
+            this._setUpdateTextureDirty();
         }
         else
         {
