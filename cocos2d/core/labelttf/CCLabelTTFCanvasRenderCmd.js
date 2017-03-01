@@ -210,7 +210,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                                   Math.ceil(this._fontClientHeight * pixelRatio + locStrokeShadowOffsetY));
             }
         } else {
-            if (node._dimensions.height === 0) {
+            /*if (node._dimensions.height === 0)*/ {
                 if (this._isMultiLine)
                     locSize = cc.size(
                         Math.ceil(locDimensionsWidth + locStrokeShadowOffsetX),
@@ -219,12 +219,12 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                     locSize = cc.size(
                         Math.ceil(locDimensionsWidth + locStrokeShadowOffsetX),
                         Math.ceil(node.getLineHeight() * pixelRatio + locStrokeShadowOffsetY));
-            } else {
+            }/* else {
                 //dimension is already set, contentSize must be same as dimension
                 locSize = cc.size(
                     Math.ceil(locDimensionsWidth + locStrokeShadowOffsetX),
                     Math.ceil(node._dimensions.height * pixelRatio + locStrokeShadowOffsetY));
-            }
+            }*/
         }
         if (node._getFontStyle() !== "normal") {    //add width for 'italic' and 'oblique'
             locSize.width = Math.ceil(locSize.width + node._fontSize * 0.3);
@@ -488,7 +488,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                     // 
                     if (curColorIdx < nbColors)
                     {
-                        if (curIdx >= curColorDesc.end)
+                        if (curIdx > curColorDesc.end)
                         {
                             // We need to look at the next color!
                             // cc.log("NEXT COLOR!");
@@ -513,13 +513,13 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                     }
                     else
                     {
-                        // We don't have anymore zones to hightlight
+                        // We don't have anymore zones to highlight
                         // cc.log("No more COLOR!");
                         curColor = fillStyle;
                         strDisplay = line.substring(curIdx - startIdx, line.length+1);
                     }
 
-                    // Only display the first _nbCharDisplay characters, if we actived this
+                    // Only display the first _nbCharDisplay characters, if we activated this
                     var strLength = strDisplay.length;
                     if (this._nbCharDisplay >= 0)
                     {
