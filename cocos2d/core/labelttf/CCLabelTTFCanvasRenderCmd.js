@@ -455,6 +455,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
             context.lineWidth = locStrokeSize;
             context.strokeStyle = this._strokeColorStr;
             context.miterLimit = locMiterLimit;
+            context.lineJoin = 'round';
         }
 
         context.textBaseline = cc.LabelTTF._textBaseline[locVAlignment];
