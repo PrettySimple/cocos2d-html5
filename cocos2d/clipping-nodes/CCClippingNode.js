@@ -62,7 +62,7 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     ctor: function (stencil) {
         stencil = stencil || null;
         cc.Node.prototype.ctor.call(this);
-        this._stencil = stencil;
+        this.setStencil(stencil); //Fixed issue where stencil was directly set as this._stencil = value when passed through constructor.
         if (stencil) {
             this._originStencilProgram = stencil.getShaderProgram();
         }
