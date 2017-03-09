@@ -403,6 +403,12 @@
 
 
         ],
+        "prettysimple-gui" : [
+            "core", "clipping-nodes", "render-texture", "actions", "progress-timer",
+
+            "extensions/gui/control-extension/CCControl.js",
+            "extensions/gui/control-extension/CCInvocation.js"
+        ],
         "gui" : [
             "core", "clipping-nodes", "render-texture", "actions", "progress-timer",
 
