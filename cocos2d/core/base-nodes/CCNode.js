@@ -698,8 +698,28 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
      * @see cc.Node#setVisible
      * @return {Boolean} true if the node is visible, false if the node is hidden.
      */
-    isVisible: function () {
-        return this._visible;
+    isVisible: function (p_checkParents) {
+
+        if (p_checkParents !== undefined && p_checkParents)
+        {
+            if (this._visible)
+            {
+                var node = this;
+                var parent = node.getParent();
+                while(parent)
+                {
+                    if (!parent.isVisible())
+                        return(false);
+                    node = parent;
+                    parent = node.getParent();
+                }
+                return(true);
+            }
+            else
+                return(false);
+        }
+        else
+            return this._visible;
     },
 
     /**
