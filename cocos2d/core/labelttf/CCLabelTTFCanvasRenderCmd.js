@@ -111,7 +111,7 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         var stopCount = locGradientStops.length;
         this._fillGradientStops = [];
         this._fillGradientBox = locGradientData.gradientBox;
-        for(index; index < stopCount; index++)
+        for(var index; index < stopCount; index++)
         {
             var stopData = {};
             stopData.colorStr = "rgba(" + (0 | (dr * locGradientStops[index].color.r)) + "," 
