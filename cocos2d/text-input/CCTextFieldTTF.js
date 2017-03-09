@@ -468,10 +468,10 @@ cc.TextFieldTTF = cc.LabelTTF.extend(/** @lends cc.TextFieldTTF# */{
 var _p = cc.TextFieldTTF.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.charCount;
 cc.defineGetterSetter(_p, "charCount", _p.getCharCount);
-/** @expose */
+/** @export */
 _p.placeHolder;
 cc.defineGetterSetter(_p, "placeHolder", _p.getPlaceHolder, _p.setPlaceHolder);
 

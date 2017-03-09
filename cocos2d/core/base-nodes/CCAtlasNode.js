@@ -269,12 +269,12 @@ cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
 cc.defineGetterSetter(_p, "color", _p.getColor, _p.setColor);
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.texture;
 cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
-/** @expose */
+/** @export */
 _p.textureAtlas;
-/** @expose */
+/** @export */
 _p.quadsToDraw;
 
 cc.EventHelper.prototype.apply(_p);

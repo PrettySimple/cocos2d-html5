@@ -409,10 +409,10 @@
     cc.PhysicsSprite._className = "PhysicsSprite";
     var _p = cc.PhysicsSprite.prototype;
     // Extended properties
-    /** @expose */
+    /** @export */
     _p.body;
     cc.defineGetterSetter(_p, "body", _p.getBody, _p.setBody);
-    /** @expose */
+    /** @export */
     _p.dirty;
     cc.defineGetterSetter(_p, "dirty", _p.isDirty, _p.setDirty);
 

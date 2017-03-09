@@ -402,7 +402,7 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
 
 var _p = cc.RenderTexture.prototype;
 // Extended
-/** @expose */
+/** @export */
 _p.clearColorVal;
 cc.defineGetterSetter(_p, "clearColorVal", _p.getClearColor, _p.setClearColor);
 

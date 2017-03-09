@@ -267,22 +267,22 @@ cc.ControlPotentiometer = cc.Control.extend(/** @lends cc.ControlPotentiometer# 
 var _p = cc.ControlPotentiometer.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.value;
 cc.defineGetterSetter(_p, "value", _p.getValue, _p.setValue);
-/** @expose */
+/** @export */
 _p.minValue;
 cc.defineGetterSetter(_p, "minValue", _p.getMinimumValue, _p.setMinimumValue);
-/** @expose */
+/** @export */
 _p.maxValue;
 cc.defineGetterSetter(_p, "maxValue", _p.getMaximumValue, _p.setMaximumValue);
-/** @expose */
+/** @export */
 _p.progressTimer;
 cc.defineGetterSetter(_p, "progressTimer", _p.getProgressTimer, _p.setProgressTimer);
-/** @expose */
+/** @export */
 _p.thumbSprite;
 cc.defineGetterSetter(_p, "thumbSprite", _p.getThumbSprite, _p.setThumbSprite);
-/** @expose */
+/** @export */
 _p.prevLocation;
 cc.defineGetterSetter(_p, "prevLocation", _p.getPreviousLocation, _p.setPreviousLocation);
 

@@ -1796,16 +1796,16 @@ ccui.ScrollView = ccui.Layout.extend(/** @lends ccui.ScrollView# */{
 var _p = ccui.ScrollView.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.innerWidth;
 cc.defineGetterSetter(_p, "innerWidth", _p._getInnerWidth, _p._setInnerWidth);
-/** @expose */
+/** @export */
 _p.innerHeight;
 cc.defineGetterSetter(_p, "innerHeight", _p._getInnerHeight, _p._setInnerHeight);
-/** @expose */
+/** @export */
 _p.direction;
 cc.defineGetterSetter(_p, "direction", _p.getDirection, _p.setDirection);
-/** @expose */
+/** @export */
 _p.touchTotalTimeThreshold;
 cc.defineGetterSetter(_p, "touchTotalTimeThreshold", _p.getTouchTotalTimeThreshold, _p.setTouchTotalTimeThreshold);
 _p = null;

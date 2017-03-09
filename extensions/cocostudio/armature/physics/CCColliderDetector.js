@@ -380,13 +380,13 @@ ccs.ColliderDetector = ccs.Class.extend(/** @lends ccs.ColliderDetector# */{
 var _p = ccs.ColliderDetector.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.colliderFilter;
 cc.defineGetterSetter(_p, "colliderFilter", _p.getColliderFilter, _p.setColliderFilter);
-/** @expose */
+/** @export */
 _p.active;
 cc.defineGetterSetter(_p, "active", _p.getActive, _p.setActive);
-/** @expose */
+/** @export */
 _p.body;
 cc.defineGetterSetter(_p, "body", _p.getBody, _p.setBody);
 

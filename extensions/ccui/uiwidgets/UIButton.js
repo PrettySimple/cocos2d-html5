@@ -786,19 +786,19 @@ ccui.Button = ccui.Widget.extend(/** @lends ccui.Button# */{
 var _p = ccui.Button.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.titleText;
 cc.defineGetterSetter(_p, "titleText", _p.getTitleText, _p.setTitleText);
-/** @expose */
+/** @export */
 _p.titleFont;
 cc.defineGetterSetter(_p, "titleFont", _p._getTitleFont, _p._setTitleFont);
-/** @expose */
+/** @export */
 _p.titleFontSize;
 cc.defineGetterSetter(_p, "titleFontSize", _p.getTitleFontSize, _p.setTitleFontSize);
-/** @expose */
+/** @export */
 _p.titleFontName;
 cc.defineGetterSetter(_p, "titleFontName", _p.getTitleFontName, _p.setTitleFontName);
-/** @expose */
+/** @export */
 _p.titleColor;
 cc.defineGetterSetter(_p, "titleColor", _p.getTitleColor, _p.setTitleColor);
 

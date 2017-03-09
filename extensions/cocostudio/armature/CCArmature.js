@@ -563,13 +563,13 @@ ccs.Armature = ccs.Node.extend(/** @lends ccs.Armature# */{
 
 var _p = ccs.Armature.prototype;
 
-/** @expose */
+/** @export */
 _p.parentBone;
 cc.defineGetterSetter(_p, "parentBone", _p.getParentBone, _p.setParentBone);
-/** @expose */
+/** @export */
 _p.body;
 cc.defineGetterSetter(_p, "body", _p.getBody, _p.setBody);
-/** @expose */
+/** @export */
 _p.colliderFilter;
 cc.defineGetterSetter(_p, "colliderFilter", null, _p.setColliderFilter);
 

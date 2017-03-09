@@ -222,25 +222,25 @@ cc.ControlSaturationBrightnessPicker = cc.Control.extend(/** @lends cc.ControlSa
 var _p = cc.ControlSaturationBrightnessPicker.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.saturation;
 cc.defineGetterSetter(_p, "saturation", _p.getSaturation);
-/** @expose */
+/** @export */
 _p.brightness;
 cc.defineGetterSetter(_p, "brightness", _p.getBrightness);
-/** @expose */
+/** @export */
 _p.background;
 cc.defineGetterSetter(_p, "background", _p.getBackground);
-/** @expose */
+/** @export */
 _p.overlay;
 cc.defineGetterSetter(_p, "overlay", _p.getOverlay);
-/** @expose */
+/** @export */
 _p.shadow;
 cc.defineGetterSetter(_p, "shadow", _p.getShadow);
-/** @expose */
+/** @export */
 _p.slider;
 cc.defineGetterSetter(_p, "slider", _p.getSlider);
-/** @expose */
+/** @export */
 _p.startPos;
 cc.defineGetterSetter(_p, "startPos", _p.getStartPos);
 

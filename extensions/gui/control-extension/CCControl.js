@@ -354,16 +354,16 @@ cc.Control = cc.Layer.extend(/** @lends cc.Control# */{
 var _p = cc.Control.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.state;
 cc.defineGetterSetter(_p, "state", _p.getState);
-/** @expose */
+/** @export */
 _p.enabled;
 cc.defineGetterSetter(_p, "enabled", _p.isEnabled, _p.setEnabled);
-/** @expose */
+/** @export */
 _p.selected;
 cc.defineGetterSetter(_p, "selected", _p.isSelected, _p.setSelected);
-/** @expose */
+/** @export */
 _p.highlighted;
 cc.defineGetterSetter(_p, "highlighted", _p.isHighlighted, _p.setHighlighted);
 

@@ -33,34 +33,34 @@ cc._tmp.PrototypeSprite = function () {
     cc.defineGetterSetter(_p, "color", _p.getColor, _p.setColor);
 
     // Extended properties
-    /** @expose */
+    /** @export */
     _p.dirty;
-    /** @expose */
+    /** @export */
     _p.flippedX;
     cc.defineGetterSetter(_p, "flippedX", _p.isFlippedX, _p.setFlippedX);
-    /** @expose */
+    /** @export */
     _p.flippedY;
     cc.defineGetterSetter(_p, "flippedY", _p.isFlippedY, _p.setFlippedY);
-    /** @expose */
+    /** @export */
     _p.offsetX;
     cc.defineGetterSetter(_p, "offsetX", _p._getOffsetX);
-    /** @expose */
+    /** @export */
     _p.offsetY;
     cc.defineGetterSetter(_p, "offsetY", _p._getOffsetY);
-    /** @expose */
+    /** @export */
     _p.atlasIndex;
-    /** @expose */
+    /** @export */
     _p.texture;
     cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
-    /** @expose */
+    /** @export */
     _p.textureRectRotated;
     cc.defineGetterSetter(_p, "textureRectRotated", _p.isTextureRectRotated);
-    /** @expose */
+    /** @export */
     _p.textureAtlas;
-    /** @expose */
+    /** @export */
     _p.batchNode;
     cc.defineGetterSetter(_p, "batchNode", _p.getBatchNode, _p.setBatchNode);
-    /** @expose */
+    /** @export */
     _p.quad;
     cc.defineGetterSetter(_p, "quad", _p.getQuad);
 

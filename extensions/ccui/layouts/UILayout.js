@@ -1470,13 +1470,13 @@ ccui.Layout = ccui.Widget.extend(/** @lends ccui.Layout# */{
 var _p = ccui.Layout.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.clippingEnabled;
 cc.defineGetterSetter(_p, "clippingEnabled", _p.isClippingEnabled, _p.setClippingEnabled);
-/** @expose */
+/** @export */
 _p.clippingType;
 cc.defineGetterSetter(_p, "clippingType", null, _p.setClippingType);
-/** @expose */
+/** @export */
 _p.layoutType;
 cc.defineGetterSetter(_p, "layoutType", _p.getLayoutType, _p.setLayoutType);
 

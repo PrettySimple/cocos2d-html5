@@ -346,34 +346,34 @@ cc.ControlStepper = cc.Control.extend(/** @lends cc.ControlStepper# */{
 var _p = cc.ControlStepper.prototype;
 
 // Extedned properties
-/** @expose */
+/** @export */
 _p.wraps;
 cc.defineGetterSetter(_p, "wraps", _p.getWraps, _p.setWraps);
-/** @expose */
+/** @export */
 _p.value;
 cc.defineGetterSetter(_p, "value", _p.getValue, _p.setValue);
-/** @expose */
+/** @export */
 _p.minValue;
 cc.defineGetterSetter(_p, "minValue", _p.getMinimumValue, _p.setMinimumValue);
-/** @expose */
+/** @export */
 _p.maxValue;
 cc.defineGetterSetter(_p, "maxValue", _p.getMaximumValue, _p.setMaximumValue);
-/** @expose */
+/** @export */
 _p.stepValue;
 cc.defineGetterSetter(_p, "stepValue", _p.getStepValue, _p.setStepValue);
-/** @expose */
+/** @export */
 _p.continuous;
 cc.defineGetterSetter(_p, "continuous", _p.isContinuous);
-/** @expose */
+/** @export */
 _p.minusSprite;
 cc.defineGetterSetter(_p, "minusSprite", _p.getMinusSprite, _p.setMinusSprite);
-/** @expose */
+/** @export */
 _p.plusSprite;
 cc.defineGetterSetter(_p, "plusSprite", _p.getPlusSprite, _p.setPlusSprite);
-/** @expose */
+/** @export */
 _p.minusLabel;
 cc.defineGetterSetter(_p, "minusLabel", _p.getMinusLabel, _p.setMinusLabel);
-/** @expose */
+/** @export */
 _p.plusLabel;
 cc.defineGetterSetter(_p, "plusLabel", _p.getPlusLabel, _p.setPlusLabel);
 

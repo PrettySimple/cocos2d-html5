@@ -843,22 +843,22 @@ var _p = ccui.Scale9Sprite.prototype;
 cc.EventHelper.prototype.apply(_p);
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.preferredSize;
 cc.defineGetterSetter(_p, "preferredSize", _p.getPreferredSize, _p.setPreferredSize);
-/** @expose */
+/** @export */
 _p.capInsets;
 cc.defineGetterSetter(_p, "capInsets", _p.getCapInsets, _p.setCapInsets);
-/** @expose */
+/** @export */
 _p.insetLeft;
 cc.defineGetterSetter(_p, "insetLeft", _p.getInsetLeft, _p.setInsetLeft);
-/** @expose */
+/** @export */
 _p.insetTop;
 cc.defineGetterSetter(_p, "insetTop", _p.getInsetTop, _p.setInsetTop);
-/** @expose */
+/** @export */
 _p.insetRight;
 cc.defineGetterSetter(_p, "insetRight", _p.getInsetRight, _p.setInsetRight);
-/** @expose */
+/** @export */
 _p.insetBottom;
 cc.defineGetterSetter(_p, "insetBottom", _p.getInsetBottom, _p.setInsetBottom);
 

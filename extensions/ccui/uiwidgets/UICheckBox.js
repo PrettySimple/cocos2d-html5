@@ -650,7 +650,7 @@ ccui.CheckBox = ccui.Widget.extend(/** @lends ccui.CheckBox# */{
 var _p = ccui.CheckBox.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.selected;
 cc.defineGetterSetter(_p, "selected", _p.isSelected, _p.setSelected);
 

@@ -841,28 +841,28 @@ ccui.TextField.create = function(placeholder, fontName, fontSize){
 var _p = ccui.TextField.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
-/** @expose */
+/** @export */
 _p.placeHolder;
 cc.defineGetterSetter(_p, "placeHolder", _p.getPlaceHolder, _p.setPlaceHolder);
-/** @expose */
+/** @export */
 _p.font;
 cc.defineGetterSetter(_p, "font", _p._getFont, _p._setFont);
-/** @expose */
+/** @export */
 _p.fontSize;
 cc.defineGetterSetter(_p, "fontSize", _p.getFontSize, _p.setFontSize);
-/** @expose */
+/** @export */
 _p.fontName;
 cc.defineGetterSetter(_p, "fontName", _p.getFontName, _p.setFontName);
-/** @expose */
+/** @export */
 _p.maxLengthEnabled;
 cc.defineGetterSetter(_p, "maxLengthEnabled", _p.isMaxLengthEnabled, _p.setMaxLengthEnabled);
-/** @expose */
+/** @export */
 _p.maxLength;
 cc.defineGetterSetter(_p, "maxLength", _p.getMaxLength, _p.setMaxLength);
-/** @expose */
+/** @export */
 _p.passwordEnabled;
 cc.defineGetterSetter(_p, "passwordEnabled", _p.isPasswordEnabled, _p.setPasswordEnabled);
 

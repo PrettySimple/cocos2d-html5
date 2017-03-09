@@ -189,19 +189,19 @@ cc.ControlHuePicker = cc.Control.extend(/** @lends cc.ControlHuePicker# */{
 var _p = cc.ControlHuePicker.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.hue;
 cc.defineGetterSetter(_p, "hue", _p.getHue, _p.setHue);
-/** @expose */
+/** @export */
 _p.huePercent;
 cc.defineGetterSetter(_p, "huePercent", _p.getHuePercentage, _p.setHuePercentage);
-/** @expose */
+/** @export */
 _p.background;
 cc.defineGetterSetter(_p, "background", _p.getBackground);
-/** @expose */
+/** @export */
 _p.slider;
 cc.defineGetterSetter(_p, "slider", _p.getSlider);
-/** @expose */
+/** @export */
 _p.startPos;
 cc.defineGetterSetter(_p, "startPos", _p.getStartPos);
 

@@ -484,31 +484,31 @@ ccui.Text = ccui.Widget.extend(/** @lends ccui.Text# */{
 var _p = ccui.Text.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.boundingWidth;
 cc.defineGetterSetter(_p, "boundingWidth", _p._getBoundingWidth, _p._setBoundingWidth);
-/** @expose */
+/** @export */
 _p.boundingHeight;
 cc.defineGetterSetter(_p, "boundingHeight", _p._getBoundingHeight, _p._setBoundingHeight);
-/** @expose */
+/** @export */
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
-/** @expose */
+/** @export */
 _p.stringLength;
 cc.defineGetterSetter(_p, "stringLength", _p.getStringLength);
-/** @expose */
+/** @export */
 _p.font;
 cc.defineGetterSetter(_p, "font", _p._getFont, _p._setFont);
-/** @expose */
+/** @export */
 _p.fontSize;
 cc.defineGetterSetter(_p, "fontSize", _p.getFontSize, _p.setFontSize);
-/** @expose */
+/** @export */
 _p.fontName;
 cc.defineGetterSetter(_p, "fontName", _p.getFontName, _p.setFontName);
-/** @expose */
+/** @export */
 _p.textAlign;
 cc.defineGetterSetter(_p, "textAlign", _p.getTextHorizontalAlignment, _p.setTextHorizontalAlignment);
-/** @expose */
+/** @export */
 _p.verticalAlign;
 cc.defineGetterSetter(_p, "verticalAlign", _p.getTextVerticalAlignment, _p.setTextVerticalAlignment);
 

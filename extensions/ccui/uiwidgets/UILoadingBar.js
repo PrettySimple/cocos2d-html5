@@ -399,10 +399,10 @@ ccui.LoadingBar = ccui.Widget.extend(/** @lends ccui.LoadingBar# */{
 var _p = ccui.LoadingBar.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.direction;
 cc.defineGetterSetter(_p, "direction", _p.getDirection, _p.setDirection);
-/** @expose */
+/** @export */
 _p.percent;
 cc.defineGetterSetter(_p, "percent", _p.getPercent, _p.setPercent);
 

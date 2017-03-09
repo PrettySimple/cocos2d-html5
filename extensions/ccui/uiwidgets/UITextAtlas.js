@@ -213,7 +213,7 @@ ccui.TextAtlas = ccui.Widget.extend(/** @lends ccui.TextAtlas# */{
 var _p = ccui.TextAtlas.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
 

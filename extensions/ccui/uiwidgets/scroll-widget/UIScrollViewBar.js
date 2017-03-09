@@ -323,10 +323,10 @@ ccui.ScrollViewBar = ccui.ProtectedNode.extend(/** @lends ccui.ScrollViewBar# */
 var _p = ccui.ScrollViewBar.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.opacity;
 cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
-/** @expose */
+/** @export */
 _p.autoHideEnabled;
 cc.defineGetterSetter(_p, "autoHideEnabled", _p.isAutoHideEnabled, _p.setAutoHideEnabled);
 

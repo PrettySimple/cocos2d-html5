@@ -521,7 +521,7 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 var _p = cc.ParticleBatchNode.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.texture;
 cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
 

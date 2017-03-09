@@ -270,28 +270,28 @@ cc.ControlSlider = cc.Control.extend(/** @lends cc.ControlSlider# */{
 var _p = cc.ControlSlider.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.value;
 cc.defineGetterSetter(_p, "value", _p.getValue, _p.setValue);
-/** @expose */
+/** @export */
 _p.minValue;
 cc.defineGetterSetter(_p, "minValue", _p.getMinimumValue, _p.setMinimumValue);
-/** @expose */
+/** @export */
 _p.maxValue;
 cc.defineGetterSetter(_p, "maxValue", _p.getMaximumValue, _p.setMaximumValue);
-/** @expose */
+/** @export */
 _p.minAllowedValue;
 cc.defineGetterSetter(_p, "minAllowedValue", _p.getMinimumAllowedValue, _p.setMinimumAllowedValue);
-/** @expose */
+/** @export */
 _p.maxAllowedValue;
 cc.defineGetterSetter(_p, "maxAllowedValue", _p.getMaximumAllowedValue, _p.setMaximumAllowedValue);
-/** @expose */
+/** @export */
 _p.thumbSprite;
 cc.defineGetterSetter(_p, "thumbSprite", _p.getThumbSprite);
-/** @expose */
+/** @export */
 _p.progressSprite;
 cc.defineGetterSetter(_p, "progressSprite", _p.getProgressSprite);
-/** @expose */
+/** @export */
 _p.backgroundSprite;
 cc.defineGetterSetter(_p, "backgroundSprite", _p.getBackgroundSprite);
 

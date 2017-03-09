@@ -227,10 +227,10 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
 var _p = cc.ClippingNode.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.stencil;
 cc.defineGetterSetter(_p, "stencil", _p.getStencil, _p.setStencil);
-/** @expose */
+/** @export */
 _p.alphaThreshold;
 cc.defineGetterSetter(_p, "alphaThreshold", _p.getAlphaThreshold, _p.setAlphaThreshold);
 

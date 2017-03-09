@@ -593,49 +593,49 @@ cc.EditBox = cc.Node.extend({
 var _p = cc.EditBox.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.font;
 cc.defineGetterSetter(_p, 'font', null, _p._setFont);
-/** @expose */
+/** @export */
 _p.fontName;
 cc.defineGetterSetter(_p, 'fontName', null, _p.setFontName);
-/** @expose */
+/** @export */
 _p.fontSize;
 cc.defineGetterSetter(_p, 'fontSize', null, _p.setFontSize);
-/** @expose */
+/** @export */
 _p.fontColor;
 cc.defineGetterSetter(_p, 'fontColor', null, _p.setFontColor);
-/** @expose */
+/** @export */
 _p.string;
 cc.defineGetterSetter(_p, 'string', _p.getString, _p.setString);
-/** @expose */
+/** @export */
 _p.maxLength;
 cc.defineGetterSetter(_p, 'maxLength', _p.getMaxLength, _p.setMaxLength);
-/** @expose */
+/** @export */
 _p.placeHolder;
 cc.defineGetterSetter(_p, 'placeholder', _p.getPlaceHolder, _p.setPlaceHolder);
-/** @expose */
+/** @export */
 _p.placeHolderFont;
 cc.defineGetterSetter(_p, 'placeholderFont', null, _p._setPlaceholderFont);
-/** @expose */
+/** @export */
 _p.placeHolderFontName;
 cc.defineGetterSetter(_p, 'placeholderFontName', null, _p.setPlaceholderFontName);
-/** @expose */
+/** @export */
 _p.placeHolderFontSize;
 cc.defineGetterSetter(_p, 'placeholderFontSize', null, _p.setPlaceholderFontSize);
-/** @expose */
+/** @export */
 _p.placeHolderFontColor;
 cc.defineGetterSetter(_p, 'placeholderFontColor', null, _p.setPlaceholderFontColor);
-/** @expose */
+/** @export */
 _p.inputFlag;
 cc.defineGetterSetter(_p, 'inputFlag', null, _p.setInputFlag);
-/** @expose */
+/** @export */
 _p.delegate;
 cc.defineGetterSetter(_p, 'delegate', null, _p.setDelegate);
-/** @expose */
+/** @export */
 _p.inputMode;
 cc.defineGetterSetter(_p, 'inputMode', null, _p.setInputMode);
-/** @expose */
+/** @export */
 _p.returnType;
 cc.defineGetterSetter(_p, 'returnType', null, _p.setReturnType);
 

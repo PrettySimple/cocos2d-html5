@@ -78,7 +78,7 @@ cc.TableViewCell = cc.Node.extend(/** @lends cc.TableViewCell# */{
 
 var _p = cc.TableViewCell.prototype;
 
-/** @expose */
+/** @export */
 _p.objectId;
 cc.defineGetterSetter(_p, "objectId", _p.getObjectID, _p.setObjectID);
 
@@ -699,13 +699,13 @@ cc.TableView = cc.ScrollView.extend(/** @lends cc.TableView# */{
 
 var _p = cc.TableView.prototype;
 
-/** @expose */
+/** @export */
 _p.dataSource;
 cc.defineGetterSetter(_p, "dataSource", _p.getDataSource, _p.setDataSource);
-/** @expose */
+/** @export */
 _p.delegate;
 cc.defineGetterSetter(_p, "delegate", _p.getDelegate, _p.setDelegate);
-/** @expose */
+/** @export */
 _p.verticalFillOrder;
 cc.defineGetterSetter(_p, "verticalFillOrder", _p.getVerticalFillOrder, _p.setVerticalFillOrder);
 

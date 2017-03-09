@@ -200,7 +200,7 @@ ccui.LabelBMFont = ccui.TextBMFont = ccui.Widget.extend(/** @lends ccui.TextBMFo
 var _p = ccui.TextBMFont.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
 

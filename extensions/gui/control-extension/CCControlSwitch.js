@@ -385,40 +385,40 @@ cc.ControlSwitchSprite = cc.Sprite.extend({
 
 var _p = cc.ControlSwitchSprite.prototype;
 
-/** @expose */
+/** @export */
 _p.sliderX;
 cc.defineGetterSetter(_p, "sliderX", _p.getSliderXPosition, _p.setSliderXPosition);
-/** @expose */
+/** @export */
 _p.onPos;
 cc.defineGetterSetter(_p, "onPos", _p.getOnPosition, _p.setOnPosition);
-/** @expose */
+/** @export */
 _p.offPos;
 cc.defineGetterSetter(_p, "offPos", _p.getOffPosition, _p.setOffPosition);
-/** @expose */
+/** @export */
 _p.maskTexture;
 cc.defineGetterSetter(_p, "maskTexture", _p.getMaskTexture, _p.setMaskTexture);
-/** @expose */
+/** @export */
 _p.maskPos;
 cc.defineGetterSetter(_p, "maskPos", _p.getMaskLocation, _p.setMaskLocation);
-/** @expose */
+/** @export */
 _p.onSprite;
 cc.defineGetterSetter(_p, "onSprite", _p.getOnSprite, _p.setOnSprite);
-/** @expose */
+/** @export */
 _p.offSprite;
 cc.defineGetterSetter(_p, "offSprite", _p.getOffSprite, _p.setOffSprite);
-/** @expose */
+/** @export */
 _p.thumbSprite;
 cc.defineGetterSetter(_p, "thumbSprite", _p.getThumbSprite, _p.setThumbSprite);
-/** @expose */
+/** @export */
 _p.onLabel;
 cc.defineGetterSetter(_p, "onLabel", _p.getOnLabel, _p.setOnLabel);
-/** @expose */
+/** @export */
 _p.offLabel;
 cc.defineGetterSetter(_p, "offLabel", _p.getOffLabel, _p.setOffLabel);
-/** @expose */
+/** @export */
 _p.onSideWidth;
 cc.defineGetterSetter(_p, "onSideWidth", _p._getOnSideWidth);
-/** @expose */
+/** @export */
 _p.offSideWidth;
 cc.defineGetterSetter(_p, "offSideWidth", _p._getOffSideWidth);
 

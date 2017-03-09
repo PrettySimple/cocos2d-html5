@@ -451,16 +451,16 @@ cc.TMXTiledMap = cc.Node.extend(/** @lends cc.TMXTiledMap# */{
 var _p = cc.TMXTiledMap.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.mapWidth;
 cc.defineGetterSetter(_p, "mapWidth", _p._getMapWidth, _p._setMapWidth);
-/** @expose */
+/** @export */
 _p.mapHeight;
 cc.defineGetterSetter(_p, "mapHeight", _p._getMapHeight, _p._setMapHeight);
-/** @expose */
+/** @export */
 _p.tileWidth;
 cc.defineGetterSetter(_p, "tileWidth", _p._getTileWidth, _p._setTileWidth);
-/** @expose */
+/** @export */
 _p.tileHeight;
 cc.defineGetterSetter(_p, "tileHeight", _p._getTileHeight, _p._setTileHeight);
 

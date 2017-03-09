@@ -188,23 +188,23 @@ cc._tmp.PrototypeTexture2D = function () {
     var _p = cc.Texture2D.prototype;
 
     // Extended properties
-    /** @expose */
+    /** @export */
     _p.name;
     cc.defineGetterSetter(_p, "name", _p.getName);
-    /** @expose */
+    /** @export */
     _p.pixelFormat;
     cc.defineGetterSetter(_p, "pixelFormat", _p.getPixelFormat);
-    /** @expose */
+    /** @export */
     _p.pixelsWidth;
     cc.defineGetterSetter(_p, "pixelsWidth", _p.getPixelsWide);
-    /** @expose */
+    /** @export */
     _p.pixelsHeight;
     cc.defineGetterSetter(_p, "pixelsHeight", _p.getPixelsHigh);
     //cc.defineGetterSetter(_p, "size", _p.getContentSize, _p.setContentSize);
-    /** @expose */
+    /** @export */
     _p.width;
     cc.defineGetterSetter(_p, "width", _p._getWidth);
-    /** @expose */
+    /** @export */
     _p.height;
     cc.defineGetterSetter(_p, "height", _p._getHeight);
 };
@@ -214,13 +214,13 @@ cc._tmp.PrototypeTextureAtlas = function () {
     var _p = cc.TextureAtlas.prototype;
 
     // Extended properties
-    /** @expose */
+    /** @export */
     _p.totalQuads;
     cc.defineGetterSetter(_p, "totalQuads", _p.getTotalQuads);
-    /** @expose */
+    /** @export */
     _p.capacity;
     cc.defineGetterSetter(_p, "capacity", _p.getCapacity);
-    /** @expose */
+    /** @export */
     _p.quads;
     cc.defineGetterSetter(_p, "quads", _p.getQuads, _p.setQuads);
 

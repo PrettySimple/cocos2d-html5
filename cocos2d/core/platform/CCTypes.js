@@ -68,16 +68,16 @@ _p._setA = function (value) {
 };
 
 
-/** @expose */
+/** @export */
 _p.r;
 cc.defineGetterSetter(_p, "r", _p._getR, _p._setR);
-/** @expose */
+/** @export */
 _p.g;
 cc.defineGetterSetter(_p, "g", _p._getG, _p._setG);
-/** @expose */
+/** @export */
 _p.b;
 cc.defineGetterSetter(_p, "b", _p._getB, _p._setB);
-/** @expose */
+/** @export */
 _p.a;
 cc.defineGetterSetter(_p, "a", _p._getA, _p._setA);
 
@@ -174,10 +174,10 @@ _p._getY = function () {
 _p._setY = function (yValue) {
     this._view[1] = yValue;
 };
-/** @expose */
+/** @export */
 _p.x;
 cc.defineGetterSetter(_p, "x", _p._getX, _p._setX);
-/** @expose */
+/** @export */
 _p.y;
 cc.defineGetterSetter(_p, "y", _p._getY, _p._setY);
 
@@ -225,13 +225,13 @@ _p._getZ = function () {
 _p._setZ = function (zValue) {
     this._view[2] = zValue;
 };
-/** @expose */
+/** @export */
 _p.x;
 cc.defineGetterSetter(_p, "x", _p._getX, _p._setX);
-/** @expose */
+/** @export */
 _p.y;
 cc.defineGetterSetter(_p, "y", _p._getY, _p._setY);
-/** @expose */
+/** @export */
 _p.z;
 cc.defineGetterSetter(_p, "z", _p._getZ, _p._setZ);
 
@@ -270,10 +270,10 @@ _p._getV = function () {
 _p._setV = function (yValue) {
     this._view[1] = yValue;
 };
-/** @expose */
+/** @export */
 _p.u;
 cc.defineGetterSetter(_p, "u", _p._getU, _p._setU);
-/** @expose */
+/** @export */
 _p.v;
 cc.defineGetterSetter(_p, "v", _p._getV, _p._setV);
 
@@ -336,16 +336,16 @@ _p._setBR = function (brValue) {
     this._br._view[1] = brValue.y;
 };
 
-/** @expose */
+/** @export */
 _p.tl;
 cc.defineGetterSetter(_p, "tl", _p._getTL, _p._setTL);
-/** @expose */
+/** @export */
 _p.tr;
 cc.defineGetterSetter(_p, "tr", _p._getTR, _p._setTR);
-/** @expose */
+/** @export */
 _p.bl;
 cc.defineGetterSetter(_p, "bl", _p._getBL, _p._setBL);
-/** @expose */
+/** @export */
 _p.br;
 cc.defineGetterSetter(_p, "br", _p._getBR, _p._setBR);
 
@@ -435,13 +435,13 @@ _p._setTexCoords = function (texValue) {
     this._texCoords._view[0] = texValue.u;
     this._texCoords._view[1] = texValue.v;
 };
-/** @expose */
+/** @export */
 _p.vertices;
 cc.defineGetterSetter(_p, "vertices", _p._getVertices, _p._setVertices);
-/** @expose */
+/** @export */
 _p.colors;
 cc.defineGetterSetter(_p, "colors", _p._getColor, _p._setColor);
-/** @expose */
+/** @export */
 _p.texCoords;
 cc.defineGetterSetter(_p, "texCoords", _p._getTexCoords, _p._setTexCoords);
 
@@ -518,19 +518,19 @@ _p._getArrayBuffer = function () {
     return this._arrayBuffer;
 };
 
-/** @expose */
+/** @export */
 _p.tl;
 cc.defineGetterSetter(_p, "tl", _p._getTL, _p._setTL);
-/** @expose */
+/** @export */
 _p.tr;
 cc.defineGetterSetter(_p, "tr", _p._getTR, _p._setTR);
-/** @expose */
+/** @export */
 _p.bl;
 cc.defineGetterSetter(_p, "bl", _p._getBL, _p._setBL);
-/** @expose */
+/** @export */
 _p.br;
 cc.defineGetterSetter(_p, "br", _p._getBR, _p._setBR);
-/** @expose */
+/** @export */
 _p.arrayBuffer;
 cc.defineGetterSetter(_p, "arrayBuffer", _p._getArrayBuffer, null);
 
@@ -649,13 +649,13 @@ _p._setTexCoords = function (texValue) {
     this._texCoords._view[1] = texValue.v;
 };
 
-/** @expose */
+/** @export */
 _p.vertices;
 cc.defineGetterSetter(_p, "vertices", _p._getVertices, _p._setVertices);
-/** @expose */
+/** @export */
 _p.colors;
 cc.defineGetterSetter(_p, "colors", _p._getColor, _p._setColor);
-/** @expose */
+/** @export */
 _p.texCoords;
 cc.defineGetterSetter(_p, "texCoords", _p._getTexCoords, _p._setTexCoords);
 
@@ -717,13 +717,13 @@ _p._setC = function (cValue) {
     locC.texCoords = cValue.texCoords;
 };
 
-/** @expose */
+/** @export */
 _p.a;
 cc.defineGetterSetter(_p, "a", _p._getA, _p._setA);
-/** @expose */
+/** @export */
 _p.b;
 cc.defineGetterSetter(_p, "b", _p._getB, _p._setB);
-/** @expose */
+/** @export */
 _p.c;
 cc.defineGetterSetter(_p, "c", _p._getC, _p._setC);
 
@@ -1127,31 +1127,31 @@ _p._getGray = function () {
     return cc.color(166, 166, 166);
 };
 
-/** @expose */
+/** @export */
 _p.WHITE;
 cc.defineGetterSetter(_p, "WHITE", _p._getWhite);
-/** @expose */
+/** @export */
 _p.YELLOW;
 cc.defineGetterSetter(_p, "YELLOW", _p._getYellow);
-/** @expose */
+/** @export */
 _p.BLUE;
 cc.defineGetterSetter(_p, "BLUE", _p._getBlue);
-/** @expose */
+/** @export */
 _p.GREEN;
 cc.defineGetterSetter(_p, "GREEN", _p._getGreen);
-/** @expose */
+/** @export */
 _p.RED;
 cc.defineGetterSetter(_p, "RED", _p._getRed);
-/** @expose */
+/** @export */
 _p.MAGENTA;
 cc.defineGetterSetter(_p, "MAGENTA", _p._getMagenta);
-/** @expose */
+/** @export */
 _p.BLACK;
 cc.defineGetterSetter(_p, "BLACK", _p._getBlack);
-/** @expose */
+/** @export */
 _p.ORANGE;
 cc.defineGetterSetter(_p, "ORANGE", _p._getOrange);
-/** @expose */
+/** @export */
 _p.GRAY;
 cc.defineGetterSetter(_p, "GRAY", _p._getGray);
 
@@ -1168,15 +1168,15 @@ cc.BlendFunc._additive = function(){
     return new cc.BlendFunc(cc.SRC_ALPHA, cc.ONE);
 };
 
-/** @expose */
+/** @export */
 cc.BlendFunc.DISABLE;
 cc.defineGetterSetter(cc.BlendFunc, "DISABLE", cc.BlendFunc._disable);
-/** @expose */
+/** @export */
 cc.BlendFunc.ALPHA_PREMULTIPLIED;
 cc.defineGetterSetter(cc.BlendFunc, "ALPHA_PREMULTIPLIED", cc.BlendFunc._alphaPremultiplied);
-/** @expose */
+/** @export */
 cc.BlendFunc.ALPHA_NON_PREMULTIPLIED;
 cc.defineGetterSetter(cc.BlendFunc, "ALPHA_NON_PREMULTIPLIED", cc.BlendFunc._alphaNonPremultiplied);
-/** @expose */
+/** @export */
 cc.BlendFunc.ADDITIVE;
 cc.defineGetterSetter(cc.BlendFunc, "ADDITIVE", cc.BlendFunc._additive);

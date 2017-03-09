@@ -651,22 +651,22 @@ cc.LayerGradient.create = function (start, end, v, stops) {
 (function () {
     var proto = cc.LayerGradient.prototype;
     // Extended properties
-    /** @expose */
+    /** @export */
     proto.startColor;
     cc.defineGetterSetter(proto, "startColor", proto.getStartColor, proto.setStartColor);
-    /** @expose */
+    /** @export */
     proto.endColor;
     cc.defineGetterSetter(proto, "endColor", proto.getEndColor, proto.setEndColor);
-    /** @expose */
+    /** @export */
     proto.startOpacity;
     cc.defineGetterSetter(proto, "startOpacity", proto.getStartOpacity, proto.setStartOpacity);
-    /** @expose */
+    /** @export */
     proto.endOpacity;
     cc.defineGetterSetter(proto, "endOpacity", proto.getEndOpacity, proto.setEndOpacity);
-    /** @expose */
+    /** @export */
     proto.vector;
     cc.defineGetterSetter(proto, "vector", proto.getVector, proto.setVector);
-    /** @expose */
+    /** @export */
     proto.colorStops;
     cc.defineGetterSetter(proto, "colorStops", proto.getColorStops, proto.setColorStops);
 })();

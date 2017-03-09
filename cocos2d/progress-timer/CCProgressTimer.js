@@ -306,22 +306,22 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
 // Extended properties
 var _p = cc.ProgressTimer.prototype;
 
-/** @expose */
+/** @export */
 _p.midPoint;
 cc.defineGetterSetter(_p, "midPoint", _p.getMidpoint, _p.setMidpoint);
-/** @expose */
+/** @export */
 _p.barChangeRate;
 cc.defineGetterSetter(_p, "barChangeRate", _p.getBarChangeRate, _p.setBarChangeRate);
-/** @expose */
+/** @export */
 _p.type;
 cc.defineGetterSetter(_p, "type", _p.getType, _p.setType);
-/** @expose */
+/** @export */
 _p.percentage;
 cc.defineGetterSetter(_p, "percentage", _p.getPercentage, _p.setPercentage);
-/** @expose */
+/** @export */
 _p.sprite;
 cc.defineGetterSetter(_p, "sprite", _p.getSprite, _p.setSprite);
-/** @expose */
+/** @export */
 _p.reverseDir;
 cc.defineGetterSetter(_p, "reverseDir", _p.isReverseDirection, _p.setReverseDirection);
 

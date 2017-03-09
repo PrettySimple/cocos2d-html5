@@ -167,7 +167,7 @@ cc.ControlColourPicker = cc.Control.extend(/** @lends cc.ControlColourPicker# */
 var _p = cc.ControlColourPicker.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.background;
 cc.defineGetterSetter(_p, "background", _p.getBackground);
 

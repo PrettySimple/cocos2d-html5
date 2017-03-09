@@ -92,9 +92,9 @@ cc.NodeGrid = cc.Node.extend(/** @lends cc.NodeGrid# */{
 
 var _p = cc.NodeGrid.prototype;
 // Extended property
-/** @expose */
+/** @export */
 _p.grid;
-/** @expose */
+/** @export */
 _p.target;
 cc.defineGetterSetter(_p, "target", null, _p.setTarget);
 

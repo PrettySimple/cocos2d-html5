@@ -431,7 +431,7 @@ ccs.Tween = ccs.ProcessBase.extend(/** @lends ccs.Tween# */{
 var _p = ccs.Tween.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.animation;
 cc.defineGetterSetter(_p, "animation", _p.getAnimation, _p.setAnimation);
 

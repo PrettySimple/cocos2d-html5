@@ -640,25 +640,25 @@ ccs.Bone = ccs.Node.extend(/** @lends ccs.Bone# */{
 var _p = ccs.Bone.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.boneData;
 cc.defineGetterSetter(_p, "boneData", _p.getBoneData, _p.setBoneData);
-/** @expose */
+/** @export */
 _p.armature;
 cc.defineGetterSetter(_p, "armature", _p.getArmature, _p.setArmature);
-/** @expose */
+/** @export */
 _p.childArmature;
 cc.defineGetterSetter(_p, "childArmature", _p.getChildArmature, _p.setChildArmature);
-/** @expose */
+/** @export */
 _p.childrenBone;
 cc.defineGetterSetter(_p, "childrenBone", _p.getChildrenBone);
-/** @expose */
+/** @export */
 _p.tween;
 cc.defineGetterSetter(_p, "tween", _p.getTween);
-/** @expose */
+/** @export */
 _p.tweenData;
 cc.defineGetterSetter(_p, "tweenData", _p.getTweenData);
-/** @expose */
+/** @export */
 _p.colliderFilter;
 cc.defineGetterSetter(_p, "colliderFilter", _p.getColliderFilter, _p.setColliderFilter);
 

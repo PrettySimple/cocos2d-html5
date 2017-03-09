@@ -183,7 +183,7 @@ cc.MenuItem = cc.Node.extend(/** @lends cc.MenuItem# */{
 var _p = cc.MenuItem.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.enabled;
 cc.defineGetterSetter(_p, "enabled", _p.isEnabled, _p.setEnabled);
 
@@ -401,13 +401,13 @@ cc.MenuItemLabel = cc.MenuItem.extend(/** @lends cc.MenuItemLabel# */{
 var _p = cc.MenuItemLabel.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
-/** @expose */
+/** @export */
 _p.disabledColor;
 cc.defineGetterSetter(_p, "disabledColor", _p.getDisabledColor, _p.setDisabledColor);
-/** @expose */
+/** @export */
 _p.label;
 cc.defineGetterSetter(_p, "label", _p.getLabel, _p.setLabel);
 
@@ -628,10 +628,10 @@ cc.MenuItemFont.setFontName = function (name) {
 var _p = cc.MenuItemFont.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.fontSize;
 cc.defineGetterSetter(_p, "fontSize", _p.getFontSize, _p.setFontSize);
-/** @expose */
+/** @export */
 _p.fontName;
 cc.defineGetterSetter(_p, "fontName", _p.getFontName, _p.setFontName);
 
@@ -944,13 +944,13 @@ cc.MenuItemSprite = cc.MenuItem.extend(/** @lends cc.MenuItemSprite# */{
 var _p = cc.MenuItemSprite.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.normalImage;
 cc.defineGetterSetter(_p, "normalImage", _p.getNormalImage, _p.setNormalImage);
-/** @expose */
+/** @export */
 _p.selectedImage;
 cc.defineGetterSetter(_p, "selectedImage", _p.getSelectedImage, _p.setSelectedImage);
-/** @expose */
+/** @export */
 _p.disabledImage;
 cc.defineGetterSetter(_p, "disabledImage", _p.getDisabledImage, _p.setDisabledImage);
 
@@ -1351,7 +1351,7 @@ cc.MenuItemToggle = cc.MenuItem.extend(/** @lends cc.MenuItemToggle# */{
 var _p = cc.MenuItemToggle.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.selectedIndex;
 cc.defineGetterSetter(_p, "selectedIndex", _p.getSelectedIndex, _p.setSelectedIndex);
 

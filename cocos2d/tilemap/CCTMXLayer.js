@@ -776,16 +776,16 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
 var _p = cc.TMXLayer.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.layerWidth;
 cc.defineGetterSetter(_p, "layerWidth", _p._getLayerWidth, _p._setLayerWidth);
-/** @expose */
+/** @export */
 _p.layerHeight;
 cc.defineGetterSetter(_p, "layerHeight", _p._getLayerHeight, _p._setLayerHeight);
-/** @expose */
+/** @export */
 _p.tileWidth;
 cc.defineGetterSetter(_p, "tileWidth", _p._getTileWidth, _p._setTileWidth);
-/** @expose */
+/** @export */
 _p.tileHeight;
 cc.defineGetterSetter(_p, "tileHeight", _p._getTileHeight, _p._setTileHeight);
 

@@ -742,7 +742,7 @@ ccui.Slider = ccui.Widget.extend(/** @lends ccui.Slider# */{
 var _p = ccui.Slider.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.percent;
 cc.defineGetterSetter(_p, "percent", _p.getPercent, _p.setPercent);
 

@@ -614,13 +614,13 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{  //WebGL only
 var _p = cc.TextureAtlas.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.totalQuads;
 cc.defineGetterSetter(_p, "totalQuads", _p.getTotalQuads);
-/** @expose */
+/** @export */
 _p.capacity;
 cc.defineGetterSetter(_p, "capacity", _p.getCapacity);
-/** @expose */
+/** @export */
 _p.quads;
 cc.defineGetterSetter(_p, "quads", _p.getQuads, _p.setQuads);
 

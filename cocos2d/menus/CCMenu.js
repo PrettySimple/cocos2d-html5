@@ -582,7 +582,7 @@ cc.Menu = cc.Layer.extend(/** @lends cc.Menu# */{
 var _p = cc.Menu.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.enabled;
 
 /**

@@ -33,26 +33,26 @@ cc._tmp = cc._tmp || {};
 cc._LogInfos = {};
 
 var _p = window;
-/** @expose */
+/** @export */
 _p.gl;
-/** @expose */
+/** @export */
 _p.WebGLRenderingContext;
-/** @expose */
+/** @export */
 _p.DeviceOrientationEvent;
-/** @expose */
+/** @export */
 _p.DeviceMotionEvent;
-/** @expose */
+/** @export */
 _p.AudioContext;
 if (!_p.AudioContext) {
-    /** @expose */
+    /** @export */
     _p.webkitAudioContext;
 }
-/** @expose */
+/** @export */
 _p.mozAudioContext;
 _p = Object.prototype;
-/** @expose */
+/** @export */
 _p._super;
-/** @expose */
+/** @export */
 _p.ctor;
 _p = null;
 

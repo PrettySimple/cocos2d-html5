@@ -294,7 +294,7 @@ ccui.PageViewIndicator = ccui.ProtectedNode.extend(/** @lends ccui.PageViewIndic
 var _p = ccui.PageViewIndicator.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.spaceBetweenIndexNodes;
 cc.defineGetterSetter(_p, "spaceBetweenIndexNodes", _p.getSpaceBetweenIndexNodes, _p.setSpaceBetweenIndexNodes);
 /**

@@ -1866,49 +1866,49 @@ ccui.Widget = ccui.ProtectedNode.extend(/** @lends ccui.Widget# */{
 var _p = ccui.Widget.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.xPercent;
 cc.defineGetterSetter(_p, "xPercent", _p._getXPercent, _p._setXPercent);
-/** @expose */
+/** @export */
 _p.yPercent;
 cc.defineGetterSetter(_p, "yPercent", _p._getYPercent, _p._setYPercent);
-/** @expose */
+/** @export */
 _p.widthPercent;
 cc.defineGetterSetter(_p, "widthPercent", _p._getWidthPercent, _p._setWidthPercent);
-/** @expose */
+/** @export */
 _p.heightPercent;
 cc.defineGetterSetter(_p, "heightPercent", _p._getHeightPercent, _p._setHeightPercent);
-/** @expose */
+/** @export */
 _p.widgetParent;
 cc.defineGetterSetter(_p, "widgetParent", _p.getWidgetParent);
-/** @expose */
+/** @export */
 _p.enabled;
 cc.defineGetterSetter(_p, "enabled", _p.isEnabled, _p.setEnabled);
-/** @expose */
+/** @export */
 _p.focused;
 cc.defineGetterSetter(_p, "focused", _p.isFocused, _p.setFocused);
-/** @expose */
+/** @export */
 _p.sizeType;
 cc.defineGetterSetter(_p, "sizeType", _p.getSizeType, _p.setSizeType);
-/** @expose */
+/** @export */
 _p.widgetType;
 cc.defineGetterSetter(_p, "widgetType", _p.getWidgetType);
-/** @expose */
+/** @export */
 _p.touchEnabled;
 cc.defineGetterSetter(_p, "touchEnabled", _p.isTouchEnabled, _p.setTouchEnabled);
-/** @expose */
+/** @export */
 _p.updateEnabled;
 cc.defineGetterSetter(_p, "updateEnabled", _p.isUpdateEnabled, _p.setUpdateEnabled);
-/** @expose */
+/** @export */
 _p.bright;
 cc.defineGetterSetter(_p, "bright", _p.isBright, _p.setBright);
-/** @expose */
+/** @export */
 _p.name;
 cc.defineGetterSetter(_p, "name", _p.getName, _p.setName);
-/** @expose */
+/** @export */
 _p.actionTag;
 cc.defineGetterSetter(_p, "actionTag", _p.getActionTag, _p.setActionTag);
-/** @expose */
+/** @export */
 _p.opacity;
 cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
 

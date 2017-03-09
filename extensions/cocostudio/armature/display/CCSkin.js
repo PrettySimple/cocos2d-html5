@@ -176,10 +176,10 @@ ccs.Skin = ccs.Sprite.extend(/** @lends ccs.Skin# */{
 var _p = ccs.Skin.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.skinData;
 cc.defineGetterSetter(_p, "skinData", _p.getSkinData, _p.setSkinData);
-/** @expose */
+/** @export */
 _p.displayName;
 cc.defineGetterSetter(_p, "displayName", _p.getDisplayName);
 

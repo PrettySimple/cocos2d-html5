@@ -662,13 +662,13 @@ cc.ControlButton = cc.Control.extend(/** @lends cc.ControlButton# */{
 var _p = cc.ControlButton.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.adjustBackground;
 cc.defineGetterSetter(_p, "adjustBackground", _p.getAdjustBackgroundImage, _p.setAdjustBackgroundImage);
-/** @expose */
+/** @export */
 _p.preferredSize;
 cc.defineGetterSetter(_p, "preferredSize", _p.getPreferredSize, _p.setPreferredSize);
-/** @expose */
+/** @export */
 _p.labelAnchor;
 cc.defineGetterSetter(_p, "labelAnchor", _p.getLabelAnchorPoint, _p.setLabelAnchorPoint);
 

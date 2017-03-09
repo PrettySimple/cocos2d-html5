@@ -807,28 +807,28 @@ cc.ScrollView = cc.Layer.extend(/** @lends cc.ScrollView# */{
 var _p = cc.ScrollView.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.minOffset;
 cc.defineGetterSetter(_p, "minOffset", _p.minContainerOffset);
-/** @expose */
+/** @export */
 _p.maxOffset;
 cc.defineGetterSetter(_p, "maxOffset", _p.maxContainerOffset);
-/** @expose */
+/** @export */
 _p.bounceable;
 cc.defineGetterSetter(_p, "bounceable", _p.isBounceable, _p.setBounceable);
-/** @expose */
+/** @export */
 _p.viewSize;
 cc.defineGetterSetter(_p, "viewSize", _p.getViewSize, _p.setViewSize);
-/** @expose */
+/** @export */
 _p.container;
 cc.defineGetterSetter(_p, "container", _p.getContainer, _p.setContainer);
-/** @expose */
+/** @export */
 _p.direction;
 cc.defineGetterSetter(_p, "direction", _p.getDirection, _p.setDirection);
-/** @expose */
+/** @export */
 _p.delegate;
 cc.defineGetterSetter(_p, "delegate", _p.getDelegate, _p.setDelegate);
-/** @expose */
+/** @export */
 _p.clippingToBounds;
 cc.defineGetterSetter(_p, "clippingToBounds", _p.isClippingToBounds, _p.setClippingToBounds);
 

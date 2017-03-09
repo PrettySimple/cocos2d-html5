@@ -41,7 +41,7 @@
 
         /**
          * @returns {PluginManager}
-         * @expose
+         * @export
          */
         getInstance: function(){
             return this;
@@ -49,7 +49,7 @@
 
         /**
          * @param {String} pluginName
-         * @expose
+         * @export
          */
         loadPlugin: function(pluginName){
 
@@ -58,7 +58,7 @@
         /**
          *
          * @param pluginName
-         * @expose
+         * @export
          */
         unloadPlugin: function(pluginName){
 
@@ -72,26 +72,26 @@
 
         /**
          * @param {Boolean} debug
-         * @expose
+         * @export
          */
         setDebugMode: function(debug){},
 
         /**
          * @param {String} appKey
-         * @expose
+         * @export
          */
         startSession: function(appKey){},
 
         /**
          * @param {Boolean} Capture
-         * @expose
+         * @export
          */
         setCaptureUncaughtException: function(Capture){},
 
         /**
          * @param {String} funName
          * @param {All} Params
-         * @expose
+         * @export
          */
         callFuncWithParam: function(funName){
             if(typeof this[funName] === 'function'){
@@ -104,7 +104,7 @@
         /**
          * @param {String} funName
          * @param {All} Params
-         * @expose
+         * @export
          */
         callStringFuncWithParam: function(funName){
             this.callFuncWithParam.apply(arguments);
@@ -112,7 +112,7 @@
 
         /**
          * @returns {String}
-         * @expose
+         * @export
          */
         getPluginName: function(){
             return this._name;
@@ -120,14 +120,14 @@
 
         /**
          * @returns {String}
-         * @expose
+         * @export
          */
         getPluginVersion: function(){
             return this._version;
         }
     };
 
-    /** @expose */
+    /** @export */
     PluginAssembly.extend = function(name, porp){
         var p, prototype = {};
         for(p in PluginAssembly.prototype){
@@ -167,87 +167,87 @@
         return tmpValue
     };
 
-    /** @expose */
+    /** @export */
     Param.ParamType = {
-        /** @expose */
+        /** @export */
         TypeInt:1,
-        /** @expose */
+        /** @export */
         TypeFloat:2,
-        /** @expose */
+        /** @export */
         TypeBool:3,
-        /** @expose */
+        /** @export */
         TypeString:4,
-        /** @expose */
+        /** @export */
         TypeStringMap:5
     };
 
-    /** @expose */
+    /** @export */
     Param.AdsResultCode = {
-        /** @expose */
+        /** @export */
         AdsReceived:0,
-        /** @expose */
+        /** @export */
         FullScreenViewShown:1,
-        /** @expose */
+        /** @export */
         FullScreenViewDismissed:2,
-        /** @expose */
+        /** @export */
         PointsSpendSucceed:3,
-        /** @expose */
+        /** @export */
         PointsSpendFailed:4,
-        /** @expose */
+        /** @export */
         NetworkError:5,
-        /** @expose */
+        /** @export */
         UnknownError:6
     };
 
-    /** @expose */
+    /** @export */
     Param.PayResultCode = {
-        /** @expose */
+        /** @export */
         PaySuccess:0,
-        /** @expose */
+        /** @export */
         PayFail:1,
-        /** @expose */
+        /** @export */
         PayCancel:2,
-        /** @expose */
+        /** @export */
         PayTimeOut:3
     };
 
-    /** @expose */
+    /** @export */
     Param.ShareResultCode = {
-        /** @expose */
+        /** @export */
         ShareSuccess:0,
-        /** @expose */
+        /** @export */
         ShareFail:1,
-        /** @expose */
+        /** @export */
         ShareCancel:2,
-        /** @expose */
+        /** @export */
         ShareTimeOut:3
     };
 
-    /** @expose */
+    /** @export */
     var PluginList = {};
 
-    /** @expose */
+    /** @export */
     var Plugin = {
 
-        /** @expose */
+        /** @export */
         extend: function(name, extend){
             var config = (cc.game.config && cc.game.config.plugin) || {};
             PluginList[name] = new (PluginAssembly.extend(name, extend));
             typeof PluginList[name].ctor === "function" && PluginList[name].ctor(config[name]);
         },
 
-        /** @expose */
+        /** @export */
         PluginList: PluginList,
 
-        /** @expose */
+        /** @export */
         PluginParam: Param,
 
-        /** @expose */
+        /** @export */
         PluginManager: new PluginManager()
 
     };
 
-    /** @expose */
+    /** @export */
     window.plugin = Plugin;
 
 })();

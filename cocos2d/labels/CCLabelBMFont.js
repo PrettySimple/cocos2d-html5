@@ -865,13 +865,13 @@ cc.LabelBMFont = cc.SpriteBatchNode.extend(/** @lends cc.LabelBMFont# */{
     var p = cc.LabelBMFont.prototype;
     cc.EventHelper.prototype.apply(p);
 
-    /** @expose */
+    /** @export */
     p.string;
     cc.defineGetterSetter(p, "string", p.getString, p._setStringForSetter);
-    /** @expose */
+    /** @export */
     p.boundingWidth;
     cc.defineGetterSetter(p, "boundingWidth", p._getBoundingWidth, p.setBoundingWidth);
-    /** @expose */
+    /** @export */
     p.textAlign;
     cc.defineGetterSetter(p, "textAlign", p._getAlignment, p.setAlignment);
 

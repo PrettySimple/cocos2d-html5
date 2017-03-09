@@ -30,98 +30,98 @@ cc._tmp.PrototypeCCNode = function () {
 
     cc.defineGetterSetter(_p, "x", _p.getPositionX, _p.setPositionX);
     cc.defineGetterSetter(_p, "y", _p.getPositionY, _p.setPositionY);
-    /** @expose */
+    /** @export */
     _p.width;
     cc.defineGetterSetter(_p, "width", _p._getWidth, _p._setWidth);
-    /** @expose */
+    /** @export */
     _p.height;
     cc.defineGetterSetter(_p, "height", _p._getHeight, _p._setHeight);
-    /** @expose */
+    /** @export */
     _p.anchorX;
     cc.defineGetterSetter(_p, "anchorX", _p._getAnchorX, _p._setAnchorX);
-    /** @expose */
+    /** @export */
     _p.anchorY;
     cc.defineGetterSetter(_p, "anchorY", _p._getAnchorY, _p._setAnchorY);
-    /** @expose */
+    /** @export */
     _p.skewX;
     cc.defineGetterSetter(_p, "skewX", _p.getSkewX, _p.setSkewX);
-    /** @expose */
+    /** @export */
     _p.skewY;
     cc.defineGetterSetter(_p, "skewY", _p.getSkewY, _p.setSkewY);
-    /** @expose */
+    /** @export */
     _p.zIndex;
     cc.defineGetterSetter(_p, "zIndex", _p.getLocalZOrder, _p.setLocalZOrder);
-    /** @expose */
+    /** @export */
     _p.vertexZ;
     cc.defineGetterSetter(_p, "vertexZ", _p.getVertexZ, _p.setVertexZ);
-    /** @expose */
+    /** @export */
     _p.rotation;
     cc.defineGetterSetter(_p, "rotation", _p.getRotation, _p.setRotation);
-    /** @expose */
+    /** @export */
     _p.rotationX;
     cc.defineGetterSetter(_p, "rotationX", _p.getRotationX, _p.setRotationX);
-    /** @expose */
+    /** @export */
     _p.rotationY;
     cc.defineGetterSetter(_p, "rotationY", _p.getRotationY, _p.setRotationY);
-    /** @expose */
+    /** @export */
     _p.scale;
     cc.defineGetterSetter(_p, "scale", _p.getScale, _p.setScale);
-    /** @expose */
+    /** @export */
     _p.scaleX;
     cc.defineGetterSetter(_p, "scaleX", _p.getScaleX, _p.setScaleX);
-    /** @expose */
+    /** @export */
     _p.scaleY;
     cc.defineGetterSetter(_p, "scaleY", _p.getScaleY, _p.setScaleY);
-    /** @expose */
+    /** @export */
     _p.children;
     cc.defineGetterSetter(_p, "children", _p.getChildren);
-    /** @expose */
+    /** @export */
     _p.childrenCount;
     cc.defineGetterSetter(_p, "childrenCount", _p.getChildrenCount);
-    /** @expose */
+    /** @export */
     _p.parent;
     cc.defineGetterSetter(_p, "parent", _p.getParent, _p.setParent);
-    /** @expose */
+    /** @export */
     _p.visible;
     cc.defineGetterSetter(_p, "visible", _p.isVisible, _p.setVisible);
-    /** @expose */
+    /** @export */
     _p.running;
     cc.defineGetterSetter(_p, "running", _p.isRunning);
-    /** @expose */
+    /** @export */
     _p.ignoreAnchor;
     cc.defineGetterSetter(_p, "ignoreAnchor", _p.isIgnoreAnchorPointForPosition, _p.ignoreAnchorPointForPosition);
-    /** @expose */
+    /** @export */
     _p.tag;
-    /** @expose */
+    /** @export */
     _p.userData;
-    /** @expose */
+    /** @export */
     _p.userObject;
-    /** @expose */
+    /** @export */
     _p.arrivalOrder;
-    /** @expose */
+    /** @export */
     _p.actionManager;
     cc.defineGetterSetter(_p, "actionManager", _p.getActionManager, _p.setActionManager);
-    /** @expose */
+    /** @export */
     _p.scheduler;
     cc.defineGetterSetter(_p, "scheduler", _p.getScheduler, _p.setScheduler);
     //cc.defineGetterSetter(_p, "boundingBox", _p.getBoundingBox);
-    /** @expose */
+    /** @export */
     _p.shaderProgram;
     cc.defineGetterSetter(_p, "shaderProgram", _p.getShaderProgram, _p.setShaderProgram);
 
-    /** @expose */
+    /** @export */
     _p.opacity;
     cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
-    /** @expose */
+    /** @export */
     _p.opacityModifyRGB;
     cc.defineGetterSetter(_p, "opacityModifyRGB", _p.isOpacityModifyRGB);
-    /** @expose */
+    /** @export */
     _p.cascadeOpacity;
     cc.defineGetterSetter(_p, "cascadeOpacity", _p.isCascadeOpacityEnabled, _p.setCascadeOpacityEnabled);
-    /** @expose */
+    /** @export */
     _p.color;
     cc.defineGetterSetter(_p, "color", _p.getColor, _p.setColor);
-    /** @expose */
+    /** @export */
     _p.cascadeColor;
     cc.defineGetterSetter(_p, "cascadeColor", _p.isCascadeColorEnabled, _p.setCascadeColorEnabled);
 };

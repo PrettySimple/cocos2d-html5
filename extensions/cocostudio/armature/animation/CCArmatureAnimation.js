@@ -653,10 +653,10 @@ ccs.ArmatureAnimation = ccs.ProcessBase.extend(/** @lends ccs.ArmatureAnimation#
 var _p = ccs.ArmatureAnimation.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.speedScale;
 cc.defineGetterSetter(_p, "speedScale", _p.getSpeedScale, _p.setSpeedScale);
-/** @expose */
+/** @export */
 _p.animationScale;
 cc.defineGetterSetter(_p, "animationScale", _p.getAnimationScale, _p.setAnimationScale);
 

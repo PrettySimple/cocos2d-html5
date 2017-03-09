@@ -337,28 +337,28 @@ ccs.ProcessBase = ccs.Class.extend(/** @lends ccs.ProcessBase# */{
 var _p = ccs.ProcessBase.prototype;
 
 // Extended properties
-/** @expose */
+/** @export */
 _p.currentFrameIndex;
 cc.defineGetterSetter(_p, "currentFrameIndex", _p.getCurrentFrameIndex);
-/** @expose */
+/** @export */
 _p.paused;
 cc.defineGetterSetter(_p, "paused", _p.isPause);
-/** @expose */
+/** @export */
 _p.completed;
 cc.defineGetterSetter(_p, "completed", _p.isComplete);
-/** @expose */
+/** @export */
 _p.currentPercent;
 cc.defineGetterSetter(_p, "currentPercent", _p.getCurrentPercent);
-/** @expose */
+/** @export */
 _p.rawDuration;
 cc.defineGetterSetter(_p, "rawDuration", _p.getRawDuration);
-/** @expose */
+/** @export */
 _p.loop;
 cc.defineGetterSetter(_p, "loop", _p.getLoop);
-/** @expose */
+/** @export */
 _p.tweenEasing;
 cc.defineGetterSetter(_p, "tweenEasing", _p.getTweenEasing);
-/** @expose */
+/** @export */
 _p.playing;
 cc.defineGetterSetter(_p, "playing", _p.isPlaying);
 
