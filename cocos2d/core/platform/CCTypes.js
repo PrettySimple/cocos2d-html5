@@ -1013,7 +1013,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 this.a_undefined = true;
         };
         cc._WebGLColor.BYTES_PER_ELEMENT = 4;
-        _p = cc._WebGLColor.prototype;
+        var _p = cc._WebGLColor.prototype;
         _p._getR = function () {
             return this._view[0];
         };
@@ -1180,3 +1180,4 @@ cc.defineGetterSetter(cc.BlendFunc, "ALPHA_NON_PREMULTIPLIED", cc.BlendFunc._alp
 /** @export */
 cc.BlendFunc.ADDITIVE;
 cc.defineGetterSetter(cc.BlendFunc, "ADDITIVE", cc.BlendFunc._additive);
+
