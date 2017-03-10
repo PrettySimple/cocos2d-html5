@@ -550,7 +550,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             this._textGradientFillColorData.gradientStops = [];
             this._textGradientFillColorData.gradientBox = gradientBox;
 
-            for(index; index < colorsCount; index++)
+            for(var index; index < colorsCount; index++)
             {
                 var stopData = {};
                 stopData.color = p_gradient_colors[index];
