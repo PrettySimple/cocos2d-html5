@@ -279,6 +279,8 @@ _p.quadsToDraw;
 
 cc.EventHelper.prototype.apply(_p);
 
+delete _p;
+
 /**
  * Creates a cc.AtlasNode with an Atlas file the width and height of each item and the quantity of items to render
  * @deprecated since v3.0, please use new construction instead

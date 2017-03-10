@@ -84,5 +84,6 @@ cc._tmp.PrototypeLabelTTF = function () {
     /** @export */
     _p.shadowBlur;
     cc.defineGetterSetter(_p, "shadowBlur", _p._getShadowBlur, _p._setShadowBlur);
-
+    
+    delete _p;
 };

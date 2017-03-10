@@ -217,7 +217,7 @@ var _p = ccui.TextAtlas.prototype;
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
 
-_p = null;
+delete _p;
 
 /**
  * allocates and initializes a UILabelAtlas.

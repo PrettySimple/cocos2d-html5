@@ -849,6 +849,8 @@ cc._tmp.WebGLTextureAtlas = function () {
         cc.g_NumberOfDraws++;
         //cc.checkGLErrorDebug();
     };
+
+    delete _p;
 };
 
 cc._tmp.WebGLTextureCache = function () {
@@ -930,5 +932,6 @@ cc._tmp.WebGLTextureCache = function () {
     };
 
     _p.addImageAsync = _p.addImage;
-    _p = null;
+
+    delete _p;
 };

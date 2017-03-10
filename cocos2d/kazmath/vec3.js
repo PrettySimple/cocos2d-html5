@@ -196,4 +196,6 @@
         tyArr[2] = this.z;
         return tyArr;
     };
+    
+    delete _p;
 })(cc);

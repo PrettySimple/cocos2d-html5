@@ -362,4 +362,4 @@ cc.defineGetterSetter(_p, "tweenEasing", _p.getTweenEasing);
 _p.playing;
 cc.defineGetterSetter(_p, "playing", _p.isPlaying);
 
-_p = null;
+delete _p;

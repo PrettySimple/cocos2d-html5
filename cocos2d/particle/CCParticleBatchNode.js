@@ -525,6 +525,7 @@ var _p = cc.ParticleBatchNode.prototype;
 _p.texture;
 cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
 
+delete _p;
 
 /**
  * initializes the particle system with the name of a file on disk (for a list of supported formats look at the cc.Texture2D class), a capacity of particles

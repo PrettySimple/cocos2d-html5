@@ -1912,7 +1912,7 @@ cc.defineGetterSetter(_p, "actionTag", _p.getActionTag, _p.setActionTag);
 _p.opacity;
 cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
 
-_p = null;
+delete _p;
 
 /**
  * allocates and initializes a UIWidget.

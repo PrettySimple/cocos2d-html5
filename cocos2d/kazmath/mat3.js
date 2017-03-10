@@ -354,4 +354,6 @@ window.Float32Array = window.Float32Array || window.Array;
     _p.rotationToAxisAngle = function() {           //cc.kmMat3RotationToAxisAngle
         return cc.math.Quaternion.rotationMatrix(this).toAxisAndAngle();
     }
+    
+    delete _p;
 })(cc);

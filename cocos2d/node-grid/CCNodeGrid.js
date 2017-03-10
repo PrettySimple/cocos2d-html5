@@ -98,6 +98,7 @@ _p.grid;
 _p.target;
 cc.defineGetterSetter(_p, "target", null, _p.setTarget);
 
+delete _p;
 
 /**
  * Creates a NodeGrid. <br />

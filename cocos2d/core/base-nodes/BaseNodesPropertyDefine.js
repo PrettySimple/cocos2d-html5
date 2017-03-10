@@ -124,4 +124,6 @@ cc._tmp.PrototypeCCNode = function () {
     /** @export */
     _p.cascadeColor;
     cc.defineGetterSetter(_p, "cascadeColor", _p.isCascadeColorEnabled, _p.setCascadeColorEnabled);
+    
+    delete _p;
 };

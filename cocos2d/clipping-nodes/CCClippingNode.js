@@ -233,7 +233,7 @@ cc.defineGetterSetter(_p, "stencil", _p.getStencil, _p.setStencil);
 /** @export */
 _p.alphaThreshold;
 cc.defineGetterSetter(_p, "alphaThreshold", _p.getAlphaThreshold, _p.setAlphaThreshold);
-
+delete _p;
 
 /**
  * Creates and initializes a clipping node with an other node as its stencil. <br/>

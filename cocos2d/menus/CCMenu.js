@@ -585,6 +585,8 @@ var _p = cc.Menu.prototype;
 /** @export */
 _p.enabled;
 
+delete _p;
+
 /**
  * create a new menu
  * @deprecated  since v3.0, please use new cc.Menu(menuitem1, menuitem2, menuitem3) to create a new menu

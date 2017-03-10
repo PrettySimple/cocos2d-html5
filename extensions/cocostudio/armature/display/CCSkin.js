@@ -183,7 +183,7 @@ cc.defineGetterSetter(_p, "skinData", _p.getSkinData, _p.setSkinData);
 _p.displayName;
 cc.defineGetterSetter(_p, "displayName", _p.getDisplayName);
 
-_p = null;
+delete _p;
 
 /**
  * allocates and initializes a skin.

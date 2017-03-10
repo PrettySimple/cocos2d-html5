@@ -639,7 +639,7 @@ cc.defineGetterSetter(_p, 'inputMode', null, _p.setInputMode);
 _p.returnType;
 cc.defineGetterSetter(_p, 'returnType', null, _p.setReturnType);
 
-_p = null;
+delete _p;
 
 /**
  * create a edit box with size and background-color or

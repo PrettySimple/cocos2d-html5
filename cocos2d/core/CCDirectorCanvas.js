@@ -70,6 +70,8 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             return cc.p(0, 0);
             //}
         };
+        
+        delete _p;
     } else {
         cc.Director._fpsImage = new Image();
         cc.Director._fpsImage.addEventListener("load", function () {

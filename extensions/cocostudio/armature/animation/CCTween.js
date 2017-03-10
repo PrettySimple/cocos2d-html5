@@ -435,7 +435,7 @@ var _p = ccs.Tween.prototype;
 _p.animation;
 cc.defineGetterSetter(_p, "animation", _p.getAnimation, _p.setAnimation);
 
-_p = null;
+delete _p;
 
 /**
  * Allocates and initializes a ArmatureAnimation.

@@ -286,7 +286,7 @@ cc.defineGetterSetter(_p, "thumbSprite", _p.getThumbSprite, _p.setThumbSprite);
 _p.prevLocation;
 cc.defineGetterSetter(_p, "prevLocation", _p.getPreviousLocation, _p.setPreviousLocation);
 
-_p = null;
+delete _p;
 
 /**
  * @deprecated

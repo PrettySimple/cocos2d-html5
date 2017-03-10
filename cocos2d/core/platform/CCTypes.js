@@ -161,7 +161,7 @@ cc.Vertex2F = function (x, y, arrayBuffer, offset) {
  */
 cc.Vertex2F.BYTES_PER_ELEMENT = 8;
 
-_p = cc.Vertex2F.prototype;
+var _p= cc.Vertex2F.prototype;
 _p._getX = function () {
     return this._view[0];
 };
@@ -206,7 +206,7 @@ cc.Vertex3F = function (x, y, z, arrayBuffer, offset) {
  */
 cc.Vertex3F.BYTES_PER_ELEMENT = 12;
 
-_p = cc.Vertex3F.prototype;
+var _p= cc.Vertex3F.prototype;
 _p._getX = function () {
     return this._view[0];
 };
@@ -257,7 +257,7 @@ cc.Tex2F = function (u, v, arrayBuffer, offset) {
  */
 cc.Tex2F.BYTES_PER_ELEMENT = 8;
 
-_p = cc.Tex2F.prototype;
+var _p= cc.Tex2F.prototype;
 _p._getU = function () {
     return this._view[0];
 };
@@ -306,7 +306,7 @@ cc.Quad2 = function (tl, tr, bl, br, arrayBuffer, offset) {
  */
 cc.Quad2.BYTES_PER_ELEMENT = 32;
 
-_p = cc.Quad2.prototype;
+var _p= cc.Quad2.prototype;
 _p._getTL = function () {
     return this._tl;
 };
@@ -408,7 +408,7 @@ cc.V3F_C4B_T2F = function (vertices, colors, texCoords, arrayBuffer, offset) {
  */
 cc.V3F_C4B_T2F.BYTES_PER_ELEMENT = 24;
 
-_p = cc.V3F_C4B_T2F.prototype;
+var _p= cc.V3F_C4B_T2F.prototype;
 _p._getVertices = function () {
     return this._vertices;
 };
@@ -477,7 +477,7 @@ cc.V3F_C4B_T2F_Quad = function (tl, bl, tr, br, arrayBuffer, offset) {
  * @type {number}
  */
 cc.V3F_C4B_T2F_Quad.BYTES_PER_ELEMENT = 96;
-_p = cc.V3F_C4B_T2F_Quad.prototype;
+var _p= cc.V3F_C4B_T2F_Quad.prototype;
 _p._getTL = function () {
     return this._tl;
 };
@@ -623,7 +623,7 @@ cc.V2F_C4B_T2F = function (vertices, colors, texCoords, arrayBuffer, offset) {
  * @type {number}
  */
 cc.V2F_C4B_T2F.BYTES_PER_ELEMENT = 20;
-_p = cc.V2F_C4B_T2F.prototype;
+var _p= cc.V2F_C4B_T2F.prototype;
 _p._getVertices = function () {
     return this._vertices;
 };
@@ -688,7 +688,7 @@ cc.V2F_C4B_T2F_Triangle = function (a, b, c, arrayBuffer, offset) {
  * @type {number}
  */
 cc.V2F_C4B_T2F_Triangle.BYTES_PER_ELEMENT = 60;
-_p = cc.V2F_C4B_T2F_Triangle.prototype;
+var _p= cc.V2F_C4B_T2F_Triangle.prototype;
 _p._getA = function () {
     return this._a;
 };
@@ -1045,7 +1045,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
     }
 });
 
-_p = cc.color;
+var _p= cc.color;
 /**
  * White color (255, 255, 255, 255)
  * @returns {cc.Color}
@@ -1154,6 +1154,8 @@ cc.defineGetterSetter(_p, "ORANGE", _p._getOrange);
 /** @export */
 _p.GRAY;
 cc.defineGetterSetter(_p, "GRAY", _p._getGray);
+
+delete _p;
 
 cc.BlendFunc._disable = function(){
     return new cc.BlendFunc(cc.ONE, cc.ZERO);

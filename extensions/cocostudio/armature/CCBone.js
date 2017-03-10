@@ -662,7 +662,7 @@ cc.defineGetterSetter(_p, "tweenData", _p.getTweenData);
 _p.colliderFilter;
 cc.defineGetterSetter(_p, "colliderFilter", _p.getColliderFilter, _p.setColliderFilter);
 
-_p = null;
+delete _p;
 
 /**
  * Allocates and initializes a bone.

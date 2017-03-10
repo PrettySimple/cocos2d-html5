@@ -378,7 +378,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
         };
 
         _p.addImageAsync = _p.addImage;
-        _p = null;
+        delete _p;
 
     } else if (cc._renderType === cc.game.RENDER_TYPE_WEBGL) {
         cc.assert(cc.isFunction(cc._tmp.WebGLTextureCache), cc._LogInfos.MissingFile, "TexturesWebGL.js");

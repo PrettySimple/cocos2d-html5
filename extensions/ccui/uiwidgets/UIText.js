@@ -512,7 +512,7 @@ cc.defineGetterSetter(_p, "textAlign", _p.getTextHorizontalAlignment, _p.setText
 _p.verticalAlign;
 cc.defineGetterSetter(_p, "verticalAlign", _p.getTextVerticalAlignment, _p.setTextVerticalAlignment);
 
-_p = null;
+delete _p;
 
 /**
  * allocates and initializes a UILabel.

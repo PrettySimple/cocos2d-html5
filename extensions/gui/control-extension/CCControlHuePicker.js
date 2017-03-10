@@ -205,7 +205,7 @@ cc.defineGetterSetter(_p, "slider", _p.getSlider);
 _p.startPos;
 cc.defineGetterSetter(_p, "startPos", _p.getStartPos);
 
-_p = null;
+delete _p;
 
 /**
  * @deprecated

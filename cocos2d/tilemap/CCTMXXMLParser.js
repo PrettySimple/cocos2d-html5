@@ -916,6 +916,7 @@ cc.defineGetterSetter(_p, "tileWidth", _p._getTileWidth, _p._setTileWidth);
 _p.tileHeight;
 cc.defineGetterSetter(_p, "tileHeight", _p._getTileHeight, _p._setTileHeight);
 
+delete _p;
 
 /**
  * Creates a TMX Format with a tmx file or content string

@@ -295,7 +295,7 @@ cc.defineGetterSetter(_p, "progressSprite", _p.getProgressSprite);
 _p.backgroundSprite;
 cc.defineGetterSetter(_p, "backgroundSprite", _p.getBackgroundSprite);
 
-_p = null;
+delete _p;
 
 /**
  * Creates a slider with a given background sprite and a progress bar and a

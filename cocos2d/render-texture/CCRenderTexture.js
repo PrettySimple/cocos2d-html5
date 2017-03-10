@@ -406,6 +406,8 @@ var _p = cc.RenderTexture.prototype;
 _p.clearColorVal;
 cc.defineGetterSetter(_p, "clearColorVal", _p.getClearColor, _p.setClearColor);
 
+delete _p;
+
 
 /**
  * creates a RenderTexture object with width and height in Points and a pixel format, only RGB and RGBA formats are valid

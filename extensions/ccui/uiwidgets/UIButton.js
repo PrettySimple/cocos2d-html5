@@ -802,7 +802,7 @@ cc.defineGetterSetter(_p, "titleFontName", _p.getTitleFontName, _p.setTitleFontN
 _p.titleColor;
 cc.defineGetterSetter(_p, "titleColor", _p.getTitleColor, _p.setTitleColor);
 
-_p = null;
+delete _p;
 
 /**
  * allocates and initializes a UIButton.

@@ -49,12 +49,12 @@ if (!_p.AudioContext) {
 }
 /** @export */
 _p.mozAudioContext;
-_p = Object.prototype;
+var _p= Object.prototype;
 /** @export */
 _p._super;
 /** @export */
 _p.ctor;
-_p = null;
+delete _p;
 
 /**
  * drawing primitive of game engine

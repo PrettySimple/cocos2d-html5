@@ -475,6 +475,8 @@ cc.defineGetterSetter(_p, "charCount", _p.getCharCount);
 _p.placeHolder;
 cc.defineGetterSetter(_p, "placeHolder", _p.getPlaceHolder, _p.setPlaceHolder);
 
+delete _p;
+
 /**
  * Please use new TextFieldTTF instead. <br />
  * Creates a cc.TextFieldTTF from a fontName, alignment, dimension and font size.

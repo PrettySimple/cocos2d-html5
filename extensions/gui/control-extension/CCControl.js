@@ -367,7 +367,7 @@ cc.defineGetterSetter(_p, "selected", _p.isSelected, _p.setSelected);
 _p.highlighted;
 cc.defineGetterSetter(_p, "highlighted", _p.isHighlighted, _p.setHighlighted);
 
-_p = null;
+delete _p;
 
 cc.Control.create = function () {
     var retControl = new cc.Control();

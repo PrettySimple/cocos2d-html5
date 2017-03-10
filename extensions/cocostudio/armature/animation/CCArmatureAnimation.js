@@ -660,7 +660,7 @@ cc.defineGetterSetter(_p, "speedScale", _p.getSpeedScale, _p.setSpeedScale);
 _p.animationScale;
 cc.defineGetterSetter(_p, "animationScale", _p.getAnimationScale, _p.setAnimationScale);
 
-_p = null;
+delete _p;
 
 /**
  * Allocates and initializes a ArmatureAnimation.

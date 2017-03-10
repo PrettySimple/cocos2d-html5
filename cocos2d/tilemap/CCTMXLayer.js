@@ -801,3 +801,6 @@ cc.defineGetterSetter(_p, "tileHeight", _p._getTileHeight, _p._setTileHeight);
 cc.TMXLayer.create = function (tilesetInfo, layerInfo, mapInfo) {
     return new cc.TMXLayer(tilesetInfo, layerInfo, mapInfo);
 };
+
+delete _p;
+

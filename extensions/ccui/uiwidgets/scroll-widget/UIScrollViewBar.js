@@ -330,6 +330,8 @@ cc.defineGetterSetter(_p, "opacity", _p.getOpacity, _p.setOpacity);
 _p.autoHideEnabled;
 cc.defineGetterSetter(_p, "autoHideEnabled", _p.isAutoHideEnabled, _p.setAutoHideEnabled);
 
+delete _p;
+
 /**
  * @ignore
  */

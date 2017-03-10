@@ -832,7 +832,7 @@ cc.defineGetterSetter(_p, "delegate", _p.getDelegate, _p.setDelegate);
 _p.clippingToBounds;
 cc.defineGetterSetter(_p, "clippingToBounds", _p.isClippingToBounds, _p.setClippingToBounds);
 
-_p = null;
+delete _p;
 
 /**
  * Returns an autoreleased scroll view object.
