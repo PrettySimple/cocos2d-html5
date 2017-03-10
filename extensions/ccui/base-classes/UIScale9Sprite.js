@@ -862,7 +862,7 @@ cc.defineGetterSetter(_p, "insetRight", _p.getInsetRight, _p.setInsetRight);
 _p.insetBottom;
 cc.defineGetterSetter(_p, "insetBottom", _p.getInsetBottom, _p.setInsetBottom);
 
-delete _p;
+_p=undefined;
 
 /**
  * Creates a 9-slice sprite with a texture file, a delimitation zone and

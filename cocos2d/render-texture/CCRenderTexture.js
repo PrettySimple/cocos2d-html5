@@ -406,7 +406,7 @@ var _p = cc.RenderTexture.prototype;
 _p.clearColorVal;
 cc.defineGetterSetter(_p, "clearColorVal", _p.getClearColor, _p.setClearColor);
 
-delete _p;
+_p=undefined;
 
 
 /**

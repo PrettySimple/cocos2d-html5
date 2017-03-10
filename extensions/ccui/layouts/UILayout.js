@@ -1480,7 +1480,7 @@ cc.defineGetterSetter(_p, "clippingType", null, _p.setClippingType);
 _p.layoutType;
 cc.defineGetterSetter(_p, "layoutType", _p.getLayoutType, _p.setLayoutType);
 
-delete _p;
+_p=undefined;
 
 /**
  * allocates and initializes a UILayout.

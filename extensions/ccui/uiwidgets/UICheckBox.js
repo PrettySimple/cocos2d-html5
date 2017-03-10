@@ -654,7 +654,7 @@ var _p = ccui.CheckBox.prototype;
 _p.selected;
 cc.defineGetterSetter(_p, "selected", _p.isSelected, _p.setSelected);
 
-delete _p;
+_p=undefined;
 
 /**
  * allocates and initializes a UICheckBox.

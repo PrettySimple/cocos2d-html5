@@ -204,7 +204,7 @@ var _p = ccui.TextBMFont.prototype;
 _p.string;
 cc.defineGetterSetter(_p, "string", _p.getString, _p.setString);
 
-delete _p;
+_p=undefined;
 
 /**
  * allocates and initializes a UILabelBMFont.

@@ -406,7 +406,7 @@ cc.defineGetterSetter(_p, "direction", _p.getDirection, _p.setDirection);
 _p.percent;
 cc.defineGetterSetter(_p, "percent", _p.getPercent, _p.setPercent);
 
-delete _p;
+_p=undefined;
 
 /**
  * Allocates and initializes a UILoadingBar.

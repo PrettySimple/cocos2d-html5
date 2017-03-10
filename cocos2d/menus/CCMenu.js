@@ -585,7 +585,7 @@ var _p = cc.Menu.prototype;
 /** @export */
 _p.enabled;
 
-delete _p;
+_p=undefined;
 
 /**
  * create a new menu

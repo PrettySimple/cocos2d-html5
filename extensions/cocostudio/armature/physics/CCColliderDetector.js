@@ -390,7 +390,7 @@ cc.defineGetterSetter(_p, "active", _p.getActive, _p.setActive);
 _p.body;
 cc.defineGetterSetter(_p, "body", _p.getBody, _p.setBody);
 
-delete _p;
+_p=undefined;
 
 ccs.ColliderDetector.create = function (bone) {
     return new ccs.ColliderDetector(bone);

@@ -573,7 +573,7 @@ cc.defineGetterSetter(_p, "body", _p.getBody, _p.setBody);
 _p.colliderFilter;
 cc.defineGetterSetter(_p, "colliderFilter", null, _p.setColliderFilter);
 
-delete _p;
+_p=undefined;
 
 /**
  * Allocates an armature, and use the ArmatureData named name in ArmatureDataManager to initializes the armature.

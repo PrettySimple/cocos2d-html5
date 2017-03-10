@@ -624,7 +624,7 @@ cc.defineGetterSetter(_p, "capacity", _p.getCapacity);
 _p.quads;
 cc.defineGetterSetter(_p, "quads", _p.getQuads, _p.setQuads);
 
-delete _p;
+_p=undefined;
 
 /**
  * <p>Creates a TextureAtlas with an filename and with an initial capacity for Quads. <br />

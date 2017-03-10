@@ -1155,7 +1155,7 @@ cc.defineGetterSetter(_p, "ORANGE", _p._getOrange);
 _p.GRAY;
 cc.defineGetterSetter(_p, "GRAY", _p._getGray);
 
-delete _p;
+_p=undefined;
 
 cc.BlendFunc._disable = function(){
     return new cc.BlendFunc(cc.ONE, cc.ZERO);

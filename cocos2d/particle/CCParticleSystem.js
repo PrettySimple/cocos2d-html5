@@ -2147,7 +2147,7 @@ cc.defineGetterSetter(_p, "totalParticles", _p.getTotalParticles, _p.setTotalPar
 _p.texture;
 cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
 
-delete _p;
+_p=undefined;
 
 /**
  * <p> return the string found by key in dict. <br/>

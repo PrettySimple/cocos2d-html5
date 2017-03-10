@@ -82,7 +82,7 @@ var _p = cc.TableViewCell.prototype;
 _p.objectId;
 cc.defineGetterSetter(_p, "objectId", _p.getObjectID, _p.setObjectID);
 
-delete _p;
+_p=undefined;
 
 /**
  * Sole purpose of this delegate is to single touch event in this version.
@@ -709,7 +709,7 @@ cc.defineGetterSetter(_p, "delegate", _p.getDelegate, _p.setDelegate);
 _p.verticalFillOrder;
 cc.defineGetterSetter(_p, "verticalFillOrder", _p.getVerticalFillOrder, _p.setVerticalFillOrder);
 
-delete _p;
+_p=undefined;
 
 /**
  * An initialized table view object

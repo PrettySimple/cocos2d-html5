@@ -416,7 +416,7 @@
     _p.dirty;
     cc.defineGetterSetter(_p, "dirty", _p.isDirty, _p.setDirty);
     
-    delete _p;
+    _p=undefined;
 
 
     /**

@@ -414,7 +414,7 @@ var _p = cc.SpriteBatchNode.prototype;
 cc.defineGetterSetter(_p, "texture", _p.getTexture, _p.setTexture);
 cc.defineGetterSetter(_p, "shaderProgram", _p.getShaderProgram, _p.setShaderProgram);
 
-delete _p;
+_p=undefined;
 
 /**
  * <p>

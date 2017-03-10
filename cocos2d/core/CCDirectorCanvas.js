@@ -71,7 +71,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             //}
         };
         
-        delete _p;
+        _p=undefined;
     } else {
         cc.Director._fpsImage = new Image();
         cc.Director._fpsImage.addEventListener("load", function () {

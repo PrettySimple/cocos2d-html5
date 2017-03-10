@@ -197,5 +197,5 @@
         return tyArr;
     };
     
-    delete _p;
+    _p=undefined;
 })(cc);

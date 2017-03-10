@@ -187,7 +187,7 @@ var _p = cc.MenuItem.prototype;
 _p.enabled;
 cc.defineGetterSetter(_p, "enabled", _p.isEnabled, _p.setEnabled);
 
-delete _p;
+_p=undefined;
 
 /**
  * creates an empty menu item with target and callback<br/>
@@ -413,7 +413,7 @@ cc.defineGetterSetter(_p, "disabledColor", _p.getDisabledColor, _p.setDisabledCo
 _p.label;
 cc.defineGetterSetter(_p, "label", _p.getLabel, _p.setLabel);
 
-delete _p;
+_p=undefined;
 
 /**
  * @deprecated since v3.0 ,please use new cc.MenuItemLabel(label,selector,target) instead
@@ -638,7 +638,7 @@ cc.defineGetterSetter(_p, "fontSize", _p.getFontSize, _p.setFontSize);
 _p.fontName;
 cc.defineGetterSetter(_p, "fontName", _p.getFontName, _p.setFontName);
 
-delete _p;
+_p=undefined;
 
 /**
  * a shared function to get the font name for menuitem font
@@ -958,7 +958,7 @@ cc.defineGetterSetter(_p, "selectedImage", _p.getSelectedImage, _p.setSelectedIm
 _p.disabledImage;
 cc.defineGetterSetter(_p, "disabledImage", _p.getDisabledImage, _p.setDisabledImage);
 
-delete _p;
+_p=undefined;
 
 /**
  * create a menu item from sprite
@@ -1361,7 +1361,7 @@ var _p = cc.MenuItemToggle.prototype;
 _p.selectedIndex;
 cc.defineGetterSetter(_p, "selectedIndex", _p.getSelectedIndex, _p.setSelectedIndex);
 
-delete _p;
+_p=undefined;
 
 /**
  * create a simple container class that "toggles" it's inner items<br/>

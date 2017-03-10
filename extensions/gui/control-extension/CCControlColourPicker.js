@@ -171,7 +171,7 @@ var _p = cc.ControlColourPicker.prototype;
 _p.background;
 cc.defineGetterSetter(_p, "background", _p.getBackground);
 
-delete _p;
+_p=undefined;
 
 /**
  * @deprecated

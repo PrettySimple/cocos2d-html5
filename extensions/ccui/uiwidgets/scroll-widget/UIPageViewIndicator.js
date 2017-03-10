@@ -298,7 +298,7 @@ var _p = ccui.PageViewIndicator.prototype;
 _p.spaceBetweenIndexNodes;
 cc.defineGetterSetter(_p, "spaceBetweenIndexNodes", _p.getSpaceBetweenIndexNodes, _p.setSpaceBetweenIndexNodes);
 
-delete _p;
+_p=undefined;
 
 /**
  * @ignore

@@ -64,6 +64,6 @@ cc._tmp.PrototypeSprite = function () {
     _p.quad;
     cc.defineGetterSetter(_p, "quad", _p.getQuad);
 
-    delete _p;
+    _p=undefined;
 
 };

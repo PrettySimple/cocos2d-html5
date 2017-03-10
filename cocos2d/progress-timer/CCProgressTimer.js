@@ -325,7 +325,7 @@ cc.defineGetterSetter(_p, "sprite", _p.getSprite, _p.setSprite);
 _p.reverseDir;
 cc.defineGetterSetter(_p, "reverseDir", _p.isReverseDirection, _p.setReverseDirection);
 
-delete _p;
+_p=undefined;
 
 /**
  * create a progress timer object with image file name that renders the inner sprite according to the percentage

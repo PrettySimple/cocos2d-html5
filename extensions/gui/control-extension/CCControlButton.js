@@ -672,7 +672,7 @@ cc.defineGetterSetter(_p, "preferredSize", _p.getPreferredSize, _p.setPreferredS
 _p.labelAnchor;
 cc.defineGetterSetter(_p, "labelAnchor", _p.getLabelAnchorPoint, _p.setLabelAnchorPoint);
 
-delete _p;
+_p=undefined;
 
 /**
  * @deprecated

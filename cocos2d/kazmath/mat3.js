@@ -355,5 +355,5 @@ window.Float32Array = window.Float32Array || window.Array;
         return cc.math.Quaternion.rotationMatrix(this).toAxisAndAngle();
     }
     
-    delete _p;
+    _p=undefined;
 })(cc);

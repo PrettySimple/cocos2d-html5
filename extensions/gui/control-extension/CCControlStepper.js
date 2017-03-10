@@ -377,7 +377,7 @@ cc.defineGetterSetter(_p, "minusLabel", _p.getMinusLabel, _p.setMinusLabel);
 _p.plusLabel;
 cc.defineGetterSetter(_p, "plusLabel", _p.getPlusLabel, _p.setPlusLabel);
 
-delete _p;
+_p=undefined;
 
 /**
  * Creates a cc.ControlStepper

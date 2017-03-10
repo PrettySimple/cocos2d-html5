@@ -54,7 +54,7 @@ var _p= Object.prototype;
 _p._super;
 /** @export */
 _p.ctor;
-delete _p;
+_p=undefined;
 
 /**
  * drawing primitive of game engine

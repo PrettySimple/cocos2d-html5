@@ -866,7 +866,7 @@ cc.defineGetterSetter(_p, "maxLength", _p.getMaxLength, _p.setMaxLength);
 _p.passwordEnabled;
 cc.defineGetterSetter(_p, "passwordEnabled", _p.isPasswordEnabled, _p.setPasswordEnabled);
 
-delete _p;
+_p=undefined;
 
 // Constants
 //TextField event

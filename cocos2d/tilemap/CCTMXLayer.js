@@ -802,5 +802,5 @@ cc.TMXLayer.create = function (tilesetInfo, layerInfo, mapInfo) {
     return new cc.TMXLayer(tilesetInfo, layerInfo, mapInfo);
 };
 
-delete _p;
+_p=undefined;
 

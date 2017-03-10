@@ -422,4 +422,4 @@ cc.defineGetterSetter(_p, "onSideWidth", _p._getOnSideWidth);
 _p.offSideWidth;
 cc.defineGetterSetter(_p, "offSideWidth", _p._getOffSideWidth);
 
-delete _p;
+_p=undefined;

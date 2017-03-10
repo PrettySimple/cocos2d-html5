@@ -475,7 +475,7 @@ cc.defineGetterSetter(_p, "charCount", _p.getCharCount);
 _p.placeHolder;
 cc.defineGetterSetter(_p, "placeHolder", _p.getPlaceHolder, _p.setPlaceHolder);
 
-delete _p;
+_p=undefined;
 
 /**
  * Please use new TextFieldTTF instead. <br />

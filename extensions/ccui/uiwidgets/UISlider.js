@@ -746,7 +746,7 @@ var _p = ccui.Slider.prototype;
 _p.percent;
 cc.defineGetterSetter(_p, "percent", _p.getPercent, _p.setPercent);
 
-delete _p;
+_p=undefined;
 
 /**
  * allocates and initializes a UISlider.
