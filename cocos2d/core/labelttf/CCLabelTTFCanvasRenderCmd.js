@@ -126,18 +126,32 @@ cc.LabelTTF._firstSpaces = /^\s*/;
     {
         var locDisplayColor = this._displayedColor, node = this._node;
         var dr = locDisplayColor.r / 255, dg = locDisplayColor.g / 255, db = locDisplayColor.b / 255;
-        // var nbColors = node._textArrayColors.length;
+
+        // We need to offset our indexes with carriage returns >_<
+        var funcGetFixedIndex = function(p_idx) {
+            var txt  = node._string;
+            var nbCR = 0;
+            var idx  = 0;
+
+            while (idx < p_idx)
+            {
+                if (txt.charAt(idx) == '\n')
+                    nbCR++;
+                idx++;
+            }
+
+            return(p_idx - nbCR);
+        };
 
         this._fillColorArray = [];
-        // for (var i=0; i < nbColors; i++)
         for (var colorIdx in node._textArrayColors)
         {
             var colorDef = node._textArrayColors[colorIdx];
             var color = {};
             color.col   = "rgba(" + (0 | (dr * colorDef.col.r)) + "," + (0 | (dg * colorDef.col.g)) + ","
                                   + (0 | (db * colorDef.col.b)) + ", 1)";
-            color.start = colorDef.start;
-            color.end   = colorDef.end;
+            color.start = funcGetFixedIndex(colorDef.start);
+            color.end   = funcGetFixedIndex(colorDef.end);
 
             this._fillColorArray.push(color);
         }
@@ -483,6 +497,8 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                 var strDisplay = "";
                 var xDisplay   = xOffset;
                 var startIdx   = curIdx;
+                var isFirstInLine = true;
+
                 while((curIdx-startIdx) < line.length)
                 {
                     // 
@@ -536,6 +552,25 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                     if (strDisplay)
                     {
                         context.fillStyle = curColor;
+                        var align = context.textAlign;
+                        var strWidth = context.measureText(strDisplay).width;
+
+                        if (   context.textAlign == "center" 
+                            && strLength != line.length )
+                        {
+                            // For the "center" alignement, we need a little tweak
+                            // We offset the first substring in the line by half the width of the remaining line
+                            // And we draw the subsequent substrings with the "left" alignment
+                            if (isFirstInLine)
+                            {
+                                var restOfLine = line.substring(strLength, line.length);
+                                xDisplay -= context.measureText(restOfLine).width / 2;
+                                strWidth /= 2;
+                            }
+                            else
+                                context.textAlign = "left";
+                        }
+                        isFirstInLine = false;
 
                         if (locStrokeEnabled)
                         {
@@ -543,12 +578,14 @@ cc.LabelTTF._firstSpaces = /^\s*/;
                             context.strokeText(strDisplay, xDisplay + locStrokeOffset.x, yOffsetArray[i] + locStrokeOffset.y);
                         }
                         context.fillText(strDisplay, xDisplay, yOffsetArray[i]);
-                        // cc.log("Display: " + curIdx + "/" + line.length +" > " + strDisplay);
+                        // cc.log("Display: " + curIdx + "/" + line.length + " > " + strDisplay + " (" + xDisplay + ")");
                     }
 
                     // Advance our state
                     curIdx   += strLength;
-                    xDisplay += context.measureText(strDisplay).width;
+                    xDisplay += strWidth;
+
+                    context.textAlign = align;
                 }
             }
             cc.g_NumberOfDraws++;
