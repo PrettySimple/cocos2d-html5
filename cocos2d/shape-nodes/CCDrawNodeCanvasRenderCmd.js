@@ -107,7 +107,7 @@
 
             var locFillColor = element.fillColor, locLineWidth = element.lineWidth;
             var locLineColor = element.lineColor, locIsClosePolygon = element.isClosePolygon;
-            var locIsFill = element.isFill, locIsStroke = element.isStroke;
+            var locIsFill = element.isFill/*, locIsStroke = element.isStroke*/;
 
             var ctx = wrapper.getContext();
             var firstPoint = locVertices[0];
@@ -130,8 +130,8 @@
                 ctx.closePath();
             if (locIsFill)
                 ctx.fill();
-            if (locIsStroke)
-                ctx.stroke();
+            // if (locIsStroke)
+            //     ctx.stroke();
         }
     });
     
