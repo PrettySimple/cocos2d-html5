@@ -134,6 +134,7 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
     _autoFullScreen: false,
     // The device's pixel ratio (for retina displays)
     _devicePixelRatio: 1,
+	fullscreenRatio: 1,
     // the view name
     _viewName: "",
     // Custom callback for resize event
@@ -906,15 +907,15 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
      * @return {cc.Point}
      */
     convertToLocationInView: function (tx, ty, relatedPos) {
-        var x = this._devicePixelRatio * (tx - relatedPos.left);
-        var y = this._devicePixelRatio * (relatedPos.top + relatedPos.height - ty);
+        var x = this.fullscreenRatio * this._devicePixelRatio * (tx - relatedPos.left);
+        var y = this.fullscreenRatio * this._devicePixelRatio * (relatedPos.top + relatedPos.height - ty);
         return this._isRotated ? {x: this._viewPortRect.width - y, y: x} : {x: x, y: y};
     },
 
     _convertMouseToLocationInView: function (point, relatedPos) {
         var viewport = this._viewPortRect, _t = this;
-        point.x = ((_t._devicePixelRatio * (point.x - relatedPos.left)) - viewport.x) / _t._scaleX;
-        point.y = (_t._devicePixelRatio * (relatedPos.top + relatedPos.height - point.y) - viewport.y) / _t._scaleY;
+        point.x = ((_t._devicePixelRatio * _t.fullscreenRatio * (point.x - relatedPos.left)) - viewport.x) / _t._scaleX;
+        point.y = (_t._devicePixelRatio * _t.fullscreenRatio * (relatedPos.top + relatedPos.height - point.y) - viewport.y) / _t._scaleY;
     },
 
     _convertPointWithScale: function (point) {
