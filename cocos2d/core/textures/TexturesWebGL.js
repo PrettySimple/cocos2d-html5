@@ -448,12 +448,15 @@ cc._tmp.WebGLTexture2D = function () {
          * handler of texture loaded event
          * @param {Boolean} [premultiplied=false]
          */
-        handleLoadedTexture: function (premultiplied) {
+        handleLoadedTexture: function (premultiplied, checkAlreadyLoaded) {
             var self = this;
             premultiplied =
                 (premultiplied !== undefined)
                     ? premultiplied
                     : self._hasPremultipliedAlpha;
+
+            if (checkAlreadyLoaded && self.isLoaded())
+                return;
             // Not sure about this ! Some texture need to be updated even after loaded
             if (!cc.game._rendererInitialized)
                 return;
