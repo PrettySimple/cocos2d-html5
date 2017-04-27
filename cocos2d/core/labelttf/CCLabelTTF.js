@@ -129,9 +129,9 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
             strInfo = "";
 
         fontSize = fontSize || 16;
-        dimensions = dimensions || cc.size(0, 0/*fontSize*/);
-        hAlignment = hAlignment || cc.TEXT_ALIGNMENT_LEFT;
-        vAlignment = vAlignment || cc.VERTICAL_TEXT_ALIGNMENT_TOP;
+        dimensions = dimensions || cc.size(0, fontSize);
+        hAlignment = hAlignment !== undefined ? hAlignment : cc.TEXT_ALIGNMENT_CENTER;
+        vAlignment = vAlignment !== undefined ? vAlignment : cc.VERTICAL_TEXT_ALIGNMENT_CENTER;
 
         this._opacityModifyRGB = false;
         this._dimensions = cc.size(dimensions.width, dimensions.height);

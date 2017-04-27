@@ -363,7 +363,10 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             var basePath = cc.loader.getBasePath ? cc.loader.getBasePath() : cc.loader.resPath;
             cc.loader.loadImg(cc.path.join(basePath || "", url), function (err, img) {
                 if (err)
-                    return cb && cb.call(target, err);
+                {
+                    delete(locTexs[url]);
+                    return cb && cb.call(target, null, err);
+                }
 
                 if (!cc.loader.cache[url]) {
                     cc.loader.cache[url] = img;

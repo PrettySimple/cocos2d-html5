@@ -529,7 +529,10 @@ cc.Sprite = cc.Node.extend(/** @lends cc.Sprite# */{
 
         var tex = cc.textureCache.getTextureForKey(filename);
         if (!tex) {
-            tex = cc.textureCache.addImage(filename);
+            tex = cc.textureCache.addImage(filename, function(p_tex, p_err) {
+                    if (p_err)
+                        this.dispatchEvent("error");
+                }, this );
         }
 
         if (!tex.isLoaded()) {
