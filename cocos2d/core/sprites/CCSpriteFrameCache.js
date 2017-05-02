@@ -189,6 +189,9 @@ cc.spriteFrameCache = /** @lends cc.spriteFrameCache# */{
                         var tempTexture = new cc.Texture2D();
                         tempTexture.initWithElement(tempElement);
                         tempTexture.handleLoadedTexture();
+                        // Forwarding the url to canvas instances, so that they keep a verifiable relation
+                        // to the parent texture that spawned them.
+                        tempTexture.url = spriteFrame.getTexture().url;
                         spriteFrame.setTexture(tempTexture);
                         spriteFrame.setRotated(false);
 

@@ -60,9 +60,13 @@ cc.SpriteBatchNode = cc.Node.extend(/** @lends cc.SpriteBatchNode# */{
     _texture: null,
     _className: "SpriteBatchNode",
 
+    _isWebGL: true,
+
     ctor: function (fileImage) {
         cc.Node.prototype.ctor.call(this);
         this._blendFunc = new cc.BlendFunc(cc.BLEND_SRC, cc.BLEND_DST);
+
+        this._isWebGL = cc._renderType == cc.game.RENDER_TYPE_WEBGL;
 
         var texture2D;
         if (cc.isString(fileImage)) {
@@ -400,10 +404,25 @@ cc.SpriteBatchNode = cc.Node.extend(/** @lends cc.SpriteBatchNode# */{
             cc.log(cc._LogInfos.Sprite_addChild_4);
             return false;
         }
-        if (child.texture !== this._texture) {
-            cc.log(cc._LogInfos.Sprite_addChild_5);
-            return false;
+        // CCSpriteBatchNode does not work in canvas mode, do to the fact that CCSpriteFrames in canvas mode
+        // are actually canvas instances, and thus do not belong to the same atlas.
+        // We added this check to ensure that the parent atlas of the frame is enforced in canvas mode
+        // while letting the CCSpriteBatchNode behave as a simple CCNode
+        if(this._isWebGL)
+        {
+            if (child.texture !== this._texture) {
+                cc.log(cc._LogInfos.Sprite_addChild_5);
+                return false;
+            }
         }
+        else
+        {
+            if (child.texture.url !== this._texture.url) {
+                cc.log(cc._LogInfos.Sprite_addChild_5);
+                return false;
+            }
+        }
+        
         return true;
     }
 });
