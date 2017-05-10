@@ -595,6 +595,13 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
 
         this._textArrayColors[p_startIdx] = colorRange;
         this._renderCmd._setColorsArray();
+
+        // If we were already added, we need to force our update!
+        if (this.getParent())
+        {
+            this._setUpdateTextureDirty();
+            this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.transformDirty);
+        }
     },
 
     clearColorRange : function ()
@@ -962,6 +969,17 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     getTextHeight : function()
     {
         return(this._renderCmd.getTextHeight());
+    },
+
+    /*
+     * Returns the position of the letter at the p_idx index
+     */
+    getPosFromIndex : function(p_idx)
+    {
+        var pos = this._renderCmd.getPosFromIndex(p_idx);
+        pos.x += this.getPositionX();
+        pos.y += this.getPositionY() + this.getTextHeight() / 2;
+        return(pos);
     },
 
     _getWidth: function () {

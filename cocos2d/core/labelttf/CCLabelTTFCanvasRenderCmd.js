@@ -54,6 +54,8 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         this._status = [];
         this._renderingIndex = 0;
 
+        this._lastContext = null;
+
         this._canUseDirtyRegion = true;
     };
     var proto = cc.LabelTTF.RenderCmd.prototype;
@@ -423,6 +425,9 @@ cc.LabelTTF._firstSpaces = /^\s*/;
 
     proto.drawLabels = function (context, xOffset, yOffsetArray) {
         var node = this._node;
+
+        this._lastContext = context;
+
         //shadow style setup
         if (node._shadowEnabled) {
             var locShadowOffset = node._shadowOffset;
@@ -643,6 +648,49 @@ cc.LabelTTF._firstSpaces = /^\s*/;
         var scale = cc.view.getDevicePixelRatio();
         var node  = this._node;
         return(node.getLineHeight() * scale * this._strings.length);
+    };
+
+    proto.getPosFromIndex = function(p_idx)
+    {
+        var pos = cc.p(0, 0);
+
+        var context = this._lastContext;
+
+        if (context.font !== this._fontStyleStr)
+            context.font = this._fontStyleStr;
+        context.textBaseline = cc.LabelTTF._textBaseline[this._node._vAlignment];
+        context.textAlign = cc.LabelTTF._textAlign[this._node._hAlignment];
+
+        var scale = cc.view.getDevicePixelRatio();
+        var lineHeight = this._node.getLineHeight() * scale;
+
+        var halfSpaceWidth = context.measureText(" ").width / 2;
+
+        // Do as if we were going to draw our text, but instead measure it, character by character!
+        var curIdx = 0;
+        var locStrLen = this._strings.length;
+        for (var i = 0; i < locStrLen; i++) 
+        {
+            var line = this._strings[i];
+            var lineWidth = context.measureText(line).width;
+
+            var lineX = - lineWidth / 2;
+            var lineY = - lineHeight / 2 - i * lineHeight;
+
+            for (var j = 0; j < line.length; j++)
+            {
+                lineX += context.measureText(line[j]).width;
+                if (curIdx == p_idx)
+                {
+                    pos.x = lineX + halfSpaceWidth;
+                    pos.y = lineY;
+                    return(pos);
+                }
+                curIdx++;
+            }
+        }
+
+        return(pos);
     };
 
 })();
