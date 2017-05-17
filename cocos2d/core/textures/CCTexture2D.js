@@ -483,6 +483,33 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 canvas.width = rect.width;
                 canvas.height = rect.height;
 
+                /*
+                We manually multiply the canvas colors as the technique used by cocos to handle
+                image tinting (although it is the correct way as proposed for canvas) because it generates
+                a very much different result between canvas and webgl.
+                This is mainly do to the fact that during the image to color compositing operations, the alpha
+                channel gets mangled and is multiplied as well changing the resulting image. 
+                 */
+                var context = canvas.getContext("2d");
+                context.drawImage(
+                    textureImage,
+                    rect.x, rect.y, rect.width, rect.height,
+                    0, 0, rect.width, rect.height
+                );
+
+                var imgData = context.getImageData(0, 0, canvas.width, canvas.height);
+                var pixelData = imgData.data;
+                for(var i = 0, len = pixelData.length; i < len; i+=4)
+                {
+                    pixelData[i  ] = r * pixelData[i  ] / 255;
+                    pixelData[i+1] = g * pixelData[i+1] / 255;
+                    pixelData[i+2] = b * pixelData[i+2] / 255;
+                }
+                context.putImageData(imgData, 0, 0);
+                /*
+                    Original setColor() cocos2d code.
+                 */
+                /*
                 var context = canvas.getContext("2d");
                 context.globalCompositeOperation = "source-over";
                 context.fillStyle = "rgb(" + (r | 0) + "," + (g | 0) + "," + (b | 0) + ")";
@@ -499,6 +526,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                     rect.x, rect.y, rect.width, rect.height,
                     0, 0, rect.width, rect.height
                 );
+                */
                 if (onlyCanvas)
                     return canvas;
                 var newTexture = new cc.Texture2D();
