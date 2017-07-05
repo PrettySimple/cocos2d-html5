@@ -407,7 +407,8 @@
             "core", "clipping-nodes", "render-texture", "actions", "progress-timer",
 
             "extensions/gui/control-extension/CCControl.js",
-            "extensions/gui/control-extension/CCInvocation.js"
+            "extensions/gui/control-extension/CCInvocation.js",
+            "extensions/gui/scrollview/CCSorting.js"
         ],
         "gui" : [
             "core", "clipping-nodes", "render-texture", "actions", "progress-timer",
