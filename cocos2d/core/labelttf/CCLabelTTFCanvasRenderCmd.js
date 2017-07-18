@@ -26,11 +26,11 @@ cc.LabelTTF.wrapInspection = true;
 
 //Support: English French German
 //Other as Oriental Language
-cc.LabelTTF._wordRex = unicode_hack(/(([0-9\u00A0°]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+|\S)/);
+cc.LabelTTF._wordRex = unicode_hack(/(([0-9\u00A0°()]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+|\S)/);
 cc.LabelTTF._symbolRex = /^[!,.:;}\]%\?>、‘“》？。，！]/;
-cc.LabelTTF._lastWordRex = unicode_hack(/(([0-9\u00A0°]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+|\S)$/);
-cc.LabelTTF._lastEnglish = unicode_hack(/([0-9\u00A0°]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+$/);
-cc.LabelTTF._firsrEnglish = unicode_hack(/^([0-9\u00A0°]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})/);
+cc.LabelTTF._lastWordRex = unicode_hack(/(([0-9\u00A0°()]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+|\S)$/);
+cc.LabelTTF._lastEnglish = unicode_hack(/([0-9\u00A0°()]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})+$/);
+cc.LabelTTF._firsrEnglish = unicode_hack(/^([0-9\u00A0°()]|\p{L}|\p{Pd}|\p{Ps}|\p{Pe}|\p{Pi}|\p{Pf}|\p{Pc}|\p{Po})/);
 cc.LabelTTF._firstSpaces = /^\s*/;
 
 (function () {
