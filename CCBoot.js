@@ -1814,13 +1814,14 @@ var _initSys = function () {
                                 + "-webkit-tap-highlight-color:rgba(0,0,0,0);}";
     }
 
-    /**
-     * cc.sys.localStorage is a local storage component.
-     * @memberof cc.sys
-     * @name localStorage
-     * @type {Object}
-     */
+
     try {
+        /**
+         * cc.sys.localStorage is a local storage component.
+         * @memberof cc.sys
+         * @name localStorage
+         * @type {Object}
+         */
         var localStorage = sys.localStorage = win.localStorage;
         localStorage.setItem("storage", "");
         localStorage.removeItem("storage");
