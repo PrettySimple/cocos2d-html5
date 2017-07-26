@@ -849,7 +849,6 @@ cc.loader = (function () {
                     }
                     catch (e) {
                         throw new Error("parse json [" + url + "] failed : " + e);
-                        return;
                     }
                     cb(null, result);
                 }
