@@ -956,7 +956,7 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
      */
     getTextWidth : function(p_updateTex)
     {
-        var updateTex = p_updateTex || true;
+        var updateTex = p_updateTex !== undefined ? p_updateTex : true;
         if (updateTex)
             this._renderCmd._updateTexture();
 
@@ -966,8 +966,12 @@ cc.LabelTTF = cc.Sprite.extend(/** @lends cc.LabelTTF# */{
     /**
      * Returns the real height of our current text
      */
-    getTextHeight : function()
+    getTextHeight : function(p_updateTex)
     {
+        var updateTex = p_updateTex !== undefined ? p_updateTex : true;
+        if (updateTex)
+            this._renderCmd._updateTexture();
+
         return(this._renderCmd.getTextHeight());
     },
 
