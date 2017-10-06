@@ -262,7 +262,7 @@ cc.LayerColor = cc.Layer.extend(/** @lends cc.LayerColor# */{
             cmd._bakeSprite.visit(this);
         }
         else {
-            var i, children = this._children, len = children.length;
+            var i, children = this._children, len = children.length, child;
             if (len > 0) {
                 if (this._reorderChildDirty) {
                     this.sortAllChildren();
