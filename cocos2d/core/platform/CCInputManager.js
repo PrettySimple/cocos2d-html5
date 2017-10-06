@@ -499,7 +499,8 @@ cc.inputManager = /** @lends cc.inputManager# */{
                 event.preventDefault();
             }, false);
 
-            element.addEventListener("mousewheel", function (event) {
+            //We want to keep the default behavior of the mouse scroll
+            /*element.addEventListener("mousewheel", function (event) {
                 var pos = selfPointer.getHTMLElementPosition(element);
                 var location = selfPointer.getPointByEvent(event, pos);
 
@@ -510,10 +511,10 @@ cc.inputManager = /** @lends cc.inputManager# */{
 
                 event.stopPropagation();
                 event.preventDefault();
-            }, false);
+            }, false);*/
 
             /* firefox fix */
-            element.addEventListener("DOMMouseScroll", function (event) {
+            /*element.addEventListener("DOMMouseScroll", function (event) {
                 var pos = selfPointer.getHTMLElementPosition(element);
                 var location = selfPointer.getPointByEvent(event, pos);
 
@@ -524,7 +525,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
 
                 event.stopPropagation();
                 event.preventDefault();
-            }, false);
+            }, false);*/
         }
 
         if (window.navigator.msPointerEnabled) {
