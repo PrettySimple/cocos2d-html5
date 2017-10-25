@@ -101,6 +101,8 @@ cc.LabelTTF._firstSpaces = /^\s*/;
 
         if(node._textGradientFillColorData !== null)
             this._setColorGradientData();
+        else
+            this._fillGradientStops = null;
     };
 
     proto._setColorGradientData = function()
