@@ -256,6 +256,7 @@
         var stopsLen = stops.length,
             stopColor,
             offset,
+            i,
             colors = this._colorView,
             opacityf = this._displayedOpacity / 255;
         for (i = 0; i < stopsLen; i++) {
