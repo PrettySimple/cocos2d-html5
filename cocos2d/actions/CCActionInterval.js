@@ -2843,6 +2843,53 @@ cc.fadeOut = function (d) {
  */
 cc.FadeOut.create = cc.fadeOut;
 
+/**
+ *  Fades to a given color
+ */
+cc.FadeColorTo = cc.ActionInterval.extend({
+    _toColor: new cc.Color(0,0,0,0),
+    _fromColor: new cc.Color(0,0,0),
+
+    ctor: function (duration, color) {
+        cc.ActionInterval.prototype.ctor.call(this);
+        color !== undefined && this.initWithDuration(duration, color);
+    },
+
+    initWithDuration: function (duration, color) {
+        if (cc.ActionInterval.prototype.initWithDuration.call(this, duration)) {
+            this._toColor = color;
+            return true;
+        }
+        return false;
+    },
+
+    clone: function () {
+        var action = new cc.FadeColorTo();
+        this._cloneDecoration(action);
+        action.initWithDuration(this._duration, this._toColor);
+        return action;
+    },
+
+    update: function (time) {
+        time = this._computeEaseTime(time);
+        var fromColor = this._fromColor !== undefined ? this._fromColor : cc.color(255,255,255,255);
+        var color = cc.color(fromColor);
+        color.r = color.r + (this._toColor.r - color.r) * time;
+        color.g = color.g + (this._toColor.g - color.g) * time;
+        color.b = color.b + (this._toColor.b - color.b) * time;
+        this.target.setColor(color);
+    },
+
+    startWithTarget: function (target) {
+        cc.ActionInterval.prototype.startWithTarget.call(this, target);
+        this._fromColor = target.getColor();
+    }
+});
+
+cc.fadeColorTo = function (duration, color) {
+    return new cc.FadeColorTo(duration, color);
+};
+
 /** Tints a cc.Node that implements the cc.NodeRGB protocol from current tint to a custom one.
  * @warning This action doesn't support "reverse"
  * @class
