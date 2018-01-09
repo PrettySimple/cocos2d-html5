@@ -556,6 +556,14 @@ cc.Audio.WebAudio.prototype = {
         },
 
         /**
+         * Return current music played
+         */
+        getCurrentMusic : function()
+        {
+            return (this._currMusic);
+        },
+
+        /**
          * Stop playing music.
          * @param {Boolean} [releaseData] If release the music data or not.As default value is false.
          * @example
