@@ -429,6 +429,92 @@ cc._tmp.WebGLTexture2D = function () {
         },
 
         /**
+         * init with HTML element specifying a specific pixelformat
+         * @param {HTMLImageElement|HTMLCanvasElement} element
+         * @param {Number} pixelFormat The desired pixel format
+         */
+        initWithCanvas: function(canvas, pixelFormat, premultiplied)
+        {
+            var self = this, tex2d = cc.Texture2D;
+            var gl = cc._renderContext;
+            var format = gl.RGBA;
+            premultiplied =
+                (premultiplied !== undefined)
+                    ? premultiplied
+                    : self._hasPremultipliedAlpha;
+
+            self._webTextureObj = cc._renderContext.createTexture();
+            self._htmlElementObj = canvas;
+
+            // Specify OpenGL texture image
+            switch (pixelFormat) {
+                case tex2d.PIXEL_FORMAT_RGBA8888:
+                    format = gl.RGBA;
+                    break;
+                case tex2d.PIXEL_FORMAT_RGB888:
+                    format = gl.RGB;
+                    break;
+                case tex2d.PIXEL_FORMAT_RGBA4444:
+                    type = gl.UNSIGNED_SHORT_4_4_4_4;
+                    break;
+                case tex2d.PIXEL_FORMAT_RGB5A1:
+                    type = gl.UNSIGNED_SHORT_5_5_5_1;
+                    break;
+                case tex2d.PIXEL_FORMAT_RGB565:
+                    type = gl.UNSIGNED_SHORT_5_6_5;
+                    break;
+                case tex2d.PIXEL_FORMAT_AI88:
+                    format = gl.LUMINANCE_ALPHA;
+                    break;
+                case tex2d.PIXEL_FORMAT_A8:
+                    format = gl.ALPHA;
+                    break;
+                case tex2d.PIXEL_FORMAT_I8:
+                    format = gl.LUMINANCE;
+                    break;
+                default:
+                    cc.assert(0, cc._LogInfos.Texture2D_initWithData);
+            }
+
+            cc.glBindTexture2D(self);
+
+            gl.pixelStorei(gl.UNPACK_ALIGNMENT, 4);
+            if (premultiplied)
+                gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
+
+            // Specify OpenGL texture image
+            gl.texImage2D(gl.TEXTURE_2D, 0, format, format, gl.UNSIGNED_BYTE, self._htmlElementObj);
+
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+            self.shaderProgram = cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURE);
+            cc.glBindTexture2D(null);
+            if (premultiplied)
+                gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+
+            var pixelsWide = self._htmlElementObj.width;
+            var pixelsHigh = self._htmlElementObj.height;
+
+            self._pixelsWide = self._contentSize.width = pixelsWide;
+            self._pixelsHigh = self._contentSize.height = pixelsHigh;
+            self._pixelFormat = format;
+            self.maxS = 1;
+            self.maxT = 1;
+
+            self._hasPremultipliedAlpha = premultiplied;
+            self._hasMipmaps = false;
+
+            self.shaderProgram = cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURE);
+
+            self._textureLoaded = true;
+
+            return true;
+        },
+
+        /**
          * HTMLElement Object getter
          * @return {HTMLElement}
          */
