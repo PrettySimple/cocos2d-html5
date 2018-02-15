@@ -1638,6 +1638,87 @@ cc.SkewTo = cc.ActionInterval.extend(/** @lends cc.SkewTo# */{
         this.target.skewY = this._startSkewY + this._deltaY * dt;
     }
 });
+
+/** Make the node "float" around its position */
+cc.MoveFloat = cc.ActionInterval.extend({
+
+    _amplitude: -1,
+    _delay: -1,
+
+    _posStart: null,
+    _newPos: null,
+
+    ctor: function (p_duration, p_amplitudeY, p_delay) {
+        cc.ActionInterval.prototype.ctor.call(this);
+        this.initWithDuration(p_duration, p_amplitudeY, p_delay);
+    },
+
+    initWithDuration: function (p_duration, p_amplitudeY, p_delay) {
+        if (cc.ActionInterval.prototype.initWithDuration.call(this, p_duration)) {
+
+            this._amplitude  = p_amplitudeY;
+            this._delay      = p_delay || 0;
+
+            this._newPos     = cc.p();
+
+            return true;
+        }
+        return false;
+    },
+
+    startWithTarget: function (p_target) {
+        cc.ActionInterval.prototype.startWithTarget.call(this, p_target);
+        this._posStart = p_target.getPosition();
+    },
+
+    clone: function () {
+        var action = new cc.Shake();
+        this._cloneDecoration(action);
+        action.initWithDuration(this._duration, this._amplitude, this._delay);
+        return action;
+    },
+
+    update: function (p_time) {
+        if (this._duration === 0)
+            return;
+        
+        this._newPos.x = this._posStart.x;
+        this._newPos.y = this._posStart.y + this._amplitude * Math.sin((p_time) * 2 * Math.PI);
+        
+        this.target.setPosition(this._newPos);
+    },
+
+    isDone : function()
+    {
+        return false;
+    },
+
+    step : function (p_dt)
+    {
+        if (this._firstTick)
+        {
+            // We can start the action with an offset
+            this._elapsed = this._delay;
+            this._firstTick = false;
+        }
+        else
+        {
+            this._elapsed += p_dt;
+        }
+        
+        this.update(Math.max(0, // needed for rewind. elapsed could be negative
+                             this._elapsed /
+                             Math.max(this._duration, 0.0000001192092896) // division by 0
+                          )
+                     );
+    }
+});
+
+cc.moveFloat = function (p_duration, p_amplitudeY, p_delay) {
+    return new cc.MoveFloat(p_duration, p_amplitudeY, p_delay);
+};
+
+
 /**
  * Create new action.
  * Skews a cc.Node object to given angles by modifying it's skewX and skewY attributes.
