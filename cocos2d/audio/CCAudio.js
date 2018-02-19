@@ -207,8 +207,8 @@ cc.Audio.WebAudio = function (buffer) {
     this.buffer = buffer;
     this.context = cc.Audio._context;
 
-    var volume = this.context['createGain']();
-    volume['gain'].value = 1;
+    var volume = this.context.createGain();
+    volume.gain.setValueAtTime(1, this.context.currentTime);
     volume['connect'](this.context['destination']);
     this._volume = volume;
 
@@ -253,7 +253,7 @@ cc.Audio.WebAudio.prototype = {
         return this._volume['gain'].value;
     },
     set volume(num) {
-        return this._volume['gain'].value = num;
+        this._volume.gain.setValueAtTime(num, this.context.currentTime);
     },
 
     get currentTime() {
