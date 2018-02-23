@@ -272,12 +272,46 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 if(p_end_angle - p_start_angle < 360)
                     vertices.push(p_center, p_center);
 
-                for (i = 0; i <= segments; i++) {
+                for (var i = 0; i <= segments; i++) {
                     var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius;
                     var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius;
                     vertices.push(cc.p(p_x, p_y));
 
                     angleCurrent = Math.min(angleCurrent + angleStep, p_end_angle);
+                }
+                
+                var element = new cc._DrawNodeElement(cc.DrawNode.TYPE_POLY);
+                element.verts = vertices;
+                element.fillColor = fillColor;
+                element.isClosePolygon = true;
+                element.isFill = true;
+                this._buffer.push(element);
+            },
+
+            drawArchHoled: function (p_center, p_radius_start, p_radius_end, p_start_angle, p_end_angle, p_color, p_segments) {
+                var fillColor = p_color || this.getDrawColor();
+                var segments = p_segments || 32;
+                var angleStep = (p_end_angle - p_start_angle) / segments;
+                var angleCurrent = p_start_angle;
+
+                var vertices = [];
+
+                for (var i=0; i <= segments; i++) 
+                {
+                    var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius_end;
+                    var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius_end;
+                    vertices.push(cc.p(p_x, p_y));
+
+                    angleCurrent = Math.min(angleCurrent + angleStep, p_end_angle);
+                }
+
+                for (var i=0; i <= segments; i++)
+                {
+                    var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius_start;
+                    var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius_start;
+                    vertices.push(cc.p(p_x, p_y));
+
+                    angleCurrent = Math.max(angleCurrent - angleStep, p_start_angle);
                 }
                 
                 var element = new cc._DrawNodeElement(cc.DrawNode.TYPE_POLY);
@@ -702,6 +736,36 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
 
                     angleCurrent = Math.min(angleCurrent + angleStep, p_end_angle);
                 }
+                this.drawPoly(_vertices, fillColor, 0, fillColor);
+                _vertices.length = 0;
+            },
+
+            drawArchHoled: function (p_center, p_radius_start, p_radius_end, p_start_angle, p_end_angle, p_color, p_segments) {
+                var fillColor = p_color || this._drawColor;
+                var segments = p_segments || 32;
+                var angleStep = (p_end_angle - p_start_angle) / segments;
+                var angleCurrent = p_start_angle;
+                
+                _vertices.length = 0;
+
+                for (var i=0; i <= segments; i++) 
+                {
+                    var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius_end;
+                    var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius_end;
+                    _vertices.push(p_x, p_y);
+
+                    angleCurrent = Math.min(angleCurrent + angleStep, p_end_angle);
+                }
+
+                for (var i=0; i <= segments; i++)
+                {
+                    var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius_start;
+                    var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius_start;
+                    _vertices.push(p_x, p_y);
+
+                    angleCurrent = Math.max(angleCurrent - angleStep, p_start_angle);
+                }
+
                 this.drawPoly(_vertices, fillColor, 0, fillColor);
                 _vertices.length = 0;
             },

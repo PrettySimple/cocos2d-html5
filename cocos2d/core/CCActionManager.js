@@ -231,7 +231,7 @@ cc.ActionManager = cc.Class.extend(/** @lends cc.ActionManager# */{
                         return action;
                 }
             }
-            cc.log(cc._LogInfos.ActionManager_getActionByTag_2, tag);
+            // cc.log(cc._LogInfos.ActionManager_getActionByTag_2, tag);
         }
         return null;
     },
