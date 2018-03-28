@@ -1672,7 +1672,7 @@ cc.MoveFloat = cc.ActionInterval.extend({
     },
 
     clone: function () {
-        var action = new cc.Shake();
+        var action = new cc.MoveFloat();
         this._cloneDecoration(action);
         action.initWithDuration(this._duration, this._amplitude, this._delay);
         return action;
@@ -1716,6 +1716,57 @@ cc.MoveFloat = cc.ActionInterval.extend({
 
 cc.moveFloat = function (p_duration, p_amplitudeY, p_delay) {
     return new cc.MoveFloat(p_duration, p_amplitudeY, p_delay);
+};
+
+/** Make the node "float" around its position */
+cc.SizeScale9To = cc.ActionInterval.extend({
+
+    _sizeDeltaX: 0,
+    _sizeDeltaY: 0,
+    _sizeStart: null,
+    _sizeTo: null,
+
+    ctor: function (p_duration, p_size) {
+        cc.ActionInterval.prototype.ctor.call(this);
+        this.initWithDuration(p_duration, p_size);
+    },
+
+    initWithDuration: function (p_duration, p_size) {
+        if (cc.ActionInterval.prototype.initWithDuration.call(this, p_duration)) {
+
+            this._sizeTo  = p_size;
+
+            return true;
+        }
+        return false;
+    },
+
+    startWithTarget: function (p_target) {
+        cc.ActionInterval.prototype.startWithTarget.call(this, p_target);
+        this._sizeStart = p_target.getPreferredSize();
+        this._sizeDeltaX = this._sizeTo.width - this._sizeStart.width;
+        this._sizeDeltaY = this._sizeTo.height - this._sizeStart.height;
+    },
+
+    clone: function () {
+        var action = new cc.SizeScale9To();
+        this._cloneDecoration(action);
+        action.initWithDuration(this._duration, this._sizeTo);
+        return action;
+    },
+
+    update: function (p_time) {
+        var dt = this._computeEaseTime(p_time);
+        if (this.target) {
+            var sizeWidth  = this._sizeStart.width + this._sizeDeltaX * dt;
+            var sizeHeight = this._sizeStart.height + this._sizeDeltaY * dt;
+            this.target.setPreferredSize(cc.size(sizeWidth, sizeHeight));
+        }
+    }
+});
+
+cc.sizeScale9To = function (p_duration, p_size) {
+    return new cc.SizeScale9To(p_duration, p_size);
 };
 
 
