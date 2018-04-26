@@ -164,7 +164,7 @@ cc.Audio = cc.Class.extend({
 
     setVolume: function (volume) {
         if (!this._element) return;
-        this._element.volume = volume;
+        this._element.volume = window.__audioSupport.WEB_AUDIO ? volume : Math.min(volume, 1); // in case web audio is not supported we must cap volume to a valid max of 1
     },
 
     getVolume: function () {
