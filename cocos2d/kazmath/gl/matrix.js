@@ -31,20 +31,25 @@
     cc.KM_GL_PROJECTION = 0x1701;
     cc.KM_GL_TEXTURE = 0x1702;
 
-    cc.modelview_matrix_stack = new cc.math.Matrix4Stack();
-    cc.projection_matrix_stack = new cc.math.Matrix4Stack();
-    cc.texture_matrix_stack = new cc.math.Matrix4Stack();
+    cc.modelview_matrix_stack = null;
+    cc.projection_matrix_stack = null;
+    cc.texture_matrix_stack = null;
 
     cc.current_stack = null;
-    var initialized = false;
+    cc.initialized = false;
 
     cc.lazyInitialize = function () {
-        if (!initialized) {
+        if (!cc.initialized) {
             var identity = new cc.math.Matrix4(); //Temporary identity matrix
 
             //Initialize all 3 stacks
+            cc.modelview_matrix_stack = new cc.math.Matrix4Stack();
             cc.modelview_matrix_stack.initialize();
+
+            cc.projection_matrix_stack = new cc.math.Matrix4Stack();
             cc.projection_matrix_stack.initialize();
+
+            cc.texture_matrix_stack = new cc.math.Matrix4Stack();
             cc.texture_matrix_stack.initialize();
 
             cc.current_stack = cc.modelview_matrix_stack;

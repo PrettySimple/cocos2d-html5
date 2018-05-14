@@ -73,6 +73,15 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
         this._sprite = null;
 
         sprite && this.initWithSprite(sprite);
+
+        cc.eventManager.addListener(
+            cc.EventListener.create({
+                event: cc.EventListener.CONTEXT,
+                onContextLost: this.onContextLost,
+                onContextPostRestore: this.onContextPostRestore
+            }),
+            this
+        );
     },
 
     onEnter: function () {
@@ -88,6 +97,20 @@ cc.ProgressTimer = cc.Node.extend(/** @lends cc.ProgressTimer# */{
             this._renderCmd.releaseData();
         }
         this._super();
+    },
+
+    onContextLost: function()
+    {
+        if (cc._renderType === cc.game.RENDER_TYPE_WEBGL)
+            this._renderCmd.releaseData();
+    },
+
+    onContextPostRestore: function()
+    {
+        if (cc._renderType === cc.game.RENDER_TYPE_WEBGL) {
+            this._renderCmd.initCmd();
+            this._renderCmd._updateProgress();
+        }
     },
 
     /**

@@ -69,6 +69,14 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
         this.alphaThreshold = 1;
         this.inverted = false;
         this._renderCmd.initStencilBits();
+
+        cc.eventManager.addListener(
+            cc.EventListener.create({
+                event: cc.EventListener.CONTEXT,
+                onContextRestore: this.onContextRestore
+            }),
+            this
+        );
     },
 
     /**
@@ -125,6 +133,13 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     onExit: function () {
         this._stencil._performRecursive(cc.Node._stateCallbackType.onExit);
         cc.Node.prototype.onExit.call(this);
+    },
+
+    onContextRestore : function()
+    {
+        //Refresh the stencil
+        if(this._stencil)
+            this.setStencil(this._stencil);
     },
 
     visit: function (parent) {

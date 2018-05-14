@@ -1280,7 +1280,8 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
             this._detachChild(child, cleanup);
 
         //this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.visibleDirty);
-        cc.renderer.childrenOrderDirty = true;
+        if(cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
     },
 
     /**

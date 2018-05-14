@@ -2649,10 +2649,11 @@ cc.game = /** @lends cc.game# */{
             width = width || element.width;
             height = height || element.height;
 
-            //it is already a canvas, we wrap it around with a div
+            //it is already a canvas, we wrap it around with a div if it does not exist
+            var wrapperDiv = document.getElementById('Cocos2dGameContainer');
             this.canvas = cc._canvas = localCanvas = element;
-            this.container = cc.container = localContainer = document.createElement("DIV");
-            if (localCanvas.parentNode)
+            this.container = cc.container = localContainer = wrapperDiv !==  null ? wrapperDiv : document.createElement("DIV");
+            if (localCanvas.parentNode && localCanvas.parentNode !== wrapperDiv)
                 localCanvas.parentNode.insertBefore(localContainer, localCanvas);
         } else {
             //we must make a new canvas and place into this element
@@ -2675,6 +2676,8 @@ cc.game = /** @lends cc.game# */{
         localCanvas.setAttribute("tabindex", 99);
 
         if (cc._renderType === cc.game.RENDER_TYPE_WEBGL) {
+            localCanvas.addEventListener("webglcontextlost", this._handleContextLost.bind(this), false);
+            localCanvas.addEventListener("webglcontextrestored", this._handleContextRestored.bind(this), false);
             this._renderContext = cc._renderContext = cc.webglContext
              = cc.create3DContext(localCanvas, {
                 'stencil': true,
@@ -2776,6 +2779,42 @@ cc.game = /** @lends cc.game# */{
         cc.eventManager.addCustomListener(cc.game.EVENT_SHOW, function () {
             cc.game.resume();
         });
+    },
+
+    _handleContextLost : function(p_event)
+    {
+        if(cc.eventManager)
+            cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.LOST));
+
+        cc.game.pause();
+        cc.renderer.dispose();
+        cc.glInvalidateStateCache();
+
+        cc.renderer = null;
+        this._rendererInitialized = false;
+
+        p_event.preventDefault();
+    },
+
+    _handleContextRestored : function(p_event)
+    {
+        this._initRenderer();
+
+        cc.lazyInitialize();
+        cc.director.setGLDefaultValues();
+
+        gl.clearStencil(0);
+
+        cc.shaderCache.reloadDefaultShaders();
+        cc.textureCache.restoreTexturesLoaded();
+
+        if(cc.eventManager)
+        {
+            cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.RESTORE));
+            cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.POST_RESTORE));
+        }
+
+        setTimeout(function(){ cc.game.resume(); }, cc.game._frameTime / 2);
     }
 };
 //+++++++++++++++++++++++++something about CCGame end+++++++++++++++++++++++++++++

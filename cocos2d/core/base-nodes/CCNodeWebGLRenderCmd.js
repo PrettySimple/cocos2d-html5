@@ -34,6 +34,9 @@
     proto.constructor = cc.Node.WebGLRenderCmd;
     proto._rootCtor = cc.Node.WebGLRenderCmd;
 
+    proto.dispose = function() {
+    };
+
     proto._updateColor = function () {
     };
 

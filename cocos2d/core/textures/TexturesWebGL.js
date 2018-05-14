@@ -86,6 +86,12 @@ cc._tmp.WebGLTexture2D = function () {
             cc.loader.release(this.url);
         },
 
+        resetTexture: function()
+        {
+            this._webTextureObj = null;
+            this._htmlElementObj = null;
+        },
+
         /**
          * pixel format of the texture
          * @return {Number}
@@ -962,6 +968,18 @@ cc._tmp.WebGLTextureCache = function () {
         }
         else {
             tex.handleLoadedTexture();
+        }
+    };
+
+    _p.restoreTexturesLoaded = function()
+    {
+        var tex;
+        for (var key in this._textures) {
+            tex = this._textures[key];
+            tex.resetTexture();
+            if(tex._setupVBO)
+                tex._setupVBO();
+            this._textures[key].handleLoadedTexture();
         }
     };
 

@@ -274,6 +274,12 @@ cc.EventListener.FOCUS = 7;
  * @type {number}
  */
 cc.EventListener.CUSTOM = 8;
+/**
+ * The type code of webgl context status change event listener.
+ * @constant
+ * @type {number}
+ */
+cc.EventListener.CONTEXT = 9;
 
 cc._EventListenerCustom = cc.EventListener.extend({
     _onCustomEvent: null,
@@ -436,6 +442,36 @@ cc._EventListenerTouchAllAtOnce.create = function(){
      return new cc._EventListenerTouchAllAtOnce();
 };
 
+cc._EventListenerContext = cc.EventListener.extend({
+
+    onContextLost: null,
+    onContextRestore: null,
+    onContextPostRestore: null,
+
+    ctor: function () {
+        cc.EventListener.prototype.ctor.call(this, cc.EventListener.CONTEXT, cc._EventListenerContext.LISTENER_ID, null);
+    },
+
+    getTarget: function() {
+        return this._node;
+    },
+
+    clone: function () {
+        var eventListener = new cc._EventListenerContext();
+        return eventListener;
+    },
+
+    checkAvailable: function () {
+        return true;
+    }
+});
+
+cc._EventListenerContext.LISTENER_ID = "__cc_context";
+
+cc._EventListenerContext.create = function () {
+    return new cc._EventListenerContext();
+};
+
 /**
  * Create a EventListener object by json object
  * @function
@@ -476,8 +512,10 @@ cc.EventListener.create = function(argObj){
     else if(listenerType === cc.EventListener.ACCELERATION){
         listener = new cc._EventListenerAcceleration(argObj.callback);
         delete argObj.callback;
-    } else if(listenerType === cc.EventListener.FOCUS)
+    } else if(listenerType === cc.EventListener.FOCUS){
         listener = new cc._EventListenerFocus();
+    } else if(listenerType === cc.EventListener.CONTEXT)
+        listener = new cc._EventListenerContext();
 
     for(var key in argObj) {
         listener[key] = argObj[key];

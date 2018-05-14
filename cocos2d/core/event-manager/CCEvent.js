@@ -118,6 +118,12 @@ cc.Event.FOCUS = 4;
  * @type {number}
  */
 cc.Event.CUSTOM = 6;
+/**
+ * The type code of webgl context status change event.
+ * @constant
+ * @type {number}
+ */
+cc.Event.CONTEXT = 7;
 
 /**
  * The Custom event
@@ -447,3 +453,42 @@ cc.EventFocus = cc.Event.extend(/** @lends cc.EventTouch# */{
         this._widgetLoseFocus = widgetLoseFocus;
     }
 });
+
+/**
+ * The mouse event
+ * @class
+ * @extends cc.Event
+ */
+cc.EventContext = cc.Event.extend(/** @lends cc.EventMouse# */{
+    _eventCode: 0,
+
+    ctor: function (eventCode) {
+        cc.Event.prototype.ctor.call(this, cc.Event.CONTEXT);
+        this._eventCode = eventCode;
+    },
+
+    getEventCode: function()
+    {
+        return this._eventCode;
+    }
+});
+
+//Different types of Context lost events
+/**
+ * The webgl context lost event code.
+ * @constant
+ * @type {number}
+ */
+cc.EventContext.LOST = 0;
+/**
+ * The webgl context restored event code.
+ * @constant
+ * @type {number}
+ */
+cc.EventContext.RESTORE = 1;
+/**
+ * The event type code of mouse up event.
+ * @constant
+ * @type {number}
+ */
+cc.EventContext.POST_RESTORE = 2;

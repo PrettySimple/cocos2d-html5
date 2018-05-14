@@ -466,6 +466,29 @@ cc.eventManager = /** @lends cc.eventManager# */{
         toRemovedListeners.length = 0;
     },
 
+    _dispatchContextEvent: function (event) {
+        var shouldStopPropagation = false;
+        var listeners = this._getListeners(cc._EventListenerContext.LISTENER_ID);
+        
+        this._dispatchEventToListeners(listeners, this._onContextEventCallback, event);
+    },
+
+    _onContextEventCallback: function(listener, event) {
+        // Skip if the listener was removed.
+        if (!listener._isRegistered)
+            return false;
+
+        var target = listener.getTarget();
+        var eventCode = event.getEventCode();
+
+        if(eventCode == cc.EventContext.LOST && listener.onContextLost)
+            listener.onContextLost.call(target);
+        else if(eventCode == cc.EventContext.RESTORE && listener.onContextRestore)
+            listener.onContextRestore.call(target);
+        else if(eventCode == cc.EventContext.POST_RESTORE && listener.onContextPostRestore)
+            listener.onContextPostRestore.call(target);
+    },
+
     _onTouchEventCallback: function (listener, argsObj) {
         // Skip if the listener was removed.
         if (!listener._isRegistered)
@@ -980,6 +1003,12 @@ cc.eventManager = /** @lends cc.eventManager# */{
             throw new Error("event is undefined");
         if (event._type === cc.Event.TOUCH) {
             this._dispatchTouchEvent(event);
+            this._inDispatch--;
+            return;
+        }
+        else if(event._type == cc.Event.CONTEXT)
+        {
+            this._dispatchContextEvent(event);
             this._inDispatch--;
             return;
         }

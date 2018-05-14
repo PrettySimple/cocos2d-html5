@@ -561,7 +561,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
 
         // 9600 vertices by default configurable in ccConfig.js
         // 20 is 2 float for position, 4 int for color and 2 float for uv
-        var _sharedBuffer = null;
+        cc.DrawNode.SHARED_BUFFER = null;
         var FLOAT_PER_VERTEX = 2 + 1 + 2;
         var VERTEX_BYTE = FLOAT_PER_VERTEX * 4;
         var FLOAT_PER_TRIANGLE = 3 * FLOAT_PER_VERTEX;
@@ -586,6 +586,8 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             _f32Buffer: null,
             _ui32Buffer: null,
 
+            _restoreInstructions: null,
+
             _dirty: false,
             _className: "DrawNodeWebGL",
 
@@ -594,9 +596,11 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             ctor: function (capacity, manualRelease) {
                 cc.Node.prototype.ctor.call(this);
 
-                if (!_sharedBuffer) {
-                    _sharedBuffer = new GlobalVertexBuffer(cc._renderContext, cc.DRAWNODE_TOTAL_VERTICES * VERTEX_BYTE);
+                if (!cc.DrawNode.SHARED_BUFFER) {
+                    cc.DrawNode.SHARED_BUFFER = new GlobalVertexBuffer(cc._renderContext, cc.DRAWNODE_TOTAL_VERTICES * VERTEX_BYTE);
                 }
+
+                this._restoreInstructions = {type: "", params: []};
 
                 this._renderCmd._shaderProgram = cc.shaderCache.programForKey(cc.SHADER_POSITION_LENGTHTEXTURECOLOR);
                 this._blendFunc = new cc.BlendFunc(cc.SRC_ALPHA, cc.ONE_MINUS_SRC_ALPHA);
@@ -606,6 +610,15 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 this.manualRelease = manualRelease;
 
                 this._dirty = true;
+
+                cc.eventManager.addListener(
+                    cc.EventListener.create({
+                        event: cc.EventListener.CONTEXT,
+                        onContextLost: this.onContextLost,
+                        onContextRestore: this.onContextRestore
+                    }),
+                    this
+                );
             },
 
             onEnter: function () {
@@ -627,9 +640,34 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             release: function () {
                 if (this._occupiedSize > 0) {
                     this._vertexCount = 0;
-                    _sharedBuffer.freeBuffer(this._offset, VERTEX_BYTE * this._occupiedSize);
+                    cc.DrawNode.SHARED_BUFFER.freeBuffer(this._offset, VERTEX_BYTE * this._occupiedSize);
                     this._occupiedSize = 0;
                 }
+            },
+
+            onContextLost : function()
+            {
+                this._dirty = true;
+                this._occupiedSize = 0;
+                this._vertexCount = 0;
+                this._offset = 0;
+                
+                if(cc.DrawNode.SHARED_BUFFER)
+                {
+                    cc.DrawNode.SHARED_BUFFER.destroy();
+                    cc.DrawNode.SHARED_BUFFER = null;
+                }
+            },
+
+            onContextRestore : function()
+            {
+                if(!cc.DrawNode.SHARED_BUFFER)
+                    cc.DrawNode.SHARED_BUFFER = new GlobalVertexBuffer(cc._renderContext, cc.DRAWNODE_TOTAL_VERTICES * VERTEX_BYTE);
+
+                this._renderCmd._shaderProgram = cc.shaderCache.programForKey(cc.SHADER_POSITION_LENGTHTEXTURECOLOR);
+                
+                var type = this._restoreInstructions.type;
+                this[type].apply(this, this._restoreInstructions.params);
             },
 
             _ensureCapacity: function (count) {
@@ -640,22 +678,22 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                     var request = Math.max(Math.min(prev + prev, MAX_INCREMENT), count, _t._bufferCapacity);
                     // free previous buffer
                     if (prev !== 0) {
-                        _sharedBuffer.freeBuffer(prevOffset, VERTEX_BYTE * prev);
+                        cc.DrawNode.SHARED_BUFFER.freeBuffer(prevOffset, VERTEX_BYTE * prev);
                         _t._occupiedSize = 0;
                     }
-                    var offset = _t._offset = _sharedBuffer.requestBuffer(VERTEX_BYTE * request);
+                    var offset = _t._offset = cc.DrawNode.SHARED_BUFFER.requestBuffer(VERTEX_BYTE * request);
                     if (offset >= 0) {
                         _t._occupiedSize = _t._bufferCapacity = request;
                         // 5 floats per vertex
-                        _t._f32Buffer = new Float32Array(_sharedBuffer.data, offset, FLOAT_PER_VERTEX * _t._occupiedSize);
-                        _t._ui32Buffer = new Uint32Array(_sharedBuffer.data, offset, FLOAT_PER_VERTEX * _t._occupiedSize);
+                        _t._f32Buffer = new Float32Array(cc.DrawNode.SHARED_BUFFER.data, offset, FLOAT_PER_VERTEX * _t._occupiedSize);
+                        _t._ui32Buffer = new Uint32Array(cc.DrawNode.SHARED_BUFFER.data, offset, FLOAT_PER_VERTEX * _t._occupiedSize);
                         
                         // Copy old data
                         if (prev !== 0 && prevOffset !== offset) {
                             // offset is in byte, we need to transform to float32 index
                             var last = (prevOffset + prev) / 4;
                             for (var i = offset / 4, j = prevOffset / 4; j < last; i++, j++) {
-                                _sharedBuffer.dataArray[i] = _sharedBuffer.dataArray[j];
+                                cc.DrawNode.SHARED_BUFFER.dataArray[i] = cc.DrawNode.SHARED_BUFFER.dataArray[j];
                             }
                         }
 
@@ -681,6 +719,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 else
                     this.drawPoly(_vertices, fillColor, lineWidth, lineColor);
                 _vertices.length = 0;
+
+                this._restoreInstructions.type = "drawRect";
+                this._restoreInstructions.params = [origin, destination, fillColor, lineWidth, lineColor];
             },
 
             drawCircle: function (center, radius, angle, segments, drawLineToCenter, lineWidth, color) {
@@ -706,6 +747,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                     this.drawSegment(_from, _to, lineWidth, color);
                 }
                 _vertices.length = 0;
+
+                this._restoreInstructions.type = "drawCircle";
+                this._restoreInstructions.params = [center, radius, angle, segments, drawLineToCenter, lineWidth, color];
             },
 
             /**
@@ -738,6 +782,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 }
                 this.drawPoly(_vertices, fillColor, 0, fillColor);
                 _vertices.length = 0;
+
+                this._restoreInstructions.type = "drawArch";
+                this._restoreInstructions.params = [p_center, p_radius, p_start_angle, p_end_angle, p_color, p_segments];
             },
 
             drawArchHoled: function (p_center, p_radius_start, p_radius_end, p_start_angle, p_end_angle, p_color, p_segments) {
@@ -768,6 +815,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
 
                 this.drawPoly(_vertices, fillColor, 0, fillColor);
                 _vertices.length = 0;
+
+                this._restoreInstructions.type = "drawArchHoled";
+                this._restoreInstructions.params = [p_center, p_radius_start, p_radius_end, p_start_angle, p_end_angle, p_color, p_segments];
             },
 
             drawQuadBezier: function (origin, control, destination, segments, lineWidth, color) {
@@ -784,6 +834,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 _vertices.push(destination.x, destination.y);
                 this._drawSegments(_vertices, lineWidth, color, false);
                 _vertices.length = 0;
+
+                this._restoreInstructions.type = "drawQuadBezier";
+                this._restoreInstructions.params = [origin, control, destination, segments, lineWidth, color];
             },
 
             drawCubicBezier: function (origin, control1, control2, destination, segments, lineWidth, color) {
@@ -800,6 +853,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 _vertices.push(destination.x, destination.y);
                 this._drawSegments(_vertices, lineWidth, color, false);
                 _vertices.length = 0;
+
+                this._restoreInstructions.type = "drawCubicBezier";
+                this._restoreInstructions.params = [origin, control1, control2, destination, segments, lineWidth, color];
             },
 
             drawCatmullRom: function (points, segments, lineWidth, color) {
@@ -843,6 +899,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                     this.drawSegment(_from, _to, lineWidth, color);
                 }
                 _vertices.length = 0;
+
+                this._restoreInstructions.type = "drawCardinalSpline";
+                this._restoreInstructions.params = [config, tension, segments, lineWidth, color];
             },
 
             drawDots: function (points, radius, color) {
@@ -852,6 +911,9 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 for (var i = 0, len = points.length; i < len; i++) {
                     this.drawDot(points[i], radius, color);
                 }
+
+                this._restoreInstructions.type = "drawDots";
+                this._restoreInstructions.params = [points, radius, color];
             },
 
             _render: function () {
@@ -862,11 +924,11 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
 
                 if (this._dirty) {
                     // bindBuffer is done in updateSubData
-                    _sharedBuffer.updateSubData(this._offset, this._f32Buffer);
+                    cc.DrawNode.SHARED_BUFFER.updateSubData(this._offset, this._f32Buffer);
                     this._dirty = false;
                 }
                 else {
-                    gl.bindBuffer(gl.ARRAY_BUFFER, _sharedBuffer.vertexBuffer);
+                    gl.bindBuffer(gl.ARRAY_BUFFER, cc.DrawNode.SHARED_BUFFER.vertexBuffer);
                 }
 
                 gl.enableVertexAttribArray(cc.VERTEX_ATTRIB_POSITION);

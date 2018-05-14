@@ -132,6 +132,35 @@ return {
         }
     },
 
+    dispose: function()
+    {
+        _batchedInfo = {
+            // The batched texture, all batching element should have the same texture
+            texture: null,
+            // The batched blend source, all batching element should have the same blend source
+            blendSrc: null,
+            // The batched blend destination, all batching element should have the same blend destination
+            blendDst: null,
+            // The batched shader, all batching element should have the same shader
+            shader: null
+        };
+
+        _quadIndexBuffer = null;
+        _quadVertexBuffer = null;
+
+        // Total vertex size
+        _vertexSize = 0;
+        // Current batching vertex size
+        _batchingSize = 0;
+        _sizePerVertex = 6;
+        // buffer data and views
+        _vertexData = null;
+        _vertexDataSize = 0;
+        _vertexDataF32 = null;
+        _vertexDataUI32 = null;
+        _IS_IOS = false;
+    },
+
     getVertexSize: function () {
         return _vertexSize;
     },

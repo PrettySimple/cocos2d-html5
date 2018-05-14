@@ -221,6 +221,19 @@ cc.LayerColor = cc.Layer.extend(/** @lends cc.LayerColor# */{
         cc.Layer.prototype.ctor.call(this);
         this._blendFunc = cc.BlendFunc._alphaNonPremultiplied();
         cc.LayerColor.prototype.init.call(this, color, width, height);
+
+        cc.eventManager.addListener(
+            cc.EventListener.create({
+                event: cc.EventListener.CONTEXT,
+                onContextLost: this.onContextLost
+            }),
+            this
+        );
+    },
+
+    onContextLost: function()
+    {
+        this._renderCmd.dispose();
     },
 
     /**

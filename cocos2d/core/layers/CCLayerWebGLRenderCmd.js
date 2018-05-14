@@ -79,6 +79,12 @@
         this._dataDirty = true;
     };
 
+    proto.dispose = function()
+    {
+        this._vertexBuffer = null;
+        this._dataDirty = true;
+    };
+
     proto.transform = function (parentCmd, recursive) {
         this.originTransform(parentCmd, recursive);
 
