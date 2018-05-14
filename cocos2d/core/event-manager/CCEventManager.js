@@ -467,7 +467,8 @@ cc.eventManager = /** @lends cc.eventManager# */{
     },
 
     _dispatchContextEvent: function (event) {
-        var shouldStopPropagation = false;
+        this._sortEventListeners(cc._EventListenerContext.LISTENER_ID);
+        
         var listeners = this._getListeners(cc._EventListenerContext.LISTENER_ID);
         
         this._dispatchEventToListeners(listeners, this._onContextEventCallback, event);

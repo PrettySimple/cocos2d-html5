@@ -2814,7 +2814,7 @@ cc.game = /** @lends cc.game# */{
             cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.POST_RESTORE));
         }
 
-        setTimeout(function(){ cc.game.resume(); }, cc.game._frameTime / 2);
+        cc.game.resume();
     }
 };
 //+++++++++++++++++++++++++something about CCGame end+++++++++++++++++++++++++++++
