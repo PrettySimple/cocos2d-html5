@@ -977,8 +977,6 @@ cc._tmp.WebGLTextureCache = function () {
         for (var key in this._textures) {
             tex = this._textures[key];
             tex.resetTexture();
-            if(tex._setupVBO)
-                tex._setupVBO();
             this._textures[key].handleLoadedTexture();
         }
     };

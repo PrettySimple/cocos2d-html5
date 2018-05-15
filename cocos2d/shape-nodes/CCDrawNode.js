@@ -667,7 +667,8 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 this._renderCmd._shaderProgram = cc.shaderCache.programForKey(cc.SHADER_POSITION_LENGTHTEXTURECOLOR);
                 
                 var type = this._restoreInstructions.type;
-                this[type].apply(this, this._restoreInstructions.params);
+                if(type !== "")
+                    this[type].apply(this, this._restoreInstructions.params);
             },
 
             _ensureCapacity: function (count) {
