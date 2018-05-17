@@ -49,6 +49,12 @@
     proto.setShapeType = function (shapeType) {
     };
 
+    proto.onContextRestore = function()
+    {
+        this._buffersVBO = [0, 0];
+        this._setupVBO();
+    },
+
     proto.setBatchNode = function (batchNode) {
         var node = this._node;
         if (node._batchNode !== batchNode) {

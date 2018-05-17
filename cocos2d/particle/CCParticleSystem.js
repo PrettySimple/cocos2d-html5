@@ -346,6 +346,14 @@ cc.ParticleSystem = cc.Node.extend(/** @lends cc.ParticleSystem# */{
         } else if (cc.isObject(plistFile)) {
             this.initWithDictionary(plistFile, "");
         }
+
+        cc.eventManager.addListener(
+            cc.EventListener.create({
+                event: cc.EventListener.CONTEXT,
+                onContextRestore: this.onContextRestore
+            }),
+            this
+        );
     },
 
     _createRenderCmd: function () {
@@ -353,6 +361,11 @@ cc.ParticleSystem = cc.Node.extend(/** @lends cc.ParticleSystem# */{
             return new cc.ParticleSystem.CanvasRenderCmd(this);
         else
             return new cc.ParticleSystem.WebGLRenderCmd(this);
+    },
+
+    onContextRestore : function()
+    {
+        this._renderCmd.onContextRestore();
     },
 
     /**
