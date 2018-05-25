@@ -101,7 +101,7 @@ cc.Audio = cc.Class.extend({
         this._AUDIO_TYPE = "AUDIO";
         this._element = element;
 
-        // Prevent partial browser from playing after the end does not reset the paused tag
+        // Prevent partial browser from playing after the end does not reset the ended tag
         // Will cause the player to judge the status of the error
         element.addEventListener('ended', function () {
             if (!element.loop) {
@@ -131,7 +131,7 @@ cc.Audio = cc.Class.extend({
 
     getPlaying: function () {
         if (!this._element) return true;
-        return !this._element.paused;
+        return !this._element.ended;
     },
 
     stop: function () {
@@ -227,8 +227,8 @@ cc.Audio.WebAudio = function (buffer) {
 cc.Audio.WebAudio.prototype = {
     constructor: cc.Audio.WebAudio,
 
-    get paused() {
-        // If the current audio is a loop, then paused is false
+    get ended() {
+        // If the current audio is a loop, then ended is false
         if (this._currentSource && this._currentSource.loop)
             return false;
 
@@ -239,7 +239,7 @@ cc.Audio.WebAudio.prototype = {
         // currentTime - startTime > durationTime
         return this.context.currentTime - this._startTime > this.buffer.duration;
     },
-    set paused(bool) {
+    set ended(bool) {
     },
 
     get loop() {
@@ -266,7 +266,7 @@ cc.Audio.WebAudio.prototype = {
     play: function (offset) {
 
         // If repeat play, you need to stop before an audio
-        if (this._currentSource && !this.paused) {
+        if (this._currentSource && !this.ended) {
             this._currentSource.stop(0);
             this.playedLength = 0;
         }
