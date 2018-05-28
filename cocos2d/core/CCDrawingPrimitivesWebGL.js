@@ -45,7 +45,7 @@ cc.DrawingPrimitiveWebGL = cc.Class.extend(/** @lends cc.DrawingPrimitiveWebGL# 
         if (ctx == null)
             ctx = cc._renderContext;
 
-        if (!ctx instanceof  WebGLRenderingContext)
+        if (ctx instanceof CanvasRenderingContext2D || ctx instanceof ImageBitmapRenderingContext)
             throw new Error("Can't initialise DrawingPrimitiveWebGL. context need is WebGLRenderingContext");
 
         this._renderContext = ctx;
