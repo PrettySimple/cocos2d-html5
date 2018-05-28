@@ -762,7 +762,7 @@ cc.loader = (function () {
                 var xhr = this.getXMLHttpRequest(),
                     errInfo = "load " + url + " failed!";
                 xhr.open("GET", url, true);
-                xhr.timeout = 10000;
+                xhr.timeout = 30000;
                 if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) {
                     // IE-specific logic here
                     xhr.setRequestHeader("Accept-Charset", "utf-8");
@@ -805,7 +805,7 @@ cc.loader = (function () {
             var xhr = cc.loader.getXMLHttpRequest(),
                 errInfo = "load " + url + " failed!";
             xhr.open("GET", url, true);
-            xhr.timeout = 10000;
+            xhr.timeout = 30000;
             xhr.responseType = "arraybuffer";
 
             xhr.onload = function () {

@@ -602,7 +602,7 @@ cc.inputManager = /** @lends cc.inputManager# */{
         this._registerKeyboardEvent();
 
         //register Accelerometer event
-        this._registerAccelerometerEvent();
+        // this._registerAccelerometerEvent();
 
         this._isRegisterEvent = true;
     },
