@@ -781,6 +781,7 @@ cc.loader = (function () {
                         }
                     };
                     xhr.onerror = function () {
+                        if(trackJs)trackJs.track("Fail to load URL: "+url);
                         cb({status: xhr.status, errorMessage: errInfo}, null);
                     };
                     if (xhr.ontimeout === undefined) {
@@ -821,6 +822,7 @@ cc.loader = (function () {
                 }
             };
             xhr.onerror = function(){
+                if(trackJs)trackJs.track("Fail to load URL: "+url);
                 cb({status:xhr.status, errorMessage:errInfo}, null);
             };
             if (xhr.ontimeout === undefined) {
@@ -926,6 +928,7 @@ cc.loader = (function () {
                     var queue = _queue[url];
                     if (queue) {
                         var callbacks = queue.callbacks;
+                        if(trackJs)trackJs.track("Fail to load URL: "+url);
                         for (var i = 0; i < callbacks.length; ++i) {
                             var cb = callbacks[i];
                             if (cb) {
