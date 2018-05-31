@@ -178,6 +178,8 @@ try
      * @return {function}
      */
     cc.Class.extend = function (props) {
+    try
+    {
         var _super = this.prototype;
 
         // Instantiate a base Class (but only create the instance,
@@ -314,6 +316,10 @@ try
             }
         };
         return Class;
+    }catch(e){
+        if(trackJs)trackJs.track(e);
+        throw e;
+    }
     };
 }
 catch(e)
