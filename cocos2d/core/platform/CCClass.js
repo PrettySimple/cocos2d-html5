@@ -198,18 +198,18 @@ try
         if (cc.game.config && cc.game.config[cc.game.CONFIG_KEY.exposeClassName]) {
             var constructor = "(function " + (props._className || "Class") + " (arg0, arg1, arg2, arg3, arg4, arg5) {\n";
             constructor += "    try{\n";
-            constructor += "    this.__instanceId = ClassManager.getNewInstanceId();\n";
-            constructor += "    if (this.ctor) {\n";
-            constructor += "        switch (arguments.length) {\n";
-            constructor += "        case 0: this.ctor(); break;\n";
-            constructor += "        case 1: this.ctor(arg0); break;\n";
-            constructor += "        case 3: this.ctor(arg0, arg1, arg2); break;\n";
-            constructor += "        case 4: this.ctor(arg0, arg1, arg2, arg3); break;\n";
-            constructor += "        case 5: this.ctor(arg0, arg1, arg2, arg3, arg4); break;\n";
-            constructor += "        default: this.ctor.apply(this, arguments);\n";
+            constructor += "        this.__instanceId = ClassManager.getNewInstanceId();\n";
+            constructor += "        if (this.ctor) {\n";
+            constructor += "            switch (arguments.length) {\n";
+            constructor += "            case 0: this.ctor(); break;\n";
+            constructor += "            case 1: this.ctor(arg0); break;\n";
+            constructor += "            case 3: this.ctor(arg0, arg1, arg2); break;\n";
+            constructor += "            case 4: this.ctor(arg0, arg1, arg2, arg3); break;\n";
+            constructor += "            case 5: this.ctor(arg0, arg1, arg2, arg3, arg4); break;\n";
+            constructor += "            default: this.ctor.apply(this, arguments);\n";
+            constructor += "            }\n";
             constructor += "        }\n";
             constructor += "    }catch(e){if(trackJs)trackJs.track(e);throw e;}\n";
-            constructor += "    }\n";
             constructor += "})";
             Class = eval(constructor);
         }
