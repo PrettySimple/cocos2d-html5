@@ -159,6 +159,9 @@ var ClassManager = {
  * MIT Licensed.
  */
 (function () {
+try
+{
+    
     var fnTest = /\b_super\b/;
 
     /**
@@ -192,6 +195,7 @@ var ClassManager = {
         var Class;
         if (cc.game.config && cc.game.config[cc.game.CONFIG_KEY.exposeClassName]) {
             var constructor = "(function " + (props._className || "Class") + " (arg0, arg1, arg2, arg3, arg4, arg5) {\n";
+            constructor += "    try{\n";
             constructor += "    this.__instanceId = ClassManager.getNewInstanceId();\n";
             constructor += "    if (this.ctor) {\n";
             constructor += "        switch (arguments.length) {\n";
@@ -202,6 +206,7 @@ var ClassManager = {
             constructor += "        case 5: this.ctor(arg0, arg1, arg2, arg3, arg4); break;\n";
             constructor += "        default: this.ctor.apply(this, arguments);\n";
             constructor += "        }\n";
+            constructor += "    }catch(e){if(trackJs)trackJs.track(e);throw e;}\n";
             constructor += "    }\n";
             constructor += "})";
             Class = eval(constructor);
@@ -247,18 +252,21 @@ var ClassManager = {
                 if (isFunc && override && hasSuperCall) {
                     desc.value = (function (name, fn) {
                         return function () {
-                            var tmp = this._super;
+                            try
+                            {
+                                var tmp = this._super;
 
-                            // Add a new ._super() method that is the same method
-                            // but on the super-Class
-                            this._super = _super[name];
+                                // Add a new ._super() method that is the same method
+                                // but on the super-Class
+                                this._super = _super[name];
 
-                            // The method only need to be bound temporarily, so we
-                            // remove it when we're done executing
-                            var ret = fn.apply(this, arguments);
-                            this._super = tmp;
+                                // The method only need to be bound temporarily, so we
+                                // remove it when we're done executing
+                                var ret = fn.apply(this, arguments);
+                                this._super = tmp;
 
-                            return ret;
+                                return ret;
+                            }catch(e){if(trackJs)trackJs.track(e);throw e;}
                         };
                     })(name, prop[name]);
                     Object.defineProperty(prototype, name, desc);
@@ -307,5 +315,11 @@ var ClassManager = {
         };
         return Class;
     };
+}
+catch(e)
+{
+    if(trackJs)trackJs.track(e);
+    throw e;
+}
 })();
 
