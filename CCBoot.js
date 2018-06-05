@@ -781,7 +781,7 @@ cc.loader = (function () {
                         }
                     };
                     xhr.onerror = function () {
-                        if(trackJs)trackJs.track("Fail to load URL: "+url);
+                        if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
                         cb({status: xhr.status, errorMessage: errInfo}, null);
                     };
                     if (xhr.ontimeout === undefined) {
@@ -822,7 +822,7 @@ cc.loader = (function () {
                 }
             };
             xhr.onerror = function(){
-                if(trackJs)trackJs.track("Fail to load URL: "+url);
+                if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
                 cb({status:xhr.status, errorMessage:errInfo}, null);
             };
             if (xhr.ontimeout === undefined) {
