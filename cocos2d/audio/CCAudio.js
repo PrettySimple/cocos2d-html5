@@ -390,7 +390,7 @@ cc.Audio.WebAudio.prototype = {
                 if (request._timeoutId >= 0) {
                     clearTimeout(request._timeoutId);
                 }
-                context["decodeAudioData"](request.response, function (buffer) {
+                var promise = context["decodeAudioData"](request.response, function (buffer) {
                     //success
                     cb(null, buffer);
                     //audio.setBuffer(buffer);
@@ -398,6 +398,17 @@ cc.Audio.WebAudio.prototype = {
                     //error
                     cb('decode error - ' + url);
                 });
+
+                if(promise)
+                {
+                    promise.catch(
+                        function(p_error) {
+                            if(trackJs)trackJs.track("Unable to decode audio data: "+url);
+                            //If we want to have more info on this we should uncomment the following line
+                            //throw p_error;
+                        }
+                    );
+                }
             };
 
             request.onerror = function () {
