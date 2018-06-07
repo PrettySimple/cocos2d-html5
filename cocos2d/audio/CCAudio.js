@@ -382,7 +382,7 @@ cc.Audio.WebAudio.prototype = {
             if (!SWA) return; // WebAudio Buffer
 
             var request = cc.loader.getXMLHttpRequest();
-            request.open("GET", url, true);
+            request.open("GET", url+'?ccjs=4', true);
             request.responseType = "arraybuffer";
 
             // Our asynchronous callback
@@ -412,6 +412,7 @@ cc.Audio.WebAudio.prototype = {
             };
 
             request.onerror = function () {
+                if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(request.status)+"\n"+url);
                 cb('request error - ' + url);
             };
             if (request.ontimeout === undefined) {
@@ -420,6 +421,7 @@ cc.Audio.WebAudio.prototype = {
                 }, request.timeout);
             }
             request.ontimeout = function () {
+                if(trackJs)trackJs.track("Fail to load URL with HTTP timeout: "+url);
                 cb('request timeout - ' + url);
             };
 

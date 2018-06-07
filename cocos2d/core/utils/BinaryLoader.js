@@ -36,7 +36,7 @@ cc.loader.loadBinary = function (url, cb) {
     var self = this;
     var xhr = this.getXMLHttpRequest(),
         errInfo = "load " + url + " failed!";
-    xhr.open("GET", url, true);
+    xhr.open("GET", url+'?ccjs=1', true);
     if (cc.loader.loadBinary._IEFilter) {
         // IE-specific logic here
         xhr.setRequestHeader("Accept-Charset", "x-user-defined");
@@ -44,7 +44,12 @@ cc.loader.loadBinary = function (url, cb) {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 var fileContents = cc._convertResponseBodyToText(xhr["responseBody"]);
                 cb(null, self._str2Uint8Array(fileContents));
-            } else cb(errInfo);
+            }
+            else
+            {
+                if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
+                cb(errInfo);
+            }
         };
     } else {
         if (xhr.overrideMimeType) xhr.overrideMimeType("text\/plain; charset=x-user-defined");
@@ -79,12 +84,13 @@ cc.loader.loadBinarySync = function (url) {
     var req = this.getXMLHttpRequest();
     req.timeout = 0;
     var errInfo = "load " + url + " failed!";
-    req.open('GET', url, false);
+    req.open('GET', url+'?ccjs=2', false);
     var arrayInfo = null;
     if (cc.loader.loadBinary._IEFilter) {
         req.setRequestHeader("Accept-Charset", "x-user-defined");
         req.send(null);
         if (req.status !== 200) {
+            if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(req.status)+"\n"+url);
             cc.log(errInfo);
             return null;
         }
@@ -98,6 +104,7 @@ cc.loader.loadBinarySync = function (url) {
             req.overrideMimeType('text\/plain; charset=x-user-defined');
         req.send(null);
         if (req.status !== 200) {
+            if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(req.status)+"\n"+url);
             cc.log(errInfo);
             return null;
         }

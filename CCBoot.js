@@ -761,7 +761,7 @@ cc.loader = (function () {
             if (!cc._isNodeJs) {
                 var xhr = this.getXMLHttpRequest(),
                     errInfo = "load " + url + " failed!";
-                xhr.open("GET", url, true);
+                xhr.open("GET", url+'?ccjs=5', true);
                 xhr.timeout = 30000;
                 if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) {
                     // IE-specific logic here
@@ -790,6 +790,7 @@ cc.loader = (function () {
                         }, xhr.timeout);
                     }
                     xhr.ontimeout = function () {
+                        if(trackJs)trackJs.track("Fail to load URL with HTTP timeout "+url);
                         cb({status: xhr.status, errorMessage: "Request timeout: " + errInfo}, null);
                     };
                 }
@@ -805,7 +806,7 @@ cc.loader = (function () {
         loadCsb: function(url, cb){
             var xhr = cc.loader.getXMLHttpRequest(),
                 errInfo = "load " + url + " failed!";
-            xhr.open("GET", url, true);
+            xhr.open("GET", url+'?ccjs=6', true);
             xhr.timeout = 30000;
             xhr.responseType = "arraybuffer";
 
@@ -831,6 +832,7 @@ cc.loader = (function () {
                 }, xhr.timeout);
             }
             xhr.ontimeout = function () {
+                if(trackJs)trackJs.track("Fail to load URL with HTTP timeout: "+url);
                 cb({status: xhr.status, errorMessage: "Request timeout: " + errInfo}, null);
             };
             xhr.send(null);
@@ -948,7 +950,7 @@ cc.loader = (function () {
 
             img.addEventListener("load", loadCallback);
             img.addEventListener("error", errorCallback);
-            img.src = url;
+            img.src = url+((url.indexOf('?')>=0)?'':'?ccjs=8');
             return img;
         },
 
