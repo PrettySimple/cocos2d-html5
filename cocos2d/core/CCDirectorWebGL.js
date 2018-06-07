@@ -118,15 +118,18 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
         _t._projection = projection;
         cc.eventManager.dispatchEvent(_t._eventProjectionChanged);
         cc.setProjectionMatrixDirty();
-        cc.renderer.childrenOrderDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
     };
 
     _p.setDepthTest = function (on) {
-        cc.renderer.setDepthTest(on);
+        if (cc.renderer)
+            cc.renderer.setDepthTest(on);
     };
 
     _p.setClearColor = function (clearColor) {
-        cc.renderer._clearColor = clearColor;
+        if (cc.renderer)
+            cc.renderer._clearColor = clearColor;
     };
 
     _p.setOpenGLView = function (openGLView) {

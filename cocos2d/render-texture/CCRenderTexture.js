@@ -140,7 +140,8 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         var renderer = cc.renderer, cmd = this._renderCmd;
 
         cmd.visit(parent && parent._renderCmd);
-        renderer.pushRenderCommand(cmd);
+        if (renderer)
+            renderer.pushRenderCommand(cmd);
         this.sprite.visit(this);
         cmd._dirtyFlag = 0;
     },
@@ -198,7 +199,8 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
      * @function
      */
     begin: function () {
-        cc.renderer._turnToCacheMode(this.__instanceId);
+        if (cc.renderer)
+            cc.renderer._turnToCacheMode(this.__instanceId);
         this._renderCmd.begin();
     },
     /**

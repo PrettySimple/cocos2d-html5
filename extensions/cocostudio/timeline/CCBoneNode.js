@@ -235,7 +235,8 @@ ccs.BoneNode = (function () {
                 return;
 
             renderCmd._debug = isDebugDraw;
-            cc.renderer.childrenOrderDirty = true;
+            if (cc.renderer)
+                cc.renderer.childrenOrderDirty = true;
 
             if (this._visible && null != this._rootSkeleton) {
                 this._rootSkeleton._subBonesDirty = true;

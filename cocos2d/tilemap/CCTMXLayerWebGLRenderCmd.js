@@ -116,8 +116,11 @@
             for (col = startCol; col < maxCol; ++col) {
                 // No more buffer
                 if (offset + 24 > f32buffer.length) {
-                    cc.renderer._increaseBatchingSize((offset - vertexDataOffset) / 6);
-                    cc.renderer._batchRendering();
+                    if (cc.renderer)
+                    {
+                        cc.renderer._increaseBatchingSize((offset - vertexDataOffset) / 6);
+                        cc.renderer._batchRendering();
+                    }
                     vertexDataOffset = 0;
                     offset = 0;
                 }
@@ -139,17 +142,20 @@
                 case cc.TMX_ORIENTATION_ORTHO:
                     left = col * maptw;
                     bottom = (rows - row - 1) * mapth;
-                    z = node._vertexZ + cc.renderer.assignedZStep * z / tiles.length;
+                    if (cc.renderer)
+                        z = node._vertexZ + cc.renderer.assignedZStep * z / tiles.length;
                     break;
                 case cc.TMX_ORIENTATION_ISO:
                     left = maptw / 2 * ( cols + col - row - 1);
                     bottom = mapth / 2 * ( rows * 2 - col - row - 2);
-                    z = node._vertexZ + cc.renderer.assignedZStep * (node.height - bottom) / node.height;
+                    if (cc.renderer)
+                        z = node._vertexZ + cc.renderer.assignedZStep * (node.height - bottom) / node.height;
                     break;
                 case cc.TMX_ORIENTATION_HEX:
                     left = col * maptw * 3 / 4;
                     bottom = (rows - row - 1) * mapth + ((col % 2 === 1) ? (-mapth / 2) : 0);
-                    z = node._vertexZ + cc.renderer.assignedZStep * (node.height - bottom) / node.height;
+                    if (cc.renderer)
+                        z = node._vertexZ + cc.renderer.assignedZStep * (node.height - bottom) / node.height;
                     break;
                 }
                 right = left + tilew;

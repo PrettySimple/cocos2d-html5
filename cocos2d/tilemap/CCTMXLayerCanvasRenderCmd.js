@@ -43,7 +43,7 @@
         if (!node._visible)
             return;
 
-        if (isNaN(node._customZ)) {
+        if (isNaN(node._customZ) && renderer) {
             node._vertexZ = renderer.assignedZ;
             renderer.assignedZ += renderer.assignedZStep;
         }
@@ -67,11 +67,12 @@
                 }
             }
 
-            renderer.pushRenderCommand(this);
+            if (renderer)
+                renderer.pushRenderCommand(this);
             for (; i < len; i++) {
                 child = children[i];
                 if (child._localZOrder === 0 && spTiles[child.tag]) {
-                    if (isNaN(child._customZ)) {
+                    if (isNaN(child._customZ) && renderer) {
                         child._vertexZ = renderer.assignedZ;
                         renderer.assignedZ += renderer.assignedZStep;
                     }
@@ -80,7 +81,7 @@
                 }
                 child._renderCmd.visit(this);
             }
-        } else {
+        } else if (renderer) {
             renderer.pushRenderCommand(this);
         }
         this._dirtyFlag = 0;

@@ -256,11 +256,13 @@
                 }
             }
 
-            cc.renderer.pushRenderCommand(this._renderCmd);
+            if (cc.renderer)
+                cc.renderer.pushRenderCommand(this._renderCmd);
         },
 
         visit: function () {
-            cc.renderer.pushRenderCommand(this._renderCmd);
+            if (cc.renderer)
+                cc.renderer.pushRenderCommand(this._renderCmd);
             cc.Sprite.prototype.visit.call(this);
         },
 

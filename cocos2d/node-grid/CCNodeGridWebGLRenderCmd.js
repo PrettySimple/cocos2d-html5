@@ -59,7 +59,8 @@
          //reset this._stackMatrix to current_stack.top
          //cc.kmMat4Assign(currentStack.top, backMatrix);
          }*/
-        cc.renderer.pushRenderCommand(this._gridBeginCommand);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._gridBeginCommand);
 
         if (node._target)
             node._target.visit();
@@ -78,7 +79,8 @@
         //if (locGrid && locGrid._active) {
         //cc.director.setProjection(beforeProjectionType);
         //}
-        cc.renderer.pushRenderCommand(this._gridEndCommand);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._gridEndCommand);
 
         this._dirtyFlag = 0;
         currentStack.top = currentStack.stack.pop();

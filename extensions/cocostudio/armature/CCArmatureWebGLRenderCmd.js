@@ -75,7 +75,8 @@
                                 }
                             }
                             // Support batch for Armature skin
-                            cc.renderer._uploadBufferData(cmd);
+                            if (cc.renderer)
+                                cc.renderer._uploadBufferData(cmd);
                         }
                         break;
                     case ccs.DISPLAY_TYPE_ARMATURE:
@@ -87,11 +88,13 @@
                         boneCmd._syncStatus(parentCmd);
                         cmd._syncStatus(boneCmd);
                         if (cmd.uploadData) {
-                            cc.renderer._uploadBufferData(cmd);
+                            if (cc.renderer)
+                                cc.renderer._uploadBufferData(cmd);
                         }
                         else if (cmd.rendering) {
                             // Finish previous batch
-                            cc.renderer._batchRendering();
+                            if (cc.renderer)
+                                cc.renderer._batchRendering();
                             cmd.rendering(cc._renderContext);
                         }
                         break;
@@ -100,11 +103,13 @@
                 selBone.setShaderProgram(this._shaderProgram);
                 boneCmd._syncStatus(parentCmd);
                 if (boneCmd.uploadData) {
-                    cc.renderer._uploadBufferData(boneCmd);
+                    if (cc.renderer)
+                        cc.renderer._uploadBufferData(boneCmd);
                 }
                 else if (boneCmd.rendering) {
                     // Finish previous batch
-                    cc.renderer._batchRendering();
+                    if (cc.renderer)
+                        cc.renderer._batchRendering();
                     boneCmd.rendering(cc._renderContext);
                 }
             }
@@ -153,7 +158,7 @@
             children = node._children, child,
             i, len = children.length;
 
-        if (isNaN(node._customZ)) {
+        if (isNaN(node._customZ) && renderer) {
             node._vertexZ = renderer.assignedZ;
             renderer.assignedZ += renderer.assignedZStep;
         }
@@ -161,7 +166,7 @@
         for (i = 0; i < len; i++) {
             child = children[i];
             if (child._localZOrder < 0) {
-                if (isNaN(child._customZ)) {
+                if (isNaN(child._customZ) && renderer) {
                     child._vertexZ = renderer.assignedZ;
                     renderer.assignedZ += renderer.assignedZStep;
                 }
@@ -171,10 +176,11 @@
             }
         }
 
-        renderer.pushRenderCommand(this);
+        if (renderer)
+            renderer.pushRenderCommand(this);
         for (; i < len; i++) {
             child = children[i];
-            if (isNaN(child._customZ)) {
+            if (isNaN(child._customZ) && renderer) {
                 child._vertexZ = renderer.assignedZ;
                 renderer.assignedZ += renderer.assignedZStep;
             }

@@ -150,7 +150,6 @@ cc.ClippingNode = cc.Node.extend(/** @lends cc.ClippingNode# */{
     },
 
     _visitChildren: function () {
-        var renderer = cc.renderer;
         if (this._reorderChildDirty) {
             this.sortAllChildren();
         }

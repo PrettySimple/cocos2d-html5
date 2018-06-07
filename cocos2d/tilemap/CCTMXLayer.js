@@ -535,7 +535,8 @@ cc.TMXLayer = cc.SpriteBatchNode.extend(/** @lends cc.TMXLayer# */{
         cc.Node.prototype.addChild.call(this, child, localZOrder, tag);
         if (tag !== undefined) {
             this._spriteTiles[tag] = child;
-            child._vertexZ = this._vertexZ + cc.renderer.assignedZStep * tag / this.tiles.length;
+            if (cc.renderer)
+                child._vertexZ = this._vertexZ + cc.renderer.assignedZStep * tag / this.tiles.length;
             // child._renderCmd._needDraw = false;
         }
     },

@@ -173,7 +173,7 @@ cc.ScrollView = cc.Layer.extend(/** @lends cc.ScrollView# */{
         var renderer = cc.renderer, cmd = this._renderCmd;
         cmd.visit(parent && parent._renderCmd);
 
-        if (this._clippingToBounds) {
+        if (this._clippingToBounds && renderer) {
             renderer.pushRenderCommand(cmd.startCmd);
         }
 
@@ -187,7 +187,7 @@ cc.ScrollView = cc.Layer.extend(/** @lends cc.ScrollView# */{
             }
         }
 
-        if (this._clippingToBounds) {
+        if (this._clippingToBounds && renderer) {
             renderer.pushRenderCommand(cmd.endCmd);
         }
         cmd._dirtyFlag = 0;

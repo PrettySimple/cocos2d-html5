@@ -93,7 +93,8 @@
     proto.bake = function () {
         if (!this._isBaked) {
             this._needDraw = true;
-            cc.renderer.childrenOrderDirty = true;
+            if (cc.renderer)
+                cc.renderer.childrenOrderDirty = true;
             //limit: 1. its children's blendfunc are invalid.
             this._isBaked = this._cacheDirty = true;
             if (this._updateCache === 0)
@@ -112,7 +113,8 @@
 
     proto.unbake = function () {
         if (this._isBaked) {
-            cc.renderer.childrenOrderDirty = true;
+            if (cc.renderer)
+                cc.renderer.childrenOrderDirty = true;
             this._needDraw = false;
             this._isBaked = false;
             this._cacheDirty = true;
@@ -151,11 +153,13 @@
                 bakeContext.setOffset(0 - boundingBox.x, ctx.canvas.height - boundingBox.height + boundingBox.y);
                 //visit for canvas
                 node.sortAllChildren();
-                cc.renderer._turnToCacheMode(this.__instanceId);
+                if (cc.renderer)
+                    cc.renderer._turnToCacheMode(this.__instanceId);
                 for (var i = 0, len = children.length; i < len; i++) {
                     children[i].visit(this);
                 }
-                cc.renderer._renderingToCacheCanvas(bakeContext, this.__instanceId);
+                if (cc.renderer)
+                    cc.renderer._renderingToCacheCanvas(bakeContext, this.__instanceId);
                 locBakeSprite.transform();                   //because bake sprite's position was changed at rendering.
                 this._updateCache--;
             }
@@ -267,7 +271,8 @@
                 bakeContext.setOffset(0 - boundingBox.x, ctx.canvas.height - boundingBox.height + boundingBox.y);
 
                 var child;
-                cc.renderer._turnToCacheMode(this.__instanceId);
+                if (cc.renderer)
+                    cc.renderer._turnToCacheMode(this.__instanceId);
                 //visit for canvas
                 if (len > 0) {
                     node.sortAllChildren();
@@ -279,13 +284,15 @@
                         else
                             break;
                     }
-                    cc.renderer.pushRenderCommand(this);
+                    if (cc.renderer)
+                        cc.renderer.pushRenderCommand(this);
                     for (; i < len; i++) {
                         children[i].visit(node);
                     }
-                } else
+                } else if (cc.renderer)
                     cc.renderer.pushRenderCommand(this);
-                cc.renderer._renderingToCacheCanvas(bakeContext, this.__instanceId);
+                if (cc.renderer)
+                    cc.renderer._renderingToCacheCanvas(bakeContext, this.__instanceId);
                 locBakeSprite.transform();
                 this._updateCache--;
             }

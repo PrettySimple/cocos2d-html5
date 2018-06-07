@@ -87,14 +87,17 @@
             this._rendererRestoreCmd = new cc.CustomRenderCmd(this, this._onRenderRestoreCmd);
         }
 
-        cc.renderer.pushRenderCommand(this._rendererSaveCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._rendererSaveCmd);
         node._clippingStencil.visit(this);
 
-        cc.renderer.pushRenderCommand(this._rendererClipCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._rendererClipCmd);
     };
 
     proto.postStencilVisit = proto.postScissorVisit = function () {
-        cc.renderer.pushRenderCommand(this._rendererRestoreCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._rendererRestoreCmd);
     };
 
     ccui.Layout.CanvasRenderCmd._getSharedCache = function () {

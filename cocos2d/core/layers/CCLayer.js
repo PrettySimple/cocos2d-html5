@@ -83,7 +83,8 @@ cc.Layer = cc.Node.extend(/** @lends cc.Layer# */{
         cmd.visit(parent && parent._renderCmd);
 
         if (cmd._isBaked) {
-            renderer.pushRenderCommand(cmd);
+            if (renderer)
+                renderer.pushRenderCommand(cmd);
             cmd._bakeSprite.visit(this);
         }
         else {
@@ -103,12 +104,14 @@ cc.Layer = cc.Node.extend(/** @lends cc.Layer# */{
                     }
                 }
 
-                renderer.pushRenderCommand(cmd);
+                if (renderer)
+                    renderer.pushRenderCommand(cmd);
                 for (; i < len; i++) {
                     children[i].visit(this);
                 }
             } else {
-                renderer.pushRenderCommand(cmd);
+                if (renderer)
+                    renderer.pushRenderCommand(cmd);
             }
         }
         cmd._dirtyFlag = 0;
@@ -269,7 +272,8 @@ cc.LayerColor = cc.Layer.extend(/** @lends cc.LayerColor# */{
         cmd.visit(parent && parent._renderCmd);
 
         if (cmd._isBaked) {
-            renderer.pushRenderCommand(cmd._bakeRenderCmd);
+            if (renderer)
+                renderer.pushRenderCommand(cmd._bakeRenderCmd);
             //the bakeSprite is drawing
             cmd._bakeSprite._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.transformDirty);
             cmd._bakeSprite.visit(this);
@@ -291,12 +295,14 @@ cc.LayerColor = cc.Layer.extend(/** @lends cc.LayerColor# */{
                     }
                 }
 
-                renderer.pushRenderCommand(cmd);
+                if (renderer)
+                    renderer.pushRenderCommand(cmd);
                 for (; i < len; i++) {
                     children[i].visit(this);
                 }
             } else {
-                renderer.pushRenderCommand(cmd);
+                if (renderer)
+                    renderer.pushRenderCommand(cmd);
             }
         }
 

@@ -1727,7 +1727,8 @@ ccui.Widget = ccui.ProtectedNode.extend(/** @lends ccui.Widget# */{
     },
 
     _findLayout: function () {
-        cc.renderer.childrenOrderDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
         var layout = this._parent;
         while (layout) {
             if (layout._doLayout) {

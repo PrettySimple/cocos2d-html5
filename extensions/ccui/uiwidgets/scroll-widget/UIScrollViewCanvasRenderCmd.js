@@ -12,7 +12,8 @@
 
     proto.rendering = function (ctx) {
         var currentID = this._node.__instanceId;
-        var i, locCmds = cc.renderer._cacheToCanvasCmds[currentID], len,
+        var locCmds = (cc.renderer ? cc.renderer._cacheToCanvasCmds[currentID] : []);
+        var i, len,
             scaleX = cc.view.getScaleX(),
             scaleY = cc.view.getScaleY();
         var context = ctx || cc._renderContext;

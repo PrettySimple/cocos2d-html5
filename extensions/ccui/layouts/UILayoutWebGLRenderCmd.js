@@ -170,7 +170,8 @@
             this._afterVisitCmdStencil = new cc.CustomRenderCmd(this, this._onAfterVisitStencil);
         }
 
-        cc.renderer.pushRenderCommand(this._beforeVisitCmdStencil);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._beforeVisitCmdStencil);
 
         //optimize performance for javascript
         var currentStack = cc.current_stack;
@@ -179,7 +180,8 @@
 
         node._clippingStencil.visit(this);
 
-        cc.renderer.pushRenderCommand(this._afterDrawStencilCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._afterDrawStencilCmd);
     };
 
     proto.postStencilVisit = function () {
@@ -192,11 +194,13 @@
             this._beforeVisitCmdScissor = new cc.CustomRenderCmd(this, this._onBeforeVisitScissor);
             this._afterVisitCmdScissor = new cc.CustomRenderCmd(this, this._onAfterVisitScissor);
         }
-        cc.renderer.pushRenderCommand(this._beforeVisitCmdScissor);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._beforeVisitCmdScissor);
     };
 
     proto.postScissorVisit = function () {
-        cc.renderer.pushRenderCommand(this._afterVisitCmdScissor);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._afterVisitCmdScissor);
     };
 
     ccui.Layout.WebGLRenderCmd._layer = -1;

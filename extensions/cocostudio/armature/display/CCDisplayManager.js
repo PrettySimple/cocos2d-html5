@@ -303,7 +303,8 @@ ccs.DisplayManager = ccs.Class.extend(/** @lends ccs.DisplayManager */{
             this._displayType = ccs.DISPLAY_TYPE_MAX;
 
 
-        cc.renderer.childrenOrderDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
     },
 
     /**

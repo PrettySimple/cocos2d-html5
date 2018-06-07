@@ -92,12 +92,14 @@
             return;
         }
 
-        cc.renderer.pushRenderCommand(this._beforeVisitCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._beforeVisitCmd);
 
         // node._stencil._stackMatrix = node._stackMatrix;
         node._stencil.visit(node);
 
-        cc.renderer.pushRenderCommand(this._afterDrawStencilCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._afterDrawStencilCmd);
 
         // draw (according to the stencil test func) this node and its children
         var locChildren = node._children;
@@ -110,7 +112,8 @@
             }
         }
 
-        cc.renderer.pushRenderCommand(this._afterVisitCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._afterVisitCmd);
 
         this._dirtyFlag = 0;
     };
@@ -158,7 +161,7 @@
         gl.stencilMask(mask_layer);
         gl.clear(gl.STENCIL_BUFFER_BIT);
 
-        if (node.alphaThreshold < 1) {            //TODO desktop
+        if (node.alphaThreshold < 1 && cc.renderer) {            //TODO desktop
             var program = cc.shaderCache.programForKey(cc.SHADER_POSITION_TEXTURECOLORALPHATEST);
             // set our alphaThreshold
             cc.glUseProgram(program.getProgram());

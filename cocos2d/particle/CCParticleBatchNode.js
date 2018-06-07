@@ -154,7 +154,8 @@ cc.ParticleBatchNode = cc.Node.extend(/** @lends cc.ParticleBatchNode# */{
 
         var cmd = this._renderCmd;
         cmd.visit(parent && parent._renderCmd);
-        cc.renderer.pushRenderCommand(cmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(cmd);
         cmd._dirtyFlag = 0;
     },
 

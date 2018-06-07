@@ -733,7 +733,8 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
             this._visible = visible;
             //if(visible)
             this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.transformDirty);
-            cc.renderer.childrenOrderDirty = true;
+            if (cc.renderer)
+                cc.renderer.childrenOrderDirty = true;
         }
     },
 
@@ -1341,7 +1342,8 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
                 }
             }
             this._children.length = 0;
-            cc.renderer.childrenOrderDirty = true;
+            if (cc.renderer)
+                cc.renderer.childrenOrderDirty = true;
         }
     },
 
@@ -1365,7 +1367,9 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
     },
 
     _insertChild: function (child, z) {
-        cc.renderer.childrenOrderDirty = this._reorderChildDirty = true;
+        this._reorderChildDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
         this._children.push(child);
         child._setLocalZOrder(z);
     },
@@ -1389,7 +1393,9 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
         if (zOrder === child.zIndex) {
             return;
         }
-        cc.renderer.childrenOrderDirty = this._reorderChildDirty = true;
+        this._reorderChildDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
         child.arrivalOrder = cc.s_globalOrderOfArrival;
         cc.s_globalOrderOfArrival++;
         child._setLocalZOrder(zOrder);
@@ -2146,12 +2152,14 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
                 }
             }
 
-            renderer.pushRenderCommand(cmd);
+            if (renderer)
+                renderer.pushRenderCommand(cmd);
             for (; i < len; i++) {
                 children[i].visit(this);
             }
         } else {
-            renderer.pushRenderCommand(cmd);
+            if (renderer)
+                renderer.pushRenderCommand(cmd);
         }
         cmd._dirtyFlag = 0;
     },

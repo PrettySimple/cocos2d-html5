@@ -84,7 +84,8 @@ cc.ProtectedNode = cc.Node.extend(/** @lends cc.ProtectedNode# */{
                 break;
         }
 
-        renderer.pushRenderCommand(cmd);
+        if (renderer)
+            renderer.pushRenderCommand(cmd);
 
         for (; i < len; i++) {
             children[i].visit(this);

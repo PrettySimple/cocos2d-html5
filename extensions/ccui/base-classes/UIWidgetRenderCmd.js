@@ -39,7 +39,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             if (parentCmd)
                 this._curLevel = parentCmd._curLevel + 1;
 
-            if (isNaN(node._customZ)) {
+            if (isNaN(node._customZ) && renderer) {
                 node._vertexZ = renderer.assignedZ;
                 renderer.assignedZ += renderer.assignedZStep;
             }
@@ -88,7 +88,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
             if (parentCmd)
                 this._curLevel = parentCmd._curLevel + 1;
 
-            if (isNaN(node._customZ)) {
+            if (isNaN(node._customZ) && renderer) {
                 node._vertexZ = renderer.assignedZ;
                 renderer.assignedZ += renderer.assignedZStep;
             }

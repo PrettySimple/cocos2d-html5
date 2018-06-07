@@ -609,7 +609,8 @@ ccui.Scale9Sprite = cc.Scale9Sprite = cc.Node.extend(/** @lends ccui.Scale9Sprit
                     self.setContentSize(self._spriteFrame._rect);
                 }
                 self._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.contentDirty);
-                cc.renderer.childrenOrderDirty = true;
+                if (cc.renderer)
+                    cc.renderer.childrenOrderDirty = true;
             };
             if (spriteFrame.textureLoaded()) {
                 onResourceDataLoaded();

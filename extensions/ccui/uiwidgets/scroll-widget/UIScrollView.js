@@ -119,7 +119,8 @@ ccui.ScrollView = ccui.Layout.extend(/** @lends ccui.ScrollView# */{
     },
 
     onExit: function () {
-        cc.renderer._removeCache(this.__instanceId);
+        if (cc.renderer)
+            cc.renderer._removeCache(this.__instanceId);
         ccui.Layout.prototype.onExit.call(this);
     },
 
@@ -134,10 +135,12 @@ ccui.ScrollView = ccui.Layout.extend(/** @lends ccui.ScrollView# */{
         var parentCmd = parent && parent._renderCmd;
         cmd.visit(parentCmd);
         
-        renderer.pushRenderCommand(cmd);
+        if (renderer)
+            renderer.pushRenderCommand(cmd);
         if (cmd instanceof ccui.ScrollView.WebGLRenderCmd) {
             var currentID = this.__instanceId;
-            renderer._turnToCacheMode(currentID);
+            if (renderer)
+                renderer._turnToCacheMode(currentID);
         }
 
         var stencilClipping = this._clippingEnabled && this._clippingType === ccui.Layout.CLIPPING_STENCIL;
@@ -177,7 +180,8 @@ ccui.ScrollView = ccui.Layout.extend(/** @lends ccui.ScrollView# */{
         }
 
         if (cmd instanceof ccui.ScrollView.WebGLRenderCmd) {
-            renderer._turnToNormalMode();
+            if (renderer)
+                renderer._turnToNormalMode();
         }
 
         // Need to update children after do layout

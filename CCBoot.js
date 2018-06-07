@@ -2701,7 +2701,8 @@ cc.game = /** @lends cc.game# */{
         if (this._renderContext) {
             cc.renderer = cc.rendererWebGL;
             win.gl = this._renderContext; // global variable declared in CCMacro.js
-            cc.renderer.init();
+            if (cc.renderer)
+                cc.renderer.init();
             cc._drawingUtil = new cc.DrawingPrimitiveWebGL(this._renderContext);
             cc.textureCache._initializingRenderer();
             cc.glExt = {};
@@ -2800,7 +2801,8 @@ cc.game = /** @lends cc.game# */{
             cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.LOST));
 
         cc.game.pause();
-        cc.renderer.dispose();
+        if (cc.renderer)
+            cc.renderer.dispose();
         cc.glInvalidateStateCache();
 
         cc.renderer = null;

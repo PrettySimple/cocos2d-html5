@@ -240,7 +240,7 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
         }
 
         // draw the scene
-        if (this._runningScene) {
+        if (this._runningScene && renderer) {
             if (renderer.childrenOrderDirty) {
                 cc.renderer.clearRenderCommands();
                 cc.renderer.assignedZ = 0;
@@ -253,7 +253,8 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
             }
         }
 
-        renderer.clear();
+        if (renderer)
+            renderer.clear();
 
         // draw the notifications node
         if (this._notificationNode)
@@ -262,7 +263,8 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
         cc.eventManager.dispatchEvent(this._eventAfterVisit);
         cc.g_NumberOfDraws = 0;
 
-        renderer.rendering(cc._renderContext);
+        if (renderer)
+            renderer.rendering(cc._renderContext);
         this._totalFrames++;
 
         cc.eventManager.dispatchEvent(this._eventAfterDraw);
@@ -548,7 +550,8 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
         }
 
         this._runningScene = this._nextScene;
-        cc.renderer.childrenOrderDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
 
         this._nextScene = null;
         if ((!runningIsTransition) && (this._runningScene !== null)) {
@@ -562,7 +565,8 @@ cc.Director = cc.Class.extend(/** @lends cc.Director# */{
      * @param {cc.Node} node
      */
     setNotificationNode: function (node) {
-        cc.renderer.childrenOrderDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
         if (this._notificationNode) {
             this._notificationNode._performRecursive(cc.Node._stateCallbackType.onExitTransitionDidStart);
             this._notificationNode._performRecursive(cc.Node._stateCallbackType.onExit);

@@ -737,7 +737,8 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
             director.setGLDefaultValues();
         }
         else if (cc._renderType === cc.game.RENDER_TYPE_CANVAS) {
-            cc.renderer._allNeedDraw = true;
+            if (cc.renderer)
+                cc.renderer._allNeedDraw = true;
         }
 
         this._originalScaleX = this._scaleX;

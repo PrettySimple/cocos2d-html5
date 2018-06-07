@@ -323,7 +323,8 @@
 
     proto.end = function () {
         var node = this._node;
-        cc.renderer._renderingToBuffer(node.__instanceId);
+        if (cc.renderer)
+            cc.renderer._renderingToBuffer(node.__instanceId);
 
         var gl = cc._renderContext;
         var director = cc.director;

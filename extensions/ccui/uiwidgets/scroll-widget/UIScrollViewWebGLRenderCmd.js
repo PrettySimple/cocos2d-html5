@@ -11,8 +11,8 @@
     proto.constructor = ccui.ScrollView.WebGLRenderCmd;
 
     proto.rendering = function (ctx) {
+        var locCmds = (cc.renderer ? cc.renderer._cacheToBufferCmds[currentID] : []);
         var currentID = this._node.__instanceId,
-            locCmds = cc.renderer._cacheToBufferCmds[currentID],
             i, len, checkNode, cmd,
             context = ctx || cc._renderContext;
         if (!locCmds) {
@@ -31,15 +31,18 @@
                 continue;
 
             if (cmd.uploadData) {
-                cc.renderer._uploadBufferData(cmd);
+                if (cc.renderer)
+                    cc.renderer._uploadBufferData(cmd);
             }
             else {
                 if (cmd._batchingSize > 0) {
-                    cc.renderer._batchRendering();
+                    if (cc.renderer)
+                        cc.renderer._batchRendering();
                 }
                 cmd.rendering(context);
             }
-            cc.renderer._batchRendering();
+            if (cc.renderer)
+                cc.renderer._batchRendering();
         }
     };
 })();

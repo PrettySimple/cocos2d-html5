@@ -187,14 +187,16 @@
             return;
         }
 
-        cc.renderer.pushRenderCommand(this._rendererSaveCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._rendererSaveCmd);
         if (this._clipElemType) {
             // Draw everything first using node visit function
             node._visitChildren();
         } else {
             node._stencil.visit(node);
         }
-        cc.renderer.pushRenderCommand(this._rendererClipCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._rendererClipCmd);
 
         if (this._clipElemType) {
             node._stencil.visit(node);
@@ -212,7 +214,8 @@
             this._cangodhelpme(false);
         }
 
-        cc.renderer.pushRenderCommand(this._rendererRestoreCmd);
+        if (cc.renderer)
+            cc.renderer.pushRenderCommand(this._rendererRestoreCmd);
         this._dirtyFlag = 0;
     };
 

@@ -115,7 +115,8 @@
         this.dispatchEvent("load");
 
         // Force refresh the render command list
-        cc.renderer.childrenOrderDirty = true;
+        if (cc.renderer)
+            cc.renderer.childrenOrderDirty = true;
     };
 
     proto._setTextureCoords = function (rect, needConvert) {
@@ -240,7 +241,7 @@
             node.setTextureRect(rect);
             this._updateBlendFunc();
 
-            if (node._textureLoaded) {
+            if (node._textureLoaded && cc.renderer) {
                 // Force refresh the render command list
                 cc.renderer.childrenOrderDirty = true;
             }

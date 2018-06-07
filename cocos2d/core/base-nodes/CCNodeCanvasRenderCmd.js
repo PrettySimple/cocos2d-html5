@@ -158,7 +158,7 @@ cc.Node.RenderCmd.prototype = {
     },
 
     setDirtyFlag: function (dirtyFlag) {
-        if (this._dirtyFlag === 0 && dirtyFlag !== 0)
+        if (this._dirtyFlag === 0 && dirtyFlag !== 0 && cc.renderer)
             cc.renderer.pushDirtyNode(this);
         this._dirtyFlag |= dirtyFlag;
     },
@@ -329,7 +329,7 @@ cc.Node.RenderCmd.prototype = {
         if (parentCmd)
             this._curLevel = parentCmd._curLevel + 1;
 
-        if (isNaN(node._customZ)) {
+        if (isNaN(node._customZ) && renderer) {
             node._vertexZ = renderer.assignedZ;
             renderer.assignedZ += renderer.assignedZStep;
         }
