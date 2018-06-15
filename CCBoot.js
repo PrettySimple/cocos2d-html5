@@ -924,8 +924,16 @@ cc.loader = (function () {
 
                 if (img.crossOrigin && img.crossOrigin.toLowerCase() === "anonymous") {
                     opt.isCrossOrigin = false;
+                    var queue = _queue[url];
                     self.release(url);
-                    cc.loader.loadImg(url, opt, callback);
+                    // Callbacks have been wiped out by the release above
+                    // So we need to restore the loaders for each callback
+                    var callbacks = queue.callbacks;
+                    for (var i = 0; i < callbacks.length; ++i)
+                    {
+                        var cb = callbacks[i];
+                        cc.loader.loadImg(url, opt, (cb ? cb : callback))
+                    }
                 } else {
                     var queue = _queue[url];
                     if (queue) {
