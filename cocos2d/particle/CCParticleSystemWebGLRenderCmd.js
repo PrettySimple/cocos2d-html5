@@ -49,9 +49,30 @@
     proto.setShapeType = function (shapeType) {
     };
 
+    proto.releaseData = function()
+    {
+        var gl = cc._renderContext;
+
+        gl.disableVertexAttribArray(cc.VERTEX_ATTRIB_POSITION);
+        gl.disableVertexAttribArray(cc.VERTEX_ATTRIB_COLOR);
+        gl.disableVertexAttribArray(cc.VERTEX_ATTRIB_TEX_COORDS);
+
+        if(this._buffersVBO)
+        {
+            if(this._buffersVBO[0])
+                gl.deleteBuffer(this._buffersVBO[0]);
+
+            if(this._buffersVBO[1])
+                gl.deleteBuffer(this._buffersVBO[1]);
+        }
+
+        this._buffersVBO = [0, 0];
+    },
+
     proto.onContextRestore = function()
     {
-        this._buffersVBO = [0, 0];
+        this.releaseData();
+
         this._setupVBO();
     },
 

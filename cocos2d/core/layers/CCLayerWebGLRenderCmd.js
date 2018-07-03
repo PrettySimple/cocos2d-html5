@@ -79,8 +79,10 @@
         this._dataDirty = true;
     };
 
-    proto.dispose = function()
+    proto.releaseData = function()
     {
+        cc._renderContext.deleteBuffer(this._vertexBuffer);
+        
         this._vertexBuffer = null;
         this._dataDirty = true;
     };

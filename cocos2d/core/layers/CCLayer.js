@@ -234,9 +234,14 @@ cc.LayerColor = cc.Layer.extend(/** @lends cc.LayerColor# */{
         );
     },
 
+    onExit: function()
+    {
+        this._renderCmd.releaseData();
+    },
+
     onContextLost: function()
     {
-        this._renderCmd.dispose();
+        this._renderCmd.releaseData();
     },
 
     /**

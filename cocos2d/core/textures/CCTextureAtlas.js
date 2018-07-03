@@ -48,7 +48,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{  //WebGL only
 
     _indices: null,
     //0: vertex  1: indices
-    _buffersVBO: null,
+    _bufferVBO: null,
     _capacity: 0,
 
     _quads: null,
@@ -72,7 +72,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{  //WebGL only
      * var textureAtlas = new cc.TextureAtlas(texture, 3);
      */
     ctor: function (fileName, capacity) {
-        this._buffersVBO = [];
+        this._bufferVBO = null;
 
         if (cc.isString(fileName)) {
             this.initWithFile(fileName, capacity);
@@ -201,8 +201,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{  //WebGL only
     _setupVBO: function () {
         var gl = cc._renderContext;
         //create WebGLBuffer
-        this._buffersVBO[0] = gl.createBuffer();
-        this._buffersVBO[1] = gl.createBuffer();
+        this._bufferVBO = gl.createBuffer();
 
         this._quadsWebBuffer = gl.createBuffer();
         this._mapBuffers();
@@ -214,7 +213,7 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{  //WebGL only
         gl.bindBuffer(gl.ARRAY_BUFFER, this._quadsWebBuffer);
         gl.bufferData(gl.ARRAY_BUFFER, this._quadsArrayBuffer, gl.DYNAMIC_DRAW);
 
-        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this._buffersVBO[1]);
+        gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this._bufferVBO);
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this._indices, gl.STATIC_DRAW);
     },
 
@@ -600,12 +599,9 @@ cc.TextureAtlas = cc.Class.extend(/** @lends cc.TextureAtlas# */{  //WebGL only
 
     _releaseBuffer: function () {
         var gl = cc._renderContext;
-        if (this._buffersVBO) {
-            if (this._buffersVBO[0])
-                gl.deleteBuffer(this._buffersVBO[0]);
-            if (this._buffersVBO[1])
-                gl.deleteBuffer(this._buffersVBO[1])
-        }
+        if (this._bufferVBO)
+            gl.deleteBuffer(this._bufferVBO);
+        
         if (this._quadsWebBuffer)
             gl.deleteBuffer(this._quadsWebBuffer);
     }

@@ -363,6 +363,12 @@ cc.ParticleSystem = cc.Node.extend(/** @lends cc.ParticleSystem# */{
             return new cc.ParticleSystem.WebGLRenderCmd(this);
     },
 
+    onExit : function()
+    {
+        this._renderCmd.releaseData();
+        this.destroyParticleSystem();
+    },
+
     onContextRestore : function()
     {
         this._renderCmd.onContextRestore();
