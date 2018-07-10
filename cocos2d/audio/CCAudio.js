@@ -403,7 +403,7 @@ cc.Audio.WebAudio.prototype = {
                 {
                     promise.catch(
                         function(p_error) {
-                            if(trackJs)trackJs.track("Unable to decode audio data: "+url);
+                            if(trackJs)trackJs.track("Decode audio error: "+p_error);
                             //If we want to have more info on this we should uncomment the following line
                             //throw p_error;
                         }
