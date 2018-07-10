@@ -36,6 +36,51 @@ cc.textureCache = /** @lends cc.textureCache# */{
 
     _loadedTexturesBefore: {},
 
+    _persistentTextures: [], // A list of texture that are persistent throughtout the game and that can only be removed at very specific parts of the game
+    _texturesToRelease: [], // A list that stores previously persistent textures that can now be safely removed
+
+    //Add a texture to the protected list. Textures in this list will be kept throughtout all screens and are only removed
+    //at specific parts of the game
+    addTextureToPersistentList : function(p_url)
+    {
+        if(this._persistentTextures.indexOf(p_url) === -1)
+            this._persistentTextures.push(p_url);
+    },
+
+    //Mark current persistent list to be deleted. After calling this, previous persistent textures will no longer be protected from deletion
+    clearPersistentTextureList : function()
+    {
+        for(var i = 0, len = this._persistentTextures.length; i < len; i++)
+            this._texturesToRelease.push(this._persistentTextures[i]);
+        this._persistentTextures = [];
+    },
+
+    //Permanently release textures that were once persistent and are now ok to be deleted.
+    releasePersistentTexturesList : function()
+    {
+        var url;
+        for(var i = 0, len = this._texturesToRelease.length; i < len; i++)
+        {
+            url = this._texturesToRelease[i];
+            if(this._persistentTextures.indexOf(url) === -1) // Double check that the flagged texture has not been re-added to the persist list 
+                this.removeTextureForKey(url);
+        }
+        this._texturesToRelease = [];
+    },
+
+    //Remove all textures that have been loaded up until now
+    removeUnusedTextures : function(p_children_list)
+    {
+        for(var url in this._textures)
+        {
+            if(this._persistentTextures.indexOf(url) === -1)
+            {
+                this._textures[url].releaseTexture();
+                delete this._textures[url];
+            }
+        }
+    },
+
     //handleLoadedTexture move to Canvas/WebGL
 
     _initializingRenderer: function () {
