@@ -34,8 +34,6 @@ cc._LogInfos = {};
 
 var _p = window;
 /** @export */
-_p.gl;
-/** @export */
 _p.WebGLRenderingContext;
 /** @export */
 _p.DeviceOrientationEvent;
@@ -2662,7 +2660,6 @@ cc.game = /** @lends cc.game# */{
         }
 
         var el = this.config[cc.game.CONFIG_KEY.id],
-            win = window,
             element = cc.$(el) || cc.$('#' + el),
             localCanvas, localContainer, localConStyle;
 
@@ -2708,14 +2705,14 @@ cc.game = /** @lends cc.game# */{
         // WebGL context created successfully
         if (this._renderContext) {
             cc.renderer = cc.rendererWebGL;
-            win.gl = this._renderContext; // global variable declared in CCMacro.js
+            var gl = this._renderContext; // global variable declared in CCMacro.js
             if (cc.renderer)
                 cc.renderer.init();
             cc._drawingUtil = new cc.DrawingPrimitiveWebGL(this._renderContext);
             cc.textureCache._initializingRenderer();
             cc.glExt = {};
-            cc.glExt.instanced_arrays = win.gl.getExtension("ANGLE_instanced_arrays");
-            cc.glExt.element_uint = win.gl.getExtension("OES_element_index_uint");
+            cc.glExt.instanced_arrays = gl.getExtension("ANGLE_instanced_arrays");
+            cc.glExt.element_uint = gl.getExtension("OES_element_index_uint");
         } else {
             cc._renderType = cc.game.RENDER_TYPE_CANVAS;
             cc.renderer = cc.rendererCanvas;

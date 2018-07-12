@@ -110,16 +110,16 @@ GlobalVertexBuffer.prototype = {
 
     update: function () {
         if (this._dirty) {
-            this.gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
+            this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
             // Note: Can memorize different dirty zones and update them separately, maybe faster
-            this.gl.bufferSubData(gl.ARRAY_BUFFER, 0, this.dataArray);
+            this.gl.bufferSubData(this.gl.ARRAY_BUFFER, 0, this.dataArray);
             this._dirty = false;
         }
     },
 
     updateSubData: function (offset, dataArray) {
-        this.gl.bindBuffer(gl.ARRAY_BUFFER, this.vertexBuffer);
-        this.gl.bufferSubData(gl.ARRAY_BUFFER, offset, dataArray);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.vertexBuffer);
+        this.gl.bufferSubData(this.gl.ARRAY_BUFFER, offset, dataArray);
     },
 
     destroy: function () {

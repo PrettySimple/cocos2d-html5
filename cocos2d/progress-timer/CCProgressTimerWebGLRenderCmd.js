@@ -220,6 +220,7 @@
             }
 
             // Init buffer data
+            var gl = cc._renderContext;
             gl.bindBuffer(gl.ARRAY_BUFFER, this._vertexWebGLBuffer);
             gl.bufferData(gl.ARRAY_BUFFER, this._float32View, gl.DYNAMIC_DRAW);
 

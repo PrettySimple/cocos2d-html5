@@ -811,7 +811,7 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
         var sh = Math.ceil(h * locScaleY * locFrameZoomFactor);
 
         if (!_scissorRect) {
-            var boxArr = gl.getParameter(gl.SCISSOR_BOX);
+            var boxArr = cc._renderContext.getParameter(cc._renderContext.SCISSOR_BOX);
             _scissorRect = cc.rect(boxArr[0], boxArr[1], boxArr[2], boxArr[3]);
         }
 
@@ -829,7 +829,7 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
      * @return {Boolean}
      */
     isScissorEnabled: function () {
-        return cc._renderContext.isEnabled(gl.SCISSOR_TEST);
+        return cc._renderContext.isEnabled(cc._renderContext.SCISSOR_TEST);
     },
 
     /**
@@ -838,7 +838,7 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
      */
     getScissorRect: function () {
         if (!_scissorRect) {
-            var boxArr = gl.getParameter(gl.SCISSOR_BOX);
+            var boxArr = cc._renderContext.getParameter(cc._renderContext.SCISSOR_BOX);
             _scissorRect = cc.rect(boxArr[0], boxArr[1], boxArr[2], boxArr[3]);
         }
         var scaleX = this._scaleX;

@@ -281,6 +281,7 @@
 
     proto.rendering = function (ctx) {
         var context = ctx || cc._renderContext, node = this._node;
+        var gl = cc._renderContext;
 
         if (!this._matrix) {
             this._matrix = new cc.math.Matrix4();
