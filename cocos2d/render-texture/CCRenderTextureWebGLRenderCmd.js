@@ -128,6 +128,9 @@
         gl.deleteFramebuffer(this._fBO);
         if (this._depthRenderBuffer)
             gl.deleteRenderbuffer(this._depthRenderBuffer);
+
+        if(node._texture)
+            node._texture.releaseTexture();
     };
 
     proto.updateClearColor = function (clearColor) {
