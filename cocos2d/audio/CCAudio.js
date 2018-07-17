@@ -84,6 +84,7 @@
  */
 cc.Audio = cc.Class.extend({
     interruptPlay: false,
+    isPromisePending: false,
     src: null,
     _element: null,
     _AUDIO_TYPE: "AUDIO",
@@ -116,13 +117,37 @@ cc.Audio = cc.Class.extend({
             return;
         }
         this._element.loop = loop;
-        this._element.play();
-        if (this._AUDIO_TYPE === 'AUDIO' && this._element.paused) {
+        var promise = this._element.play();
+
+        if (promise !== undefined)
+        {
+            this.isPromisePending = true;
+            var self = this;
+            promise.then(function()
+            {
+                self.onPlaybackStart(offset, loop);
+            }).catch(function(error)
+            {
+                // Playback failed, log error
+                if(trackJs)trackJs.track("CCAudio promise error (play) : " + error + ", src=" + self.src);
+            });
+        }
+        else
+        {
+            this.onPlaybackStart(offset, loop);
+        }
+    },
+
+    onPlaybackStart: function(offset, loop) {
+        this.isPromisePending = false;
+        if (this._AUDIO_TYPE === 'AUDIO' && this._element.paused)
+        {
             this.stop();
             cc.Audio.touchPlayList.push({ loop: loop, offset: offset, audio: this._element });
         }
 
-        if (cc.Audio.bindTouch === false) {
+        if (cc.Audio.bindTouch === false)
+        {
             cc.Audio.bindTouch = true;
             // Listen to the touchstart body event and play the audio when necessary.
             cc.game.canvas.addEventListener('touchstart', cc.Audio.touchStart);
@@ -139,10 +164,13 @@ cc.Audio = cc.Class.extend({
             this.interruptPlay = true;
             return;
         }
-        this._element.pause();
-        try {
-            this._element.currentTime = 0;
-        } catch (err) {
+        if (this.isPromisePending == false)
+        {
+            this._element.pause();
+            try {
+                this._element.currentTime = 0;
+            } catch (err) {
+            }
         }
     },
 
@@ -151,7 +179,8 @@ cc.Audio = cc.Class.extend({
             this.interruptPlay = true;
             return;
         }
-        this._element.pause();
+        if (this.isPromisePending == false)
+            this._element.pause();
     },
 
     resume: function () {
@@ -159,7 +188,20 @@ cc.Audio = cc.Class.extend({
             this.interruptPlay = false;
             return;
         }
-        this._element.play();
+        var promise = this._element.play();
+        if (promise !== undefined)
+        {
+            this.isPromisePending = true;
+            var self = this;
+            promise.then(function()
+            {
+                self.isPromisePending = false;
+            }).catch(function(error)
+            {
+                // Playback failed, log error
+                if(trackJs)trackJs.track("CCAudio promise error (resume) : " + error + ", src=" + self.src);
+            });
+        }
     },
 
     setVolume: function (volume) {
