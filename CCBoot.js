@@ -2823,7 +2823,7 @@ cc.game = /** @lends cc.game# */{
         cc.lazyInitialize();
         cc.director.setGLDefaultValues();
 
-        gl.clearStencil(0);
+        cc._renderContext.clearStencil(0);
 
         cc.shaderCache.reloadDefaultShaders();
         cc.textureCache.restoreTexturesLoaded();
