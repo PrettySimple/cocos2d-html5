@@ -85,7 +85,7 @@ cc.glDeleteProgram = function (program) {
         if (program === cc._currentShaderProgram)
             cc._currentShaderProgram = -1;
     }
-    gl.deleteProgram(program);
+    cc._renderContext.deleteProgram(program);
 };
 
 /**

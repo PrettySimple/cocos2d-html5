@@ -238,7 +238,7 @@ cc.GridBase = cc.Class.extend(/** @lends cc.GridBase# */{
 
         //this.set2DProjection();    //TODO why?
         var size = cc.director.getWinSizeInPixels();
-        gl.viewport(0, 0, size.width, size.height);
+        cc._renderContext.viewport(0, 0, size.width, size.height);
         this._grabber.beforeRender(this._texture);
     },
 

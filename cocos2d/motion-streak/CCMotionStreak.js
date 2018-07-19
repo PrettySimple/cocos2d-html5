@@ -277,6 +277,8 @@ cc.MotionStreak = cc.Node.extend(/** @lends cc.MotionStreak# */{
         this._texCoords = new Float32Array(locMaxPoints * 4);
         this._colorPointer = new Uint8Array(locMaxPoints * 8);
 
+        var gl = cc._renderContext;
+
         this._verticesBuffer = gl.createBuffer();
         this._texCoordsBuffer = gl.createBuffer();
         this._colorPointerBuffer = gl.createBuffer();
