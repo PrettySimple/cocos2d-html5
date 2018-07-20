@@ -129,7 +129,7 @@ cc.Audio = cc.Class.extend({
             }).catch(function(error)
             {
                 // Playback failed, log error
-                if(trackJs)trackJs.track("CCAudio promise error (play) : " + error + ", src=" + self.src);
+                if(trackJs)trackJs.track("CCAudio promise error (play) : " + error);
             });
         }
         else
@@ -199,7 +199,7 @@ cc.Audio = cc.Class.extend({
             }).catch(function(error)
             {
                 // Playback failed, log error
-                if(trackJs)trackJs.track("CCAudio promise error (resume) : " + error + ", src=" + self.src);
+                if(trackJs)trackJs.track("CCAudio promise error (resume) : " + error);
             });
         }
     },
