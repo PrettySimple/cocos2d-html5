@@ -774,7 +774,7 @@ cc.game.addEventListener(cc.game.EVENT_RENDERER_INITED, function () {
                 if(p_end_angle - p_start_angle < 360)
                     _vertices.push(p_center.x, p_center.y);
 
-                for (i = 0; i <= segments; i++) {
+                for (var i = 0; i <= segments; i++) {
                     var p_x = p_center.x + Math.cos(this._degreesToRadians(angleCurrent - 90)) * p_radius;
                     var p_y = p_center.y - Math.sin(this._degreesToRadians(angleCurrent - 90)) * p_radius;
                     _vertices.push(p_x, p_y);
