@@ -40,6 +40,9 @@
         this._cacheCanvas = null;
     };
 
+    proto.destroy = function() {
+    };
+
     proto.clearStencil = function (stencilValue) {
     };
 

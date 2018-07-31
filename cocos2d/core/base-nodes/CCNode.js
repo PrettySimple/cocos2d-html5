@@ -1139,6 +1139,12 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
         cc.eventManager.removeListeners(this);
     },
 
+    /**
+     *
+     */
+    destroy: function() {
+    },
+
     // composition: GET
     /**
      * Returns a child from the container given its tag
@@ -1270,15 +1276,17 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
      * @param {cc.Node} child  The child node which will be removed.
      * @param {Boolean} [cleanup=true]  true if all running actions and callbacks on the child node will be cleanup, false otherwise.
      */
-    removeChild: function (child, cleanup) {
+    removeChild: function (child, cleanup, destroy) {
         // explicit nil handling
         if (this._children.length === 0)
             return;
 
         if (cleanup === undefined)
             cleanup = true;
+        if (destroy === undefined)
+            destroy = true;
         if (this._children.indexOf(child) > -1)
-            this._detachChild(child, cleanup);
+            this._detachChild(child, cleanup, destroy);
 
         //this._renderCmd.setDirtyFlag(cc.Node._dirtyFlags.visibleDirty);
         if(cc.renderer)
@@ -1347,7 +1355,7 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
         }
     },
 
-    _detachChild: function (child, doCleanup) {
+    _detachChild: function (child, doCleanup, doDestroy) {
         // IMPORTANT:
         //  -1st do onExit
         //  -2nd cleanup
@@ -1359,6 +1367,10 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
         // If you don't do cleanup, the child's actions will not get removed and the
         if (doCleanup)
             child._performRecursive(cc.Node._stateCallbackType.cleanup);
+
+        //
+        if (doDestroy)
+            child._performRecursive(cc.Node._stateCallbackType.destroy);
 
         // set parent nil at the end
         child.parent = null;
@@ -1528,6 +1540,9 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
                 break;
             case nodeCallbackType.cleanup:
                 curr.cleanup();
+                break;
+            case nodeCallbackType.destroy:
+                curr.destroy();
                 break;
             case nodeCallbackType.onExitTransitionDidStart:
                 curr.onExitTransitionDidStart();
@@ -2612,7 +2627,8 @@ cc.Node._stateCallbackType = {
     cleanup: 3,
     onEnterTransitionDidFinish: 4,
     onExitTransitionDidStart: 5,
-    max: 6
+    destroy: 6,
+    max: 7
 };
 cc.Node._performStacks = [[]];
 cc.Node._performing = 0;

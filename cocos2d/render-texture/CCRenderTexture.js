@@ -155,6 +155,10 @@ cc.RenderTexture = cc.Node.extend(/** @lends cc.RenderTexture# */{
         this._renderCmd.cleanup();
     },
 
+    destroy: function() {
+        this._renderCmd.destroy();
+    },
+
     /**
      * Gets the sprite
      * @return {cc.Sprite}
