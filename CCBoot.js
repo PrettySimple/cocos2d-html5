@@ -677,6 +677,7 @@ cc.loader = (function () {
                 }, callback);
             }
         },
+
         /**
          * Load js width loading image.
          *
@@ -862,6 +863,7 @@ cc.loader = (function () {
             var ext = /(\.png)|(\.jpg)|(\.bmp)|(\.jpeg)|(\.gif)/.exec(url);
             return (ext != null);
         },
+
         /**
          * Load a single image.
          * @param {!string} url
@@ -968,7 +970,7 @@ cc.loader = (function () {
          * @returns {*}
          * @private
          */
-        _loadResIterator: function (item, index, cb) {
+        _loadResIterator: function (item, index, retry, cb) {
             var self = this, url = null;
             var type = item.type;
             if (type) {
@@ -1002,7 +1004,29 @@ cc.loader = (function () {
                 else
                     realUrl += "?_t=" + (new Date() - 0);
             }
-            loader.load(realUrl, url, item, function (err, data) {
+
+            var retryer_regex=new RegExp('\\.(?:plist)$');
+            var retryer=function(num,func,obj,args,cb)
+            {
+                var test;
+                args.push(function(err,res){
+                    if(err && num-->0 && retryer_regex.test(args[0]))
+                    {
+                        setTimeout(test,100);
+                    }
+                    else if(err) cb(err);
+                    else cb(null,res);
+                });
+                test=function()
+                {
+                    func.apply(obj,args);
+                };
+                setTimeout(test,0);
+            };
+
+            // NOTE: to disable the retry, simply switch the comment status of the two following lines
+            retryer(retry,loader.load,loader,[realUrl,url,item],function(err,data){
+            //loader.load(realUrl, url, item, function (err, data) {
                 if (err) {
                     cc.log(err);
                     self.cache[url] = null;
@@ -1076,7 +1100,7 @@ cc.loader = (function () {
             var asyncPool = new cc.AsyncPool(
                 resources, cc.CONCURRENCY_HTTP_REQUEST_COUNT,
                 function (value, index, AsyncPoolCallback, aPool) {
-                    self._loadResIterator(value, index, function (err) {
+                    self._loadResIterator(value, index, option.retry||0, function (err) {
                         var arr = Array.prototype.slice.call(arguments, 1);
                         if (option.trigger)
                             option.trigger.call(option.triggerTarget, arr[0], aPool.size, aPool.finishedSize);   //call trigger
