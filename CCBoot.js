@@ -1006,22 +1006,28 @@ cc.loader = (function () {
             }
 
             var retryer_regex=new RegExp('\\.(?:plist)$');
-            var retryer=function(num,func,obj,args,cb)
+            var retryer=function(retry_count,loader_func,loader_obj,loader_args,cb)
             {
-                var test;
-                args.push(function(err,res){
-                    if(err && num-->0 && retryer_regex.test(args[0]))
+                var do_loading;
+                loader_args.push(function(err,res){
+                    if(err && retry_count-->0 && retryer_regex.test(loader_args[0]))
                     {
-                        setTimeout(test,100);
+                        setTimeout(do_loading,100);
                     }
-                    else if(err) cb(err);
-                    else cb(null,res);
+                    else if(err && cb)
+                    {
+                        cb(err);
+                    }
+                    else if(cb)
+                    {
+                        cb(null,res);
+                    }
                 });
-                test=function()
+                do_loading=function()
                 {
-                    func.apply(obj,args);
+                    loader_func.apply(loader_obj,loader_args);
                 };
-                setTimeout(test,0);
+                setTimeout(do_loading,0);
             };
 
             // NOTE: to disable the retry, simply switch the comment status of the two following lines
