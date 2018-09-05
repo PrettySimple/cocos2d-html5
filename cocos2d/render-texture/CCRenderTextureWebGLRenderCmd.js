@@ -165,14 +165,12 @@
             powH = cc.NextPOT(height);
         }
 
-        // 2018 july, 25
-        // When gl.texImage2D() is empty texture, it is not necessery to create an array filled by 0
-        //void *data = malloc(powW * powH * 4);
-        //var dataLen = powW * powH * 4;
-        //var data = new Uint8Array(dataLen);
-        //memset(data, 0, (int)(powW * powH * 4));
-        //for (var i = 0; i < powW * powH * 4; i++)
-        //    data[i] = 0;
+        // Data need to be allocated in order to avoid crashes
+        // (Chrome69++/MacOS, MGScratch)
+        var dataLen = powW * powH * 4;
+        var data = new Uint8Array(dataLen);
+        for (var i = 0; i < powW * powH * 4; i++)
+           data[i] = 0;
 
         this._pixelFormat = format;
 
@@ -180,10 +178,7 @@
         if (!node._texture)
             return false;
 
-        // 2018 july, 25
-        // When gl.texImage2D() is empty texture, it is not necessery to create an array filled by 0
-        locTexture.initWithData(null,/*data,*/ node._pixelFormat, powW, powH, cc.size(width, height));
-        //free( data );
+        locTexture.initWithData(data, node._pixelFormat, powW, powH, cc.size(width, height));
 
         var oldRBO = gl.getParameter(gl.RENDERBUFFER_BINDING);
 
