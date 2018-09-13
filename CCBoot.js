@@ -928,11 +928,14 @@ cc.loader = (function () {
                     self.release(url);
                     // Callbacks have been wiped out by the release above
                     // So we need to restore the loaders for each callback
-                    var callbacks = queue.callbacks;
-                    for (var i = 0; i < callbacks.length; ++i)
+                    if (queue)
                     {
-                        var cb = callbacks[i];
-                        cc.loader.loadImg(url, opt, (cb ? cb : callback))
+                        var callbacks = queue.callbacks;
+                        for (var i = 0; i < callbacks.length; ++i)
+                        {
+                            var cb = callbacks[i];
+                            cc.loader.loadImg(url, opt, (cb ? cb : callback))
+                        }
                     }
                 } else {
                     var queue = _queue[url];
