@@ -2727,8 +2727,8 @@ cc.game = /** @lends cc.game# */{
         localCanvas.setAttribute("tabindex", 99);
 
         if (cc._renderType === cc.game.RENDER_TYPE_WEBGL) {
-            localCanvas.addEventListener("webglcontextlost", this._handleContextLost.bind(this), false);
-            localCanvas.addEventListener("webglcontextrestored", this._handleContextRestored.bind(this), false);
+            localCanvas.addEventListener("webglcontextlost", this._handleContextLost.bind(this), {capture: false, once: true});
+            localCanvas.addEventListener("webglcontextrestored", this._handleContextRestored.bind(this), {capture: false, once: true});
             this._renderContext = cc._renderContext = cc.webglContext
              = cc.create3DContext(localCanvas, {
                 'stencil': true,
