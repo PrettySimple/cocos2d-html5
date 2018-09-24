@@ -2727,8 +2727,8 @@ cc.game = /** @lends cc.game# */{
         localCanvas.setAttribute("tabindex", 99);
 
         if (cc._renderType === cc.game.RENDER_TYPE_WEBGL) {
-            localCanvas.addEventListener("webglcontextlost", this._handleContextLost.bind(this), {capture: false, once: true});
-            localCanvas.addEventListener("webglcontextrestored", this._handleContextRestored.bind(this), {capture: false, once: true});
+            localCanvas.addEventListener("webglcontextlost", this._handleContextLost.bind(this), false);
+            localCanvas.addEventListener("webglcontextrestored", this._handleContextRestored.bind(this), false);
             this._renderContext = cc._renderContext = cc.webglContext
              = cc.create3DContext(localCanvas, {
                 'stencil': true,
@@ -2835,39 +2835,45 @@ cc.game = /** @lends cc.game# */{
 
     _handleContextLost : function(p_event)
     {
-        if(cc.eventManager)
-            cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.LOST));
+        if (this._rendererInitialized)
+        {
+            if(cc.eventManager)
+                cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.LOST));
 
-        cc.game.pause();
-        if (cc.renderer)
-            cc.renderer.dispose();
-        cc.glInvalidateStateCache();
+            cc.game.pause();
+            if (cc.renderer)
+                cc.renderer.dispose();
+            cc.glInvalidateStateCache();
 
-        cc.renderer = null;
-        this._rendererInitialized = false;
+            cc.renderer = null;
+            this._rendererInitialized = false;
 
-        p_event.preventDefault();
+            p_event.preventDefault();
+        }
     },
 
     _handleContextRestored : function(p_event)
     {
-        this._initRenderer();
-
-        cc.lazyInitialize();
-        cc.director.setGLDefaultValues();
-
-        cc._renderContext.clearStencil(0);
-
-        cc.shaderCache.reloadDefaultShaders();
-        cc.textureCache.restoreTexturesLoaded();
-
-        if(cc.eventManager)
+        if (!this._rendererInitialized)
         {
-            cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.RESTORE));
-            cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.POST_RESTORE));
-        }
+            this._initRenderer();
 
-        cc.game.resume();
+            cc.lazyInitialize();
+            cc.director.setGLDefaultValues();
+
+            cc._renderContext.clearStencil(0);
+
+            cc.shaderCache.reloadDefaultShaders();
+            cc.textureCache.restoreTexturesLoaded();
+
+            if(cc.eventManager)
+            {
+                cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.RESTORE));
+                cc.eventManager.dispatchEvent(new cc.EventContext(cc.EventContext.POST_RESTORE));
+            }
+
+            cc.game.resume();
+        }
     }
 };
 //+++++++++++++++++++++++++something about CCGame end+++++++++++++++++++++++++++++
