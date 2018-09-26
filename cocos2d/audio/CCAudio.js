@@ -129,7 +129,7 @@ cc.Audio = cc.Class.extend({
             }).catch(function(error)
             {
                 // Playback failed, log error
-                if(trackJs)trackJs.track("CCAudio promise error (play) : " + error);
+                if(window['trackJs'])trackJs.track("CCAudio promise error (play) : " + error);
             });
         }
         else
@@ -199,7 +199,7 @@ cc.Audio = cc.Class.extend({
             }).catch(function(error)
             {
                 // Playback failed, log error
-                if(trackJs)trackJs.track("CCAudio promise error (resume) : " + error);
+                if(window['trackJs'])trackJs.track("CCAudio promise error (resume) : " + error);
             });
         }
     },
@@ -445,7 +445,7 @@ cc.Audio.WebAudio.prototype = {
                 {
                     promise.catch(
                         function(p_error) {
-                            if(trackJs)trackJs.track("Decode audio error: "+p_error);
+                            if(window['trackJs'])trackJs.track("Decode audio error: "+p_error);
                             //If we want to have more info on this we should uncomment the following line
                             //throw p_error;
                         }
@@ -454,7 +454,7 @@ cc.Audio.WebAudio.prototype = {
             };
 
             request.onerror = function () {
-                if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(request.status)+"\n"+url);
+                if(window['trackJs'])trackJs.track("Fail to load URL with HTTP status code: "+String(request.status)+"\n"+url);
                 cb('request error - ' + url);
             };
             if (request.ontimeout === undefined) {
@@ -463,7 +463,7 @@ cc.Audio.WebAudio.prototype = {
                 }, request.timeout);
             }
             request.ontimeout = function () {
-                if(trackJs)trackJs.track("Fail to load URL with HTTP timeout: "+url);
+                if(window['trackJs'])trackJs.track("Fail to load URL with HTTP timeout: "+url);
                 cb('request timeout - ' + url);
             };
 

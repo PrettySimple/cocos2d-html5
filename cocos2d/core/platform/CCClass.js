@@ -209,7 +209,7 @@ try
             constructor += "            default: this.ctor.apply(this, arguments);\n";
             constructor += "            }\n";
             constructor += "        }\n";
-            constructor += "    }catch(e){if(trackJs)trackJs.track(e);throw e;}\n";
+            constructor += "    }catch(e){if(window['trackJs'])trackJs.track(e);throw e;}\n";
             constructor += "})";
             Class = eval(constructor);
         }
@@ -268,7 +268,7 @@ try
                                 this._super = tmp;
 
                                 return ret;
-                            }catch(e){if(trackJs)trackJs.track(e);throw e;}
+                            }catch(e){if(window['trackJs'])trackJs.track(e);throw e;}
                         };
                     })(name, prop[name]);
                     Object.defineProperty(prototype, name, desc);
@@ -317,14 +317,14 @@ try
         };
         return Class;
     }catch(e){
-        if(trackJs)trackJs.track(e);
+        if(window['trackJs'])trackJs.track(e);
         throw e;
     }
     };
 }
 catch(e)
 {
-    if(trackJs)trackJs.track(e);
+    if(window['trackJs'])trackJs.track(e);
     throw e;
 }
 })();

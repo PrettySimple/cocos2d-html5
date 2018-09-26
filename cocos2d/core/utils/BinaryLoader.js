@@ -47,7 +47,7 @@ cc.loader.loadBinary = function (url, cb) {
             }
             else
             {
-                if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
+                if(window['trackJs'])trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
                 cb(errInfo);
             }
         };
@@ -90,7 +90,7 @@ cc.loader.loadBinarySync = function (url) {
         req.setRequestHeader("Accept-Charset", "x-user-defined");
         req.send(null);
         if (req.status !== 200) {
-            if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(req.status)+"\n"+url);
+            if(window['trackJs'])trackJs.track("Fail to load URL with HTTP status code: "+String(req.status)+"\n"+url);
             cc.log(errInfo);
             return null;
         }
@@ -104,7 +104,7 @@ cc.loader.loadBinarySync = function (url) {
             req.overrideMimeType('text\/plain; charset=x-user-defined');
         req.send(null);
         if (req.status !== 200) {
-            if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(req.status)+"\n"+url);
+            if(window['trackJs'])trackJs.track("Fail to load URL with HTTP status code: "+String(req.status)+"\n"+url);
             cc.log(errInfo);
             return null;
         }

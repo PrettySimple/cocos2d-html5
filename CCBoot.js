@@ -780,7 +780,7 @@ cc.loader = (function () {
                         }
                     };
                     xhr.onerror = function () {
-                        if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
+                        if(window['trackJs'])trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
                         cb({status: xhr.status, errorMessage: errInfo}, null);
                     };
                     if (xhr.ontimeout === undefined) {
@@ -789,7 +789,7 @@ cc.loader = (function () {
                         }, xhr.timeout);
                     }
                     xhr.ontimeout = function () {
-                        if(trackJs)trackJs.track("Fail to load URL with HTTP timeout "+url);
+                        if(window['trackJs'])trackJs.track("Fail to load URL with HTTP timeout "+url);
                         cb({status: xhr.status, errorMessage: "Request timeout: " + errInfo}, null);
                     };
                 }
@@ -822,7 +822,7 @@ cc.loader = (function () {
                 }
             };
             xhr.onerror = function(){
-                if(trackJs)trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
+                if(window['trackJs'])trackJs.track("Fail to load URL with HTTP status code: "+String(xhr.status)+"\n"+url);
                 cb({status:xhr.status, errorMessage:errInfo}, null);
             };
             if (xhr.ontimeout === undefined) {
@@ -831,7 +831,7 @@ cc.loader = (function () {
                 }, xhr.timeout);
             }
             xhr.ontimeout = function () {
-                if(trackJs)trackJs.track("Fail to load URL with HTTP timeout: "+url);
+                if(window['trackJs'])trackJs.track("Fail to load URL with HTTP timeout: "+url);
                 cb({status: xhr.status, errorMessage: "Request timeout: " + errInfo}, null);
             };
             xhr.send(null);
@@ -941,7 +941,7 @@ cc.loader = (function () {
                     var queue = _queue[url];
                     if (queue) {
                         var callbacks = queue.callbacks;
-                        if(trackJs)trackJs.track("Fail to load URL: "+url);
+                        if(window['trackJs'])trackJs.track("Fail to load URL: "+url);
                         for (var i = 0; i < callbacks.length; ++i) {
                             var cb = callbacks[i];
                             if (cb) {
@@ -2612,7 +2612,7 @@ cc.game = /** @lends cc.game# */{
             }
             catch(e)
             {
-                if(trackJs)trackJs.track(e);
+                if(window['trackJs'])trackJs.track(e);
                 throw e;
             }
         };
