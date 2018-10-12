@@ -1037,7 +1037,7 @@ cc.loader = (function () {
             retryer(retry,loader.load,loader,[realUrl,url,item],function(err,data){
             //loader.load(realUrl, url, item, function (err, data) {
                 if (err) {
-                    cc.log(err);
+                    cc.log(err, url);
                     self.cache[url] = null;
                     delete self.cache[url];
                     cb({status: 520, errorMessage: err}, null);
