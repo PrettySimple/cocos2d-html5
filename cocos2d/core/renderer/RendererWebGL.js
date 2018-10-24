@@ -118,6 +118,7 @@ return {
     _cacheInstanceIds: [],
     _currentID: 0,
     _clearColor: cc.color(),                            //background color,default BLACK
+    _backupIndex: 0,
 
     init: function () {
         var gl = cc._renderContext;
@@ -290,6 +291,29 @@ return {
                 this._renderCmds.push(cmd);
             }
         }
+    },
+
+    getCmdsList: function()
+    {
+        if (this._isCacheToBufferOn)
+        {
+            var currentId = this._currentID, locCmdBuffer = this._cacheToBufferCmds;
+            return (locCmdBuffer[currentId]);
+        }
+        else
+        {
+            return (this._renderCmds);
+        }
+    },
+
+    backupCmds: function()
+    {
+        this._backupIndex = this.getCmdsList().length;
+    },
+
+    restoreCmds: function()
+    {
+        this.getCmdsList().splice(this._backupIndex);
     },
 
     _increaseBatchingSize: function (increment) {

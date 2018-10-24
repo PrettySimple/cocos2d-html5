@@ -93,7 +93,10 @@
         }
 
         if (cc.renderer)
+        {
+            cc.renderer.backupCmds();
             cc.renderer.pushRenderCommand(this._beforeVisitCmd);
+        }
 
         // node._stencil._stackMatrix = node._stackMatrix;
         node._stencil.visit(node);
@@ -102,6 +105,9 @@
             cc.renderer.pushRenderCommand(this._afterDrawStencilCmd);
 
         // draw (according to the stencil test func) this node and its children
+        var numCmds = 0;
+        if (cc.renderer)
+            numCmds = cc.renderer.getCmdsList().length;
         var locChildren = node._children;
         if (locChildren && locChildren.length > 0) {
             var childLen = locChildren.length;
@@ -113,7 +119,15 @@
         }
 
         if (cc.renderer)
-            cc.renderer.pushRenderCommand(this._afterVisitCmd);
+        {
+            // Nothing has been rendered, revert the stencil commands..
+            // Fixes many issues : white eyes, find the same black mask and many GAF anims
+            if (cc.renderer.getCmdsList().length == numCmds)
+                cc.renderer.restoreCmds();
+            // Otherwise, complete the mask process
+            else
+                cc.renderer.pushRenderCommand(this._afterVisitCmd);
+        }
 
         this._dirtyFlag = 0;
     };
