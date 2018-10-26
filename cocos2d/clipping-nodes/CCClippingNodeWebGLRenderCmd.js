@@ -121,7 +121,7 @@
         if (cc.renderer)
         {
             // Nothing has been rendered, revert the stencil commands..
-            // Fixes many issues : white eyes, find the same black mask and many GAF anims
+            // Fixes many Masking issues on older GPUs
             if (cc.renderer.getCmdsList().length == numCmds)
                 cc.renderer.restoreCmds();
             // Otherwise, complete the mask process
