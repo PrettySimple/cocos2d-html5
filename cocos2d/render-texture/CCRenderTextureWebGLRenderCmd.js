@@ -268,6 +268,9 @@
         // gl.viewport(viewport.x, viewport.y, viewport.width, viewport.height);
 
         /////////////////////////////////////////////////////
+        
+        var viewportSize = cc.view.getDesignResolutionSize();
+        gl.viewport(0, 0, viewportSize.width, viewportSize.height);
 
         this._oldFBO = gl.getParameter(gl.FRAMEBUFFER_BINDING);
         gl.bindFramebuffer(gl.FRAMEBUFFER, this._fBO);//Will direct drawing to the frame buffer created above

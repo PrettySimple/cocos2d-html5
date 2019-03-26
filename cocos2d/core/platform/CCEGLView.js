@@ -157,6 +157,7 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
     _rpNoBorder: null,
     _rpFixedHeight: null,
     _rpFixedWidth: null,
+    _rpCustomShowAll: null,
     _initialized: false,
 
     _contentTranslateLeftTop: null,
@@ -199,6 +200,8 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
         _t._rpNoBorder = new cc.ResolutionPolicy(_strategyer.EQUAL_TO_FRAME, _strategy.NO_BORDER);
         _t._rpFixedHeight = new cc.ResolutionPolicy(_strategyer.EQUAL_TO_FRAME, _strategy.FIXED_HEIGHT);
         _t._rpFixedWidth = new cc.ResolutionPolicy(_strategyer.EQUAL_TO_FRAME, _strategy.FIXED_WIDTH);
+
+        _t._rpCustomShowAll = new cc.ResolutionPolicy(_strategyer.ORIGINAL_CONTAINER, _strategy.SHOW_ALL);
 
         _t._targetDensityDPI = cc.DENSITYDPI_HIGH;
 
@@ -657,6 +660,8 @@ cc.EGLView = cc.Class.extend(/** @lends cc.view# */{
                 _t._resolutionPolicy = _t._rpFixedHeight;
             if (resolutionPolicy === _locPolicy.FIXED_WIDTH)
                 _t._resolutionPolicy = _t._rpFixedWidth;
+            if (resolutionPolicy === _locPolicy.CUSTOM_SHOW_ALL)
+                _t._resolutionPolicy = _t._rpCustomShowAll;
         }
     },
 
@@ -1409,10 +1414,21 @@ cc.ResolutionPolicy.FIXED_WIDTH = 4;
 
 /**
  * @memberOf cc.ResolutionPolicy#
+ * @name CUSTOM_SHOW_ALL
+ * @constant
+ * @type Number
+ * @static
+ * The entire application is visible in the specified area without distortion while maintaining the original<br/>
+ * aspect ratio of the application. Borders can appear on two sides of the application. Does not change original container
+ */
+cc.ResolutionPolicy.CUSTOM_SHOW_ALL = 5;
+
+/**
+ * @memberOf cc.ResolutionPolicy#
  * @name UNKNOWN
  * @constant
  * @type Number
  * @static
  * Unknow policy
  */
-cc.ResolutionPolicy.UNKNOWN = 5;
+cc.ResolutionPolicy.UNKNOWN = 6;
