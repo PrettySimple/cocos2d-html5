@@ -306,6 +306,7 @@ cc.Audio.WebAudio.prototype = {
     },
 
     play: function (offset) {
+        offset = offset || this.playedLength;
 
         // If repeat play, you need to stop before an audio
         if (this._currentSource && !this.ended) {
@@ -319,7 +320,6 @@ cc.Audio.WebAudio.prototype = {
         audio.loop = this._loop;
 
         this._startTime = this.context.currentTime;
-        offset = offset || this.playedLength;
 
         var duration = this.buffer.duration;
         if (!this._loop) {
@@ -331,11 +331,11 @@ cc.Audio.WebAudio.prototype = {
                 audio["noteOn"](0, offset, duration - offset);
         } else {
             if (audio.start)
-                audio.start(0);
+                audio.start(0, offset);
             else if (audio["notoGrainOn"])
-                audio["noteGrainOn"](0);
+                audio["noteGrainOn"](0, offset);
             else
-                audio["noteOn"](0);
+                audio["noteOn"](0, offset);
         }
 
         this._currentSource = audio;
@@ -358,7 +358,7 @@ cc.Audio.WebAudio.prototype = {
     },
     pause: function () {
         // Record the time the current has been played
-        this.playedLength = this.context.currentTime - this._startTime;
+        this.playedLength = this.context.currentTime;
         //If the duration of playedLendth exceeds the audio, you should take the remainder
         this.playedLength %= this.buffer.duration;
         var audio = this._currentSource;
