@@ -80,19 +80,24 @@
     };
 
     cc.kmGLPushMatrix = function () {
-        cc.current_stack.push(cc.current_stack.top);
+        if(cc.current_stack)
+            cc.current_stack.push(cc.current_stack.top);
     };
 
     cc.kmGLPushMatrixWitMat4 = function (saveMat) {
-        cc.current_stack.stack.push(cc.current_stack.top);
-        saveMat.assignFrom(cc.current_stack.top);
-        cc.current_stack.top = saveMat;
+        if(cc.current_stack)
+        {
+            cc.current_stack.stack.push(cc.current_stack.top);
+            saveMat.assignFrom(cc.current_stack.top);
+            cc.current_stack.top = saveMat;
+        }
     };
 
     cc.kmGLPopMatrix = function () {
         //No need to lazy initialize, you shouldn't be popping first anyway!
         //cc.km_mat4_stack_pop(cc.current_stack, null);
-        cc.current_stack.top = cc.current_stack.stack.pop();
+        if(cc.current_stack)
+            cc.current_stack.top = cc.current_stack.stack.pop();
     };
 
     cc.kmGLMatrixMode = function (mode) {
@@ -111,46 +116,60 @@
                 throw new Error("Invalid matrix mode specified");   //TODO: Proper error handling
                 break;
         }
-        cc.current_stack.lastUpdated = cc.director.getTotalFrames();
+        if(cc.current_stack)
+            cc.current_stack.lastUpdated = cc.director.getTotalFrames();
     };
 
     cc.kmGLLoadIdentity = function () {
         //cc.lazyInitialize();
-        cc.current_stack.top.identity(); //Replace the top matrix with the identity matrix
+        if(cc.current_stack)
+            cc.current_stack.top.identity(); //Replace the top matrix with the identity matrix
     };
 
     cc.kmGLLoadMatrix = function (pIn) {
         //cc.lazyInitialize();
-        cc.current_stack.top.assignFrom(pIn);
+        if(cc.current_stack)
+            cc.current_stack.top.assignFrom(pIn);
     };
 
     cc.kmGLMultMatrix = function (pIn) {
         //cc.lazyInitialize();
-        cc.current_stack.top.multiply(pIn);
+        if(cc.current_stack)
+            cc.current_stack.top.multiply(pIn);
     };
 
     var tempMatrix = new cc.math.Matrix4();    //an internal matrix
     cc.kmGLTranslatef = function (x, y, z) {
-        //Create a rotation matrix using translation
-        var translation = cc.math.Matrix4.createByTranslation(x, y, z, tempMatrix);
+        if(cc.current_stack)
+        {
+            //Create a rotation matrix using translation
+            var translation = cc.math.Matrix4.createByTranslation(x, y, z, tempMatrix);
 
-        //Multiply the rotation matrix by the current matrix
-        cc.current_stack.top.multiply(translation);
+            //Multiply the rotation matrix by the current matrix
+            cc.current_stack.top.multiply(translation);
+        }
     };
 
     var tempVector3 = new cc.math.Vec3();
     cc.kmGLRotatef = function (angle, x, y, z) {
-        tempVector3.fill(x, y, z);
-        //Create a rotation matrix using the axis and the angle
-        var rotation = cc.math.Matrix4.createByAxisAndAngle(tempVector3, cc.degreesToRadians(angle), tempMatrix);
+        if(cc.current_stack)
+        {
+            tempVector3.fill(x, y, z);
+            //Create a rotation matrix using the axis and the angle
+            var rotation = cc.math.Matrix4.createByAxisAndAngle(tempVector3, cc.degreesToRadians(angle), tempMatrix);
 
-        //Multiply the rotation matrix by the current matrix
-        cc.current_stack.top.multiply(rotation);
+            //Multiply the rotation matrix by the current matrix
+            cc.current_stack.top.multiply(rotation);
+        }
+
     };
 
     cc.kmGLScalef = function (x, y, z) {
-        var scaling = cc.math.Matrix4.createByScale(x, y, z, tempMatrix);
-        cc.current_stack.top.multiply(scaling);
+        if(cc.current_stack)
+        {
+            var scaling = cc.math.Matrix4.createByScale(x, y, z, tempMatrix);
+            cc.current_stack.top.multiply(scaling);
+        }
     };
 
     cc.kmGLGetMatrix = function (mode, pOut) {
